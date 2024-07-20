@@ -3,11 +3,11 @@ import './newArticle.css';
 import { createArticles } from '../API/data';
 import Title from '../Components/Title/title';
 import Content from '../Components/Content/content';
-import File from '../Components/File/file';
+import Image from '../Components/Image/image';
 
 function Formular() {
-    const [dataForm, setDataForm] = useState({title: '', content: '', file: null});
-    const [validate, setValidate] = useState(false);   
+    const [dataForm, setDataForm] = useState({title: '', content: '', image: null});
+    const [formValidation, setFormValidation] = useState({title: null, content: null, image: null})
 
     const updateForm = (name, value) => {
         setDataForm({
@@ -16,46 +16,69 @@ function Formular() {
           });
     }
 
+    const updateFormValidation = (name, value) => {
+        setFormValidation({
+            ...formValidation,
+            [name]: value
+          });
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setValidate(true);
-        if (anyFieldMissing()) { 
-            return; 
+        if(validate()) {
+            postArticle();
         }
-        postArticle();
     };
+
+    const validate = () => {
+        let isValid = true;
+        if (!dataForm.title) {
+            isValid = false;
+            updateFormValidation('title', 'Titre requis');
+        }
+        if (!dataForm.content) {
+            isValid = false;
+            updateFormValidation('content', 'Contenu requis');
+        }
+        if (!dataForm.image) {
+            isValid = false;
+            updateFormValidation('image', 'Image requise');
+        }
+        return isValid;
+    }
+
+    // const invalidExtention = () => {
+    //     const validExtensions = ['.jpg', '.jpeg', '.png'];
+    //     return !validExtensions.some(ext => newImage.name.endsWith(ext));
+    // }
 
     const buildFormData = () => {
         const data = new FormData();
         data.append('title', dataForm.title);
         data.append('content', dataForm.content);
-        data.append('file', dataForm.file);
+        data.append('image', dataForm.image);
         return data;
     }
 
     const postArticle = async () => {
         try {
             const result = await createArticles(buildFormData());
-            setValidate(false);
-            console.log('Success:', result);
+            console.log(result);
+            alert("L'article a été ajouté");
         } catch (error) {
-            console.error('Error:', error.message);
+            alert(`Une erreur est survenue lors de l'ajout de l'article : ${error.message}`);
         }
-    }
-
-    const anyFieldMissing = () => {
-        return !dataForm.title || !dataForm.content || !dataForm.file;
     }
 
     return (
         <div className="form-container"> 
             <div className="content">
                 <form method="post" onSubmit={handleSubmit}>
-                    <Title title={dataForm.title} updateForm={updateForm} validate={validate}/>
-                    <Content content={dataForm.content} updateForm={updateForm} validate={validate}/>
-                    <File  uploadedFile={null} updateForm={updateForm} validate={validate}></File>
+                    <Title title={dataForm.title} updateForm={updateForm} errorMessage={formValidation.title}/>
+                    <Content content={dataForm.content} updateForm={updateForm} errorMessage={formValidation.content}/>
+                    <Image  updateForm={updateForm} errorMessage={formValidation.image}/>
                     <div className="modal-buttons">
-                        <input type="submit" value="Ajouter l'article" onClick={handleSubmit}/>
+                        <input type="submit" value="Ajouter l'article" onClick={handleSubmit} />
                     </div>
                 </form>
             </div>

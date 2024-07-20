@@ -1,23 +1,19 @@
 import { useState } from "react";
 
-function Title({ title, updateForm, validate }) {
+function Title({ title, updateForm, errorMessage }) {
     const [newTitle, setNewTitle] = useState(title);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { value } = e.target;
         setNewTitle(value);
-        updateForm(name, value);
-    }; 
-
-    const titleInvalid = () => {
-        return validate && !newTitle;
+        updateForm('title', newTitle);
     };
 
     return(
         <div>
             <label htmlFor='title'>Titre :</label>
-            <input type='text' id='title' name='title' value={title} onChange={handleChange}/>
-            {titleInvalid() && <div>Titre requis</div>}
+            <input type='text' id='title' name='title' value={newTitle} onChange={handleChange}/>
+            {errorMessage && <div>{errorMessage}</div>}
         </div>
     )
 }
