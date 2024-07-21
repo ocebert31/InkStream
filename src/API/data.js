@@ -26,4 +26,10 @@ async function getArticles(page = 1, limit = 20) {
     return articles;
 }
 
-export {createArticles, getArticles};
+async function getOneArticle(id) {
+    const response = await fetch(`${url}/articles/${id}`)
+    const article = await response.json();
+    return article;
+}
+
+export {createArticles, getArticles, getOneArticle};
