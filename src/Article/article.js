@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getOneArticle } from '../API/data';
 import { useParams } from 'react-router-dom';
+import Delete from './Delete/delete';
+import './article.css';
 
 function Article() {
     const [article, setArticle] = useState(null);
@@ -25,7 +27,10 @@ function Article() {
 
     return(
         <div>
-            <h1>{article.title}</h1>
+            <div className='alignement'>
+                <h1>{article.title}</h1>
+                <Delete id={article._id}></Delete>
+            </div>
             {article.imageUrl && <img src={article.imageUrl} alt={article.title} />}
             <p>{article.content}</p>
         </div>

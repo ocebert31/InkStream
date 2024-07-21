@@ -28,8 +28,27 @@ async function getArticles(page = 1, limit = 20) {
 
 async function getOneArticle(id) {
     const response = await fetch(`${url}/articles/${id}`)
+    if (!response.ok) {
+        throw new Error("Erreur lors de la récupération de l'article");
+    }
     const article = await response.json();
     return article;
 }
 
-export {createArticles, getArticles, getOneArticle};
+async function deleteArticle(id) {
+    try {
+        const response = await fetch(`${url}/articles/${id}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+export {createArticles, getArticles, getOneArticle, deleteArticle};
