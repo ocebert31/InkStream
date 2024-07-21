@@ -1,0 +1,9 @@
+.style-image {
+    width: 70%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.article {
+    width: 30%;
+}

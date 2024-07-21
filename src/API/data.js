@@ -17,4 +17,13 @@ async function createArticles(formData) {
     }
 }
 
-export {createArticles}
+async function getArticles(page = 1, limit = 20) {
+    const response = await fetch(`${url}/articles?page=${page}&limit=${limit}`);
+    if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des articles');
+    }
+    const articles = await response.json();
+    return articles;
+}
+
+export {createArticles, getArticles};

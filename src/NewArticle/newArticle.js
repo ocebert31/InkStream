@@ -5,9 +5,9 @@ import Title from '../Components/Title/title';
 import Content from '../Components/Content/content';
 import Image from '../Components/Image/image';
 
-function Formular() {
+function NewArticle() {
     const [dataForm, setDataForm] = useState({title: '', content: '', image: null});
-    const [formValidation, setFormValidation] = useState({title: null, content: null, image: null})
+    const [formValidation, setFormValidation] = useState({title: null, content: null, image: null});
 
     const updateForm = (name, value) => {
         setDataForm({
@@ -16,41 +16,45 @@ function Formular() {
           });
     }
 
-    const updateFormValidation = (name, value) => {
-        setFormValidation({
-            ...formValidation,
-            [name]: value
-          });
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(validate()) {
+            setFormValidation({title: null, content: null, image: null});
             postArticle();
         }
     };
 
     const validate = () => {
         let isValid = true;
-        if (!dataForm.title) {
+        let errors = { ...formValidation };
+        if (isEmptyOrNull(dataForm.title)) {
             isValid = false;
-            updateFormValidation('title', 'Titre requis');
+            errors.title = 'Titre requis';
         }
-        if (!dataForm.content) {
+        if (isEmptyOrNull(dataForm.content)) {
             isValid = false;
-            updateFormValidation('content', 'Contenu requis');
+            errors.content = 'Contenu requis';
         }
         if (!dataForm.image) {
             isValid = false;
-            updateFormValidation('image', 'Image requise');
+            errors.image = 'Image requise';
         }
+        if (dataForm.image && invalidExtention()) {
+            isValid = false;
+            errors.image = "L'image doit être au format JPEG ou PNG";
+        }
+        setFormValidation(errors);
         return isValid;
     }
 
-    // const invalidExtention = () => {
-    //     const validExtensions = ['.jpg', '.jpeg', '.png'];
-    //     return !validExtensions.some(ext => newImage.name.endsWith(ext));
-    // }
+    const isEmptyOrNull = (value) => {
+        return value === null || value === '';
+    };
+
+    const invalidExtention = () => {
+        const validExtensions = ['.jpg', '.jpeg', '.png'];
+        return !validExtensions.some(ext => dataForm.image.name.endsWith(ext));
+    }
 
     const buildFormData = () => {
         const data = new FormData();
@@ -86,4 +90,4 @@ function Formular() {
     );
 }
 
-export default Formular;
+export default NewArticle;

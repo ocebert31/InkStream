@@ -1,3 +1,9 @@
-.align-container {
+.uploaded-articles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pagination-buttons {
     text-align: center;
 }
