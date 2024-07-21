@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { getOneArticle } from '../API/data';
 import { useParams } from 'react-router-dom';
 import Delete from './Delete/delete';
+import Edit from './Edit/edit';
 import './article.css';
+import ArticleDisplay from '../Article/ArticleDisplay/articleDisplay';
+import ArticleEdition from './ArticleEdition/articleEdition';
 
 function Article() {
     const [article, setArticle] = useState(null);
     const { id } = useParams();
+    const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
         const loadArticle = async () => {
@@ -17,22 +21,32 @@ function Article() {
                 alert(error);
             }
         };
-
         loadArticle();
     }, [id]);
+
+    const editArticle = () => {
+        setIsEditing(true);
+    };
+
+    const cancelEdit = () => {
+        setIsEditing(false);
+    };
 
     if (!article) {
         return <div>Loading...</div>;
     }
 
-    return(
+    return (
         <div>
             <div className='alignement'>
-                <h1>{article.title}</h1>
                 <Delete id={article._id}></Delete>
+                <Edit editArticle={editArticle}></Edit>
             </div>
-            {article.imageUrl && <img src={article.imageUrl} alt={article.title} />}
-            <p>{article.content}</p>
+            {isEditing ? (
+                <ArticleEdition article={article} setArticle={setArticle} cancelEdit={cancelEdit} />
+            ) : (
+                <ArticleDisplay article={article}/>
+            )}
         </div>
     );
 }

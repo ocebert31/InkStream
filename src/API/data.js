@@ -50,5 +50,20 @@ async function deleteArticle(id) {
     }
 };
 
+async function updateArticle (id, formData) {
+    try {
+        const response = await fetch(`${url}/articles/${id}`, {
+            method: 'PUT',
+            body: formData,
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
 
-export {createArticles, getArticles, getOneArticle, deleteArticle};
+export {createArticles, getArticles, getOneArticle, deleteArticle, updateArticle};
