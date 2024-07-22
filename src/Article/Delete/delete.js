@@ -16,7 +16,7 @@ function Delete({ id }) {
                 alert('Article supprimé avec succès');
                 navigate('/');
             } catch (error) {
-                alert({error});
+                alert(`Erreur lors de la suppression de l'article : ${error.message}`);
             }
         }
     };

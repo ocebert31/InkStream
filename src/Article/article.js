@@ -38,7 +38,7 @@ function Article() {
         return <div>Loading...</div>;
     }
 
-    const isAuthor = user && user._id === article.userId;
+    const isAuthor = user && (user._id === article.userId || user.role === 'admin');
 
     return (
         <div>
