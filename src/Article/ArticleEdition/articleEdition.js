@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { updateArticle } from '../../API/data';
+import { updateArticle } from '../../API/articleData';
 import { validateForm } from '../../Common/articleValidation';
 import { buildArticleFormData } from '../../Common/common';
 import Title from '../../Components/Title/title';

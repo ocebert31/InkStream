@@ -7,6 +7,7 @@ function Header() {
         <div className='align-routes'>
             <Link to='/' className='style-button'>Accueil</Link>
             <Link to='/articles/new' className='style-button'>Ecrire un article</Link>
+            <Link to='/registration' className='style-button'>Registration</Link>
         </div>
     )
 }

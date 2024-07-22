@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './newArticle.css';
-import { createArticles } from '../API/data';
+import { createArticles } from '../API/articleData';
 import Title from '../Components/Title/title';
 import Content from '../Components/Content/content';
 import Image from '../Components/Image/image';
