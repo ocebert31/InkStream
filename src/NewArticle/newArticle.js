@@ -1,39 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import './newArticle.css';
 import { createArticles } from '../API/articleData';
-import Title from '../Components/Title/title';
-import Content from '../Components/Content/content';
-import Image from '../Components/Image/image';
-import { validateForm } from '../Common/articleValidation';
-import { buildArticleFormData } from '../Common/common';
+import Title from '../Components/Articles/title';
+import Content from '../Components/Articles/content';
+import Image from '../Components/Articles/image';
+import { buildArticleFormData } from '../Components/buildFormData';
 import { useNavigate } from 'react-router-dom';
 
 function NewArticle() {
-    const [dataForm, setDataForm] = useState({ title: '', content: '', image: null });
-    const [formValidation, setFormValidation] = useState({ title: null, content: null, image: null });
+    const { control, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
-    const updateForm = (name, value) => {
-        setDataForm({
-            ...dataForm,
-            [name]: value
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const { isValid, errors } = validateForm(dataForm);
-        if (isValid) {
-            setFormValidation({ title: null, content: null, image: null });
-            postArticle();
-        } else {
-            setFormValidation(errors);
-        }
-    };
-
-    const postArticle = async () => {
+    const onSubmit = async (data) => {
         try {
-            const result = await createArticles(buildArticleFormData(dataForm));
+            const result = await createArticles(buildArticleFormData(data));
             console.log(result);
             alert("L'article a été ajouté");
             navigate('/');
@@ -45,12 +26,12 @@ function NewArticle() {
     return (
         <div className="form-container">
             <div className="content">
-                <form method="post" onSubmit={handleSubmit}>
-                    <Title title={dataForm.title} updateForm={updateForm} errorMessage={formValidation.title} />
-                    <Content content={dataForm.content} updateForm={updateForm} errorMessage={formValidation.content} />
-                    <Image updateForm={updateForm} errorMessage={formValidation.image} />
+                <form method="post" onSubmit={handleSubmit(onSubmit)}>
+                    <Controller name="title" control={control} defaultValue="" render={({ field }) => (<Title {...field} errorMessage={errors.title?.message}/>)}rules={{required: "Titre requis"}}/>
+                    <Controller name="content" control={control} defaultValue="" render={({ field }) => (<Content {...field} errorMessage={errors.content?.message}/>)}rules={{required: "Contenu requis"}}/>
+                    <Controller name="image" control={control} defaultValue="" render={({ field }) => (<Image {...field} errorMessage={errors.image?.message}/>)}rules={{required: "Image requise"}}/>
                     <div className="modal-buttons">
-                        <input type="submit" value="Ajouter l'article" onClick={handleSubmit} />
+                        <input type="submit" value="Ajouter l'article" />
                     </div>
                 </form>
             </div>

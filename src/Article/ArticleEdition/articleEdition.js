@@ -1,35 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { updateArticle } from '../../API/articleData';
-import { validateForm } from '../../Common/articleValidation';
-import { buildArticleFormData } from '../../Common/common';
-import Title from '../../Components/Title/title';
-import Content from '../../Components/Content/content';
-import Image from '../../Components/Image/image';
+import { buildArticleFormData } from '../../Components/buildFormData';
+import Title from '../../Components/Articles/title';
+import Content from '../../Components/Articles/content';
+import Image from '../../Components/Articles/image';
 
 function ArticleEdition({ article, setArticle, cancelEdit }) {
-    const [formValidation, setFormValidation] = useState({ title: null, content: null, image: null });
+    const { control, handleSubmit, formState: { errors } } = useForm({defaultValues: {title: article.title,content: article.content, image: null}});
 
-    const updateForm = (name, value) => {
-        setArticle({
-            ...article,
-            [name]: value
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const { isValid, errors } = validateForm(article, 'edit');
-        if (isValid) {
-            setFormValidation({ title: null, content: null, image: null });
-            putArticle();
-        } else {
-            setFormValidation(errors);
-        }
-    };
-
-    const putArticle = async () => {
+    const onSubmit = async (data) => {
         try {
-            const result = await updateArticle(article._id, buildArticleFormData(article));
+            const formData = buildArticleFormData(data);
+            const result = await updateArticle(article._id, formData);
             alert('Article mis à jour avec succès');
             setArticle(result.article);
             cancelEdit();
@@ -44,10 +27,10 @@ function ArticleEdition({ article, setArticle, cancelEdit }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <Title title={article.title} updateForm={updateForm} errorMessage={formValidation.title} />
-                <Content content={article.content} updateForm={updateForm} errorMessage={formValidation.content} />
-                <Image updateForm={updateForm} errorMessage={formValidation.image}/>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Controller name="title" control={control} render={({ field }) => (<Title {...field} errorMessage={errors.title?.message}/>)}rules={{ required: "Titre requis"}}/>
+                <Controller name="content" control={control} render={({ field }) => ( <Content {...field} errorMessage={errors.content?.message}/>)}rules={{ required: "Contenu requis"}}/>
+                <Controller name="image" control={control} render={({ field: { onChange } }) => (<Image onChange={file => onChange(file)} errorMessage={errors.image?.message}/>)}/>
                 <button type="submit">Enregistrer</button>
                 <button type="button" onClick={cancelEditing}>Annuler</button>
             </form>
@@ -56,4 +39,3 @@ function ArticleEdition({ article, setArticle, cancelEdit }) {
 }
 
 export default ArticleEdition;
-
