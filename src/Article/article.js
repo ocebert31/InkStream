@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { getOneArticle } from '../API/articleData';
+import { getOneArticle } from '../API/articleAPI';
 import { useParams } from 'react-router-dom';
 import Delete from './Delete/delete';
 import Edit from './Edit/edit';
 import './article.css';
 import ArticleDisplay from '../Article/ArticleDisplay/articleDisplay';
 import ArticleEdition from './ArticleEdition/articleEdition';
+import { useAuth } from "../AuthContext";
 
 function Article() {
     const [article, setArticle] = useState(null);
     const { id } = useParams();
     const [isEditing, setIsEditing] = useState(false);
+    const { user } = useAuth();
 
     useEffect(() => {
         const loadArticle = async () => {
@@ -18,7 +20,7 @@ function Article() {
                 const fetchedArticle = await getOneArticle(id);
                 setArticle(fetchedArticle);
             } catch (error) {
-                alert(error);
+                alert(error.message);
             }
         };
         loadArticle();
@@ -36,16 +38,22 @@ function Article() {
         return <div>Loading...</div>;
     }
 
+    const isAuthor = user && user._id === article.userId;
+
     return (
         <div>
             <div className='alignement'>
-                <Delete id={article._id}></Delete>
-                <Edit editArticle={editArticle}></Edit>
+                {isAuthor && (
+                    <>
+                        <Delete id={article._id} />
+                        <Edit editArticle={editArticle} />
+                    </>
+                )}
             </div>
             {isEditing ? (
                 <ArticleEdition article={article} setArticle={setArticle} cancelEdit={cancelEdit} />
             ) : (
-                <ArticleDisplay article={article}/>
+                <ArticleDisplay article={article} />
             )}
         </div>
     );

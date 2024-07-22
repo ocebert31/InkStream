@@ -1,10 +1,11 @@
 const url = 'http://localhost:3001';
 
-async function createArticles(formData) {
+async function createArticles(formData, token) {
     try {
         const response = await fetch(`${url}/articles`, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: {'Authorization': `Bearer ${token}`}
         });
         if (!response.ok) {
             const error = await response.json();
@@ -35,10 +36,11 @@ async function getOneArticle(id) {
     return article;
 }
 
-async function deleteArticle(id) {
+async function deleteArticle(id, token) {
     try {
         const response = await fetch(`${url}/articles/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {'Authorization': `Bearer ${token}`}
         });
         if (!response.ok) {
             const error = await response.json();
@@ -50,11 +52,12 @@ async function deleteArticle(id) {
     }
 };
 
-async function updateArticle (id, formData) {
+async function updateArticle (id, formData, token) {
     try {
         const response = await fetch(`${url}/articles/${id}`, {
             method: 'PUT',
             body: formData,
+            headers: {'Authorization': `Bearer ${token}`}
         });
         if (!response.ok) {
             const error = await response.json();

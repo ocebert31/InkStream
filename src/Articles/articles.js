@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { getArticles } from '../API/articleData';
+import { getArticles } from '../API/articleAPI';
 import './articles.css';
-import ArticleCard from '../ArticleCard/articleCard';
+import ArticleCard from './ArticleCard/articleCard';
 
 function Article() {
     const [articles, setArticles] = useState([]);

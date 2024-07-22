@@ -1,20 +1,22 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import './newArticle.css';
-import { createArticles } from '../API/articleData';
+import { createArticles } from '../API/articleAPI';
 import Title from '../Components/Articles/title';
 import Content from '../Components/Articles/content';
 import Image from '../Components/Articles/image';
 import { buildArticleFormData } from '../Components/buildFormData';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../AuthContext";
 
 function NewArticle() {
     const { control, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
+    const { token } = useAuth();
 
     const onSubmit = async (data) => {
         try {
-            const result = await createArticles(buildArticleFormData(data));
+            const result = await createArticles(buildArticleFormData(data), token);
             console.log(result);
             alert("L'article a été ajouté");
             navigate('/');
