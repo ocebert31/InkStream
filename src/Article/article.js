@@ -7,6 +7,7 @@ import './article.css';
 import ArticleDisplay from '../Article/ArticleDisplay/articleDisplay';
 import ArticleEdition from './ArticleEdition/articleEdition';
 import { useAuth } from "../AuthContext";
+import Comments from '../Comments/comments';
 
 function Article() {
     const [article, setArticle] = useState(null);
@@ -53,7 +54,10 @@ function Article() {
             {isEditing ? (
                 <ArticleEdition article={article} setArticle={setArticle} cancelEdit={cancelEdit} />
             ) : (
+                <>
                 <ArticleDisplay article={article} />
+                <Comments articleId={article._id}/>
+                </>
             )}
         </div>
     );
