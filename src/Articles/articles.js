@@ -2,30 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { getArticles } from '../API/articleAPI';
 import './articles.css';
 import ArticleCard from './ArticleCard/articleCard';
+import Search from './search';
 
 function Article() {
     const [articles, setArticles] = useState([]);
     const [page, setPage] = useState(1);
     const [limit] = useState(20);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const loadArticles = async () => {
             try {
-                const fetchedArticles = await getArticles(page, limit);
+                const fetchedArticles = await getArticles(searchQuery, page, limit);
                 setArticles(fetchedArticles);
             } catch (error) {
-               alert(error);
+                alert(error);
             }
         };
         loadArticles();
-    }, [page, limit]);
+    }, [searchQuery, page, limit]);
 
     return (
         <div>
-            <div className="uploaded-articles">
+            <Search setSearchQuery={setSearchQuery} />
+            <div className='uploaded-articles'>
                 {articles.length > 0 ? (
                     articles.map((article, index) => (
-                        <ArticleCard key={index} article={article}/>
+                        <ArticleCard key={index} article={article} />
                     ))
                 ) : (
                     <p>Aucun article trouvé.</p>

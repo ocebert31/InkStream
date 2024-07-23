@@ -18,8 +18,8 @@ async function createArticles(formData, token) {
     }
 }
 
-async function getArticles(page = 1, limit = 20) {
-    const response = await fetch(`${url}/articles?page=${page}&limit=${limit}`);
+async function getArticles(searchQuery, page = 1, limit = 20) {
+    const response = await fetch(`${url}/articles?searchQuery=${searchQuery}&page=${page}&limit=${limit}`);
     if (!response.ok) {
         throw new Error('Erreur lors de la récupération des articles');
     }
