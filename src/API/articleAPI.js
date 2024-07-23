@@ -18,15 +18,6 @@ async function createArticles(formData, token) {
     }
 }
 
-async function getArticles(searchQuery, page = 1, limit = 20) {
-    const response = await fetch(`${url}/articles?searchQuery=${searchQuery}&page=${page}&limit=${limit}`);
-    if (!response.ok) {
-        throw new Error('Erreur lors de la récupération des articles');
-    }
-    const articles = await response.json();
-    return articles;
-}
-
 async function getOneArticle(id) {
     const response = await fetch(`${url}/articles/${id}`)
     if (!response.ok) {
@@ -69,4 +60,4 @@ async function updateArticle (id, formData, token) {
     }
 };
 
-export {createArticles, getArticles, getOneArticle, deleteArticle, updateArticle};
+export {createArticles, getOneArticle, deleteArticle, updateArticle};

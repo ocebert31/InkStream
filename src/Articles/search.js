@@ -1,11 +1,11 @@
 import './search.css';
 import { useForm } from 'react-hook-form';
 
-function Search({setSearchQuery}) {
+function Search({handleSearchQueryChange}) {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = async (data) => {
-        setSearchQuery(data.searchQuery);
+        handleSearchQueryChange(data.searchQuery);
     };
 
     return(

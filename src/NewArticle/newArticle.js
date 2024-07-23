@@ -21,7 +21,7 @@ function NewArticle() {
             alert("L'article a été ajouté");
             navigate('/');
         } catch (error) {
-            alert(`Une erreur est survenue lors de l'ajout de l'article : ${error.message}`);
+            alert(error.message);
         }
     };
 
