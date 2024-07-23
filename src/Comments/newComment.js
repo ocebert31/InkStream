@@ -5,14 +5,16 @@ import { useAuth } from '../AuthContext';
 
 function NewComment({articleId, onCommentAdded}) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { token } = useAuth();
+    const { token, user } = useAuth();
   
     const onSubmit = async (data) => {
         try {
-            const newComment = await postComment(data.content, articleId ,token);
+            const result = await postComment(data.content, articleId ,token);
+            const comment = result.comment;
             alert('Le commentaire a été ajouté');
             reset();
-            onCommentAdded(newComment.comment);
+            comment.pseudo = user.pseudo;
+            onCommentAdded(comment);
         } catch (error) {
             console.error(error);
         }
