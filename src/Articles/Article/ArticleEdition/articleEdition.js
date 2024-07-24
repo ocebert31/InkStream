@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { updateArticle } from '../../API/articleAPI';
-import { buildArticleFormData } from '../../Components/buildFormData';
-import Title from '../../Components/Articles/title';
-import Content from '../../Components/Articles/content';
-import Image from '../../Components/Articles/image';
-import { useAuth } from "../../AuthContext";
+import { updateArticle } from '../../../API/articleAPI';
+import { buildArticleFormData } from '../../../Components/buildFormData';
+import Title from '../../../Components/Articles/title';
+import Content from '../../../Components/Articles/content';
+import Image from '../../../Components/Articles/image';
+import { useAuth } from "../../../AuthContext";
 
 function ArticleEdition({ article, setArticle, cancelEdit }) {
     const { control, handleSubmit, formState: { errors } } = useForm({defaultValues: {title: article.title,content: article.content, image: null}});

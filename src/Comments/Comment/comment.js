@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Delete from "../Delete/delete";
 import { useAuth } from "../../AuthContext";
 import Edit from '../Edit/edit';
-import Vote from '../Vote/vote';
+import Vote from '../../Votes/votes';
+import CommentDisplay from '../CommentDisplay/commentDisplay';
 
 function Comment({ comment, onDelete }) {
     const { user } = useAuth();
@@ -90,27 +91,14 @@ function Comment({ comment, onDelete }) {
             </div>
             <div className='alignement-style-content'>
                 {!isEditing && (
-                     <div>
-                        {isHidden ? (
-                            <p>Ce commentaire peut être offensant. <span onClick={toggleHidden} style={{color: 'blue', cursor: 'pointer'}}>Afficher</span></p>
-                        ) : (
-                            <>
-                            {content.startsWith('giphy#') ? (
-                                <img src={giphyUrl()} alt={'GIF'} style={{'max-width': '100%', height: 'auto'}} />
-                                ) : (
-                                <p>{content}</p>
-                                )
-                            }
-                            </>
-                        )}
+                    <div>
+                        <CommentDisplay isHidden={isHidden} toggleHidden={toggleHidden} content={content} giphyUrl={giphyUrl}/>
                         <Vote comment={comment} onVoteDone={onVoteDone} upVotes={upVotes} downVotes={downVotes} userVoteType={userVoteType}></Vote>
                     </div>
                 )}
                 {isAuthor && (
                     <div className='style-button-content'>
-                    {!content.startsWith('giphy#') ? (
                         <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing} />
-                    ) : (<></>)}
                         <Delete id={comment._id} onDelete={onDelete} comment={comment} />
                     </div>
                 )}
@@ -120,3 +108,4 @@ function Comment({ comment, onDelete }) {
 }
 
 export default Comment;
+

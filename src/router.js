@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Articles from './Articles/articles';
-import NewArticle from './NewArticle/newArticle';
-import Article from './Article/article';
+import NewArticle from './Articles/NewArticle/newArticle';
+import Article from './Articles/Article/article';
 import Registration from './Registration/registration';
 import Login from './Login/login';
 

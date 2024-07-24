@@ -1,6 +1,5 @@
-
-import { voteComment } from '../../API/voteAPI'; 
-import { useAuth } from '../../AuthContext';
+import { voteComment } from '../API/voteAPI'; 
+import { useAuth } from '../AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 

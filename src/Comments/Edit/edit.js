@@ -33,11 +33,15 @@ function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
                     </form>
                 </div>
             ) : (
-                <div className='style-button-edit'>
-                    <button onClick={() => setIsEditing(true)}>
-                        <FontAwesomeIcon icon={faPen} />
-                    </button>
-                </div>
+                <div>
+                    {!content.startsWith('giphy#') && (
+                        <div className='style-button-edit'>
+                            <button onClick={() => setIsEditing(true)}>
+                                <FontAwesomeIcon icon={faPen} />
+                            </button>
+                        </div> 
+                    )}
+               </div>
             )}
         </div>
     );

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { getOneArticle } from '../API/articleAPI';
+import { getOneArticle } from '../../API/articleAPI';
 import { useParams } from 'react-router-dom';
 import Delete from './Delete/delete';
 import Edit from './Edit/edit';
 import './article.css';
 import ArticleDisplay from '../Article/ArticleDisplay/articleDisplay';
 import ArticleEdition from './ArticleEdition/articleEdition';
-import { useAuth } from "../AuthContext";
-import Comments from '../Comments/comments';
+import { useAuth } from "../../AuthContext";
+import Comments from '../../Comments/comments';
 
 function Article() {
     const [article, setArticle] = useState(null);
@@ -45,19 +45,19 @@ function Article() {
         <div>
             <div className='alignement'>
                 {isAuthor && (
-                    <>
+                    <div>
                         <Delete id={article._id} />
                         <Edit editArticle={editArticle} />
-                    </>
+                    </div>
                 )}
             </div>
             {isEditing ? (
                 <ArticleEdition article={article} setArticle={setArticle} cancelEdit={cancelEdit} />
             ) : (
-                <>
-                <ArticleDisplay article={article} />
-                <Comments articleId={article._id}/>
-                </>
+                <div>
+                    <ArticleDisplay article={article} />
+                    <Comments articleId={article._id}/>
+                </div>
             )}
         </div>
     );
