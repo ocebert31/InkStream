@@ -21,12 +21,48 @@ async function postComment(content, articleId, token) {
 };
 
 async function getComments(articleId) {
-        const response = await fetch(`${url}/comments?articleId=${articleId}`);
-        if (!response.ok) {
-            throw new Error('Erreur lors de la récupération des commentaires');
-        }
-        const comments = await response.json();
-        return comments;
+    const response = await fetch(`${url}/comments?articleId=${articleId}`);
+    if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des commentaires');
+    }
+    const comments = await response.json();
+    return comments;
 }
 
-export {postComment, getComments}
+async function deleteComment(id, token) {
+    try {
+        const response = await fetch(`${url}/comments/${id}`, {
+            method: 'DELETE',
+            headers: {'Authorization': `Bearer ${token}`}
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
+async function updateComment (id, content, token) {
+    try {
+        const response = await fetch(`${url}/comments/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({content}),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
+export {postComment, getComments, deleteComment, updateComment}

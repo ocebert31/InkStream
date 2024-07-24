@@ -1,0 +1,13 @@
+.header-comment{
+    display: flex;
+    justify-content: start;
+}
+
+.style-button-content{
+    display: flex;
+    align-items: center;
+}
+
+.alignement-style-content {
+    display: flex;
+}

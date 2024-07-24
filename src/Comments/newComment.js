@@ -11,7 +11,6 @@ function NewComment({articleId, onCommentAdded}) {
         try {
             const result = await postComment(data.content, articleId ,token);
             const comment = result.comment;
-            alert('Le commentaire a été ajouté');
             reset();
             comment.pseudo = user.pseudo;
             onCommentAdded(comment);
