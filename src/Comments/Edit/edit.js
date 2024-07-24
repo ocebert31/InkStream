@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { updateComment } from '../../API/commentAPI';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../AuthContext';
-import Content from '../../Components/Articles/content';
+import Content from '../../Comments/Edit/content';
 import './edit.css';
 
 function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
