@@ -1,14 +1,43 @@
-import Comment from "./comment";
+import React, { useEffect, useState } from 'react';
+import { getComments } from '../API/commentAPI';
+import Comment from './comment';
+import NewComment from './newComment';
+import { useAuth } from '../AuthContext';
 
-function Comments({comments, onDelete, setComments}) {
+function Comments({ articleId }) {
+    const [comments, setComments] = useState([]);
+    const { token } = useAuth();
+
+    useEffect(() => {
+        const loadComments = async () => {
+            try {
+                const fetchedComments = await getComments(articleId, token);
+                setComments(fetchedComments);
+            } catch (error) {
+                alert(error);
+            }
+        };
+        loadComments();
+    }, [articleId, token]);
+
+    const handleCommentAdded = (newComment) => {
+        setComments((prevComments) => [...prevComments, newComment]);
+    };
+    const handleCommentDeleted = (id) => {
+        setComments(comments.filter(comment => comment._id !== id));
+    };
+
     return(
         <div>
-            <ul>
+            <h3>Commentaires</h3>
+            <div>
                 {comments.map(comment => 
-                    <Comment key={comment._id} comment={comment} onDelete={onDelete} setComments={setComments}/>
+                    <Comment key={comment._id} comment={comment} onDelete={handleCommentDeleted}/>
                 )}
-            </ul>
+            </div>
+            <NewComment articleId={articleId} onAdded={handleCommentAdded} />
         </div>
+        
     )
 }
 

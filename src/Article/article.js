@@ -7,7 +7,7 @@ import './article.css';
 import ArticleDisplay from '../Article/ArticleDisplay/articleDisplay';
 import ArticleEdition from './ArticleEdition/articleEdition';
 import { useAuth } from "../AuthContext";
-import CommentSection from '../Comments/commentSection';
+import Comments from '../Comments/comments';
 
 function Article() {
     const [article, setArticle] = useState(null);
@@ -56,7 +56,7 @@ function Article() {
             ) : (
                 <>
                 <ArticleDisplay article={article} />
-                <CommentSection articleId={article._id}/>
+                <Comments articleId={article._id}/>
                 </>
             )}
         </div>

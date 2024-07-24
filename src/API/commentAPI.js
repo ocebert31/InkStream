@@ -20,8 +20,12 @@ async function postComment(content, articleId, token) {
     }
 };
 
-async function getComments(articleId) {
-    const response = await fetch(`${url}/comments?articleId=${articleId}`);
+async function getComments(articleId, token) {
+    let headers = {};
+    if(token) {
+        headers = { ...headers, 'Authorization': `Bearer ${token}` };
+    }
+    const response = await fetch(`${url}/comments?articleId=${articleId}`, { headers });
     if (!response.ok) {
         throw new Error('Erreur lors de la récupération des commentaires');
     }

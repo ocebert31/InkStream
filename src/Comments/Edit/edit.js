@@ -1,23 +1,19 @@
-import React, { useEffect } from 'react';
 import { faPen, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { updateComment } from '../../API/commentAPI';
+import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../AuthContext';
+import Content from '../../Components/Articles/content';
 import './edit.css';
 
-function Edit({ comment, setComments, content, setContent, isEditing, setIsEditing }) {
-    const { token, user } = useAuth(); 
+function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
+    const { token } = useAuth(); 
+    const { control, handleSubmit, formState: { errors } } = useForm({defaultValues: {content: content}});
 
-    useEffect(() => {
-        setContent(comment.content);
-    }, [comment.content, setContent]);
-
-    const handleSave = async () => {
+    const onSubmit = async (data) => {
         try {
-            const result = await updateComment(comment._id, content, token);
-            setComments(prevComments =>
-                prevComments.map(com => (com._id === comment._id ? { ...result.comment, pseudo: user.pseudo } : com))
-            );
+            await updateComment(comment._id, data.content, token);
+            setContent(data.content);
             setIsEditing(false);
         } catch (error) {
             alert(`Erreur lors de la mise à jour du commentaire : ${error.message}`);
@@ -28,11 +24,13 @@ function Edit({ comment, setComments, content, setContent, isEditing, setIsEditi
         <div >
             {isEditing ? (
                 <div className='style-button-edit'>
-                    <textarea value={content} onChange={(e) => setContent(e.target.value)} rows="4" cols="50"/>
-                    <button onClick={() => setIsEditing(false)}>Cancel</button>
-                    <button onClick={handleSave}>
-                        <FontAwesomeIcon icon={faCheck} />
-                    </button>
+                    <form method="post" onSubmit={handleSubmit(onSubmit)}>
+                        <Controller name="content" control={control} defaultValue="" render={({ field }) => (<Content {...field} errorMessage={errors.content?.message}/>)}rules={{required: "Contenu requis"}}/>
+                        <button onClick={() => setIsEditing(false)}>Cancel</button>
+                        <button type="submit">
+                            <FontAwesomeIcon icon={faCheck} />
+                        </button>
+                    </form>
                 </div>
             ) : (
                 <div className='style-button-edit'>

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { postComment } from '../API/commentAPI'; 
 import { useAuth } from '../AuthContext';
 
-function NewComment({articleId, onCommentAdded}) {
+function NewComment({articleId, onAdded}) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { token, user } = useAuth();
   
@@ -13,7 +13,7 @@ function NewComment({articleId, onCommentAdded}) {
             const comment = result.comment;
             reset();
             comment.pseudo = user.pseudo;
-            onCommentAdded(comment);
+            onAdded(comment);
         } catch (error) {
             console.error(error);
         }

@@ -1,18 +1,20 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useMemo} from "react";
 const baseUrl = 'http://localhost:3001';
 
 function useFetch (path, options = {}) {
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState(null)
-    const [errors, setErrors] = useState(null)
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState(null);
+    const [errors, setErrors] = useState(null);
+
+    const memoizedOptions = useMemo(() => JSON.stringify(options), [options]);
 
     useEffect(() => {
         const url = `${baseUrl}/${path}`;
         fetch(url, {
-            ...options,
+            ...memoizedOptions,
             headers: {
                 'Accept': 'application/json; charset=UTF-8',
-                ...options.headers
+                ...memoizedOptions.headers
             }
         }).then(r => r.json()).then(data => {
             setData(data)
@@ -21,7 +23,7 @@ function useFetch (path, options = {}) {
         }).finally(() => {
             setLoading(false)
         })
-    }, [path, options]);
+    }, [path, memoizedOptions]);
 
     return {
         loading, data, errors
