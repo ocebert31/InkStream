@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getComments } from '../API/commentAPI';
-import Comment from './comment';
-import NewComment from './newComment';
+import Comment from './Comment/comment';
+import NewComment from './NewComment/newComment';
 import { useAuth } from '../AuthContext';
 
 function Comments({ articleId }) {

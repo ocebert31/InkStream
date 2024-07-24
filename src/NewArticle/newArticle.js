@@ -18,7 +18,6 @@ function NewArticle() {
         try {
             const result = await createArticles(buildArticleFormData(data), token);
             console.log(result);
-            alert("L'article a été ajouté");
             navigate('/');
         } catch (error) {
             alert(error.message);

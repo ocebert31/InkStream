@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import  useGetArticles  from '../API/Article/useGetArticles';
 import './articles.css';
 import ArticleCard from './ArticleCard/articleCard';
-import Search from './search';
+import Search from './Search/search';
 
 function Article() {
     const [searchQuery, setSearchQuery] = useState('');

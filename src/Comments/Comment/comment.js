@@ -1,8 +1,8 @@
-import React, { useState, } from 'react';
-import Delete from "../Comments/Delete/delete";
-import { useAuth } from "../AuthContext";
-import Edit from './Edit/edit';
-import Vote from '../Comments/Vote/vote'
+import React, { useState } from 'react';
+import Delete from "../Delete/delete";
+import { useAuth } from "../../AuthContext";
+import Edit from '../Edit/edit';
+import Vote from '../Vote/vote';
 
 function Comment({ comment, onDelete }) {
     const { user } = useAuth();
@@ -11,6 +11,7 @@ function Comment({ comment, onDelete }) {
     const [downVotes, setdownVotes] = useState(comment.downvotes || 0);
     const [userVoteType, setUserVoteType] = useState(comment.userVote ? comment.userVote.voteType : null);
     const [isEditing, setIsEditing] = useState(false);
+    const [isHidden, setIsHidden] = useState(downVotes >= 3 && downVotes > upVotes);
 
     const isAuthor = user && (user._id === comment.userId || user.role === 'admin');
     
@@ -21,13 +22,18 @@ function Comment({ comment, onDelete }) {
         year: 'numeric'
     });
 
+    const toggleHidden = () => {
+        setIsHidden(!isHidden);
+    };
+
     const upVote = () => {
         setupVotes(upVotes + 1);
         if (userVoteType === 'downvote') {
             setdownVotes(downVotes - 1);
         }
         setUserVoteType('upvote');
-    }
+        checkIfHidden(upVotes + 1, downVotes);
+    };
 
     const downVote = () => {
         setdownVotes(downVotes + 1);
@@ -35,34 +41,45 @@ function Comment({ comment, onDelete }) {
             setupVotes(upVotes - 1);
         }
         setUserVoteType('downvote');
-    }
+        checkIfHidden(upVotes, downVotes + 1);
+    };
 
     const cancelUpVote = () => {
         setupVotes(upVotes - 1);
         setUserVoteType(null);
-    }
+        checkIfHidden(upVotes - 1, downVotes);
+    };
 
     const cancelDownVote = () => {
         setdownVotes(downVotes - 1);
         setUserVoteType(null);
-    }
+        checkIfHidden(upVotes, downVotes - 1);
+    };
+
+    const checkIfHidden = (upVotes, downVotes) => {
+        setIsHidden(downVotes >= 3 && downVotes > upVotes);
+    };
 
     const onVoteDone = (voteType, voteResult) => {
         if (voteResult.vote) {
-            if (voteType ===  'upvote') {
+            if (voteType === 'upvote') {
                 upVote();
             }
-            if (voteType ===  'downvote') {
+            if (voteType === 'downvote') {
                 downVote();
             }
         } else {
-            if (voteType ===  'upvote') {
+            if (voteType === 'upvote') {
                 cancelUpVote();
             }
-            if (voteType ===  'downvote') {
+            if (voteType === 'downvote') {
                 cancelDownVote();
             }
         }
+    };
+
+    const giphyUrl = () => {
+        return content.split('#')[1];
     }
 
     return (
@@ -72,15 +89,28 @@ function Comment({ comment, onDelete }) {
                 <p><em>{formattedDate}</em></p>
             </div>
             <div className='alignement-style-content'>
-                {!isEditing &&
-                    <>
-                        <p>{content}</p>
+                {!isEditing && (
+                     <div>
+                        {isHidden ? (
+                            <p>Ce commentaire peut être offensant. <span onClick={toggleHidden} style={{color: 'blue', cursor: 'pointer'}}>Afficher</span></p>
+                        ) : (
+                            <>
+                            {content.startsWith('giphy#') ? (
+                                <img src={giphyUrl()} alt={'GIF'} style={{'max-width': '100%', height: 'auto'}} />
+                                ) : (
+                                <p>{content}</p>
+                                )
+                            }
+                            </>
+                        )}
                         <Vote comment={comment} onVoteDone={onVoteDone} upVotes={upVotes} downVotes={downVotes} userVoteType={userVoteType}></Vote>
-                    </>
-                }
+                    </div>
+                )}
                 {isAuthor && (
                     <div className='style-button-content'>
-                        <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing}/>
+                    {!content.startsWith('giphy#') ? (
+                        <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing} />
+                    ) : (<></>)}
                         <Delete id={comment._id} onDelete={onDelete} comment={comment} />
                     </div>
                 )}
@@ -90,4 +120,3 @@ function Comment({ comment, onDelete }) {
 }
 
 export default Comment;
-

@@ -13,7 +13,6 @@ function Delete({ id }) {
         if (window.confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
             try {
                 await deleteArticle(id, token);
-                alert('Article supprimé avec succès');
                 navigate('/');
             } catch (error) {
                 alert(`Erreur lors de la suppression de l'article : ${error.message}`);

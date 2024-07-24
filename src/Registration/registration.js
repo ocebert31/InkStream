@@ -13,8 +13,7 @@ function Registration() {
 
     const onSubmit = async (data) => {
         try {
-            const response = await postInscription(data);
-            console.log(response);
+            await postInscription(data);
             navigate('/');
         } catch (error) {
             alert(error.message);
