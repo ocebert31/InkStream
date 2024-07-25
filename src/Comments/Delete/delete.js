@@ -1,10 +1,10 @@
 import React from 'react';
-import { deleteComment} from '../../API/commentAPI'; 
+import { deleteComment } from '../../API/commentAPI'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../AuthContext";
 
-function Delete({ id, onDelete, comment }) {
+function Delete({ id, onDelete, comment, isEditing }) {
     const { token } = useAuth();
 
     const handleDelete = async () => {
@@ -20,9 +20,9 @@ function Delete({ id, onDelete, comment }) {
 
     return (
         <div>
-            <button onClick={handleDelete}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>
+            {!isEditing && <button onClick={handleDelete} className="text-red-500 hover:text-red-700 transition-colors duration-150" aria-label="Supprimer le commentaire"><FontAwesomeIcon icon={faTrash} /></button>}
         </div>
     );
-};
+}
 
 export default Delete;

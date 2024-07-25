@@ -1,35 +1,51 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { postSession } from '../API/authentificationAPI';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../Registration/registration.css';
 import EmailInput from '../Components/Users/email';
 import PasswordInput from '../Components/Users/password';
 import { useAuth } from '../AuthContext';
+import './login.css';
+import React, { useState } from 'react';
+import SuccessAlert from '../Alert/successAlert';
+import ErrorAlert from '../Alert/errorAlert';
 
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const { login } = useAuth();
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     const onSubmit = async (data) => {
         try {
             const { user, token } = await postSession(data);
             login(user, token);
-            navigate('/');
+            setShowSuccessAlert(true);
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
         } catch (error) {
-            alert(error.message);
+            setShowErrorAlert(true);
         }
     };
 
     return (
-        <div className="alignement">
-            <form method='post' onSubmit={handleSubmit(onSubmit)}>
-                <legend className='style-title-sign-in'>Connexion</legend>
-                <EmailInput register={register} errors={errors} />
-                <PasswordInput register={register} errors={errors} />
-                <button type="submit" className='style-formulaire style-button-sign-in'>Se connecter</button>
-            </form>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="w-full p-7 max-w-md bg-white rounded-lg shadow-lg container-alignement-login">
+                <h2 className="text-2xl font-bold text-center text-primary mb-6">Connexion</h2>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mx-5">
+                    <EmailInput register={register} errors={errors} />
+                    <PasswordInput register={register} errors={errors} />
+                    <div className="space-y-4">
+                        <button type="submit" className="w-full bg-primary text-white py-3 px-4 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50 transition-colors duration-300">Se connecter</button>
+                        <Link to='/registration' className="block mt-4 text-primary hover:text-secondary font-medium transition-colors duration-300 underline text-center">Vous n'avez pas de compte ?</Link>
+                    </div>
+                </form>
+         
+            </div>
+            {showSuccessAlert && (<SuccessAlert message="Vous êtes désormais connectés" onClose={() => setShowSuccessAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de la connexion" onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

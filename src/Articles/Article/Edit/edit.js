@@ -1,16 +1,17 @@
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Edit({ editArticle }) {
-    const activeEditing = () => {
+function Edit({ editArticle, isEditing }) {
+    const activateEditing = () => {
         editArticle();
     }
 
-    return(
+    return (
         <div>
-            <button>
-                <FontAwesomeIcon icon={faPen} onClick={activeEditing}></FontAwesomeIcon>
-            </button>
+            {!isEditing && (
+                <button onClick={activateEditing} className="text-primary transition-colors duration-300">
+                    <FontAwesomeIcon icon={faPen} />
+                </button>)}
         </div>
     )
 }

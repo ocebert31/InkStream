@@ -33,13 +33,13 @@ function NewComment({ articleId, onAdded }) {
     }
 
     return (
-        <div>
+        <div className="bg-white p-4 rounded-lg shadow-md mt-4">
             {showGifSelector ? (
-                <div style={{ backgroundColor: 'white', border: '1px solid #ccc', padding: '10px' }}>
+                <div className="border border-gray-300 p-4 rounded-lg">
                     <GifSelector onSelect={handleGifSelect} />
                 </div>
             ) : (
-                <CommentForm register={register} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} setShowGifSelector={setShowGifSelector}/>
+                <CommentForm register={register} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} setShowGifSelector={setShowGifSelector} />
             )}
         </div>
     );

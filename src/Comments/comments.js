@@ -23,22 +23,22 @@ function Comments({ articleId }) {
     const handleCommentAdded = (newComment) => {
         setComments((prevComments) => [...prevComments, newComment]);
     };
+
     const handleCommentDeleted = (id) => {
         setComments(comments.filter(comment => comment._id !== id));
     };
 
-    return(
-        <div>
-            <h3>Commentaires</h3>
-            <div>
+    return (
+        <div className="p-4 bg-gray-100 rounded-lg shadow-lg">
+            <h3 className="text-2xl font-semibold text-primary mb-4">Commentaires</h3>
+            <div className="space-y-4  max-h-96 overflow-auto">
                 {comments.map(comment => 
                     <Comment key={comment._id} comment={comment} onDelete={handleCommentDeleted}/>
                 )}
             </div>
             <NewComment articleId={articleId} onAdded={handleCommentAdded} />
         </div>
-        
-    )
+    );
 }
 
 export default Comments;

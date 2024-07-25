@@ -69,4 +69,4 @@ async function updateComment (id, content, token) {
     }
 };
 
-export {postComment, getComments, deleteComment, updateComment}
+export {postComment, getComments, deleteComment, updateComment};

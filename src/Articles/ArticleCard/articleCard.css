@@ -7,3 +7,21 @@
 .article {
     width: 30%;
 }
+
+.style-underline{
+    text-decoration: underline;
+    text-decoration-color:  #ff8f5f;
+}
+
+/* styles.css */
+/* styles.css */
+.text-container {
+    display: -webkit-box;   
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;     
+    overflow: hidden;         
+    text-overflow: ellipsis;    
+    white-space: normal;       
+    line-clamp: 2;           
+  }
+  

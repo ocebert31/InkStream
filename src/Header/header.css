@@ -1,7 +1,4 @@
-.style-button{
-    margin: 5px;
-}
-
-.align-routes {
-    text-align: center;
+.background {
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(109,76,180,1) 72%, rgba(109,76,180,1) 100%);
 }

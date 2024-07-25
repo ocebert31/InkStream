@@ -7,3 +7,26 @@
 .pagination-buttons {
     text-align: center;
 }
+
+.font-inkstream {
+    font-size: 9vw;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.font-inkstream span:nth-of-type(2) {
+    width: 100%; 
+    margin: 0 auto; 
+}
+
+@media (max-width: 768px) {
+    .font-inkstream {
+        font-size: 19vw; 
+    }
+}
+
+@media (max-width: 480px) {
+    .font-inkstream {
+        font-size: 15vw; 
+    }
+}

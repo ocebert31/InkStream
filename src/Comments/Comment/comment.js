@@ -84,28 +84,27 @@ function Comment({ comment, onDelete }) {
     }
 
     return (
-        <div key={comment._id}>
-            <div className='header-comment'>
-                <p><strong>{comment.pseudo}</strong></p>
-                <p><em>{formattedDate}</em></p>
+        <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+            <div className='flex justify-between items-center border-b border-gray-300 pb-2 mb-2'>
+                <p className="text-lg font-semibold text-primary">{comment.pseudo}</p>
+                <p className="text-sm text-gray-500">{formattedDate}</p>
             </div>
-            <div className='alignement-style-content'>
-                {!isEditing && (
-                    <div>
-                        <CommentDisplay isHidden={isHidden} toggleHidden={toggleHidden} content={content} giphyUrl={giphyUrl}/>
-                        <Vote comment={comment} onVoteDone={onVoteDone} upVotes={upVotes} downVotes={downVotes} userVoteType={userVoteType}></Vote>
+            <div className='flex flex-col gap-2'>
+                <div>
+                    {!isEditing && (<CommentDisplay isHidden={isHidden} toggleHidden={toggleHidden} content={content} giphyUrl={giphyUrl} />)}
+                    <div className="flex items-center gap-4">
+                        {!isEditing && (<Vote comment={comment} onVoteDone={onVoteDone} upVotes={upVotes} downVotes={downVotes} userVoteType={userVoteType}/>)}
+                        {isAuthor && (
+                            <div className='flex items-center gap-2'>
+                                <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing}/>
+                                <Delete id={comment._id} onDelete={onDelete} comment={comment} isEditing={isEditing}/>
+                            </div>
+                        )}
                     </div>
-                )}
-                {isAuthor && (
-                    <div className='style-button-content'>
-                        <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing} />
-                        <Delete id={comment._id} onDelete={onDelete} comment={comment} />
-                    </div>
-                )}
+                </div>
             </div>
         </div>
     );
 }
 
 export default Comment;
-

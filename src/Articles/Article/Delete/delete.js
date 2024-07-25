@@ -21,9 +21,9 @@ function Delete({ id }) {
     };
 
     return (
-        <div>
-            <button onClick={handleDelete}><FontAwesomeIcon icon={faTrash}></FontAwesomeIcon></button>
-        </div>
+        <button onClick={handleDelete} className="text-secondary transition-colors duration-300">
+            <FontAwesomeIcon icon={faTrash} />
+        </button>
     );
 };
 

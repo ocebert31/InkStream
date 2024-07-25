@@ -8,7 +8,7 @@
     align-items: center;
 }
 
-form {
+.style-form {
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -28,4 +28,8 @@ div > label {
   
 div > input {
     display: block;
+}
+
+.container-alignement-registration {
+    margin-bottom: 200px;
 }
