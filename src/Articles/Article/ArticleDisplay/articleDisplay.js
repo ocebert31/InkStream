@@ -10,7 +10,7 @@ function ArticleDisplay({ article }) {
 
     const sanitizedContent = sanitizeHtml(article.content);
     const formattedDate = format(new Date(article.createdAt), 'MMM dd, yyyy');
-
+console.log(article)
     return (
         <div>
             <p className='text-xs md:text-base text-primary text-center'>{formattedDate}</p>

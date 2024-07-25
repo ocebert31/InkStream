@@ -24,7 +24,7 @@ function ArticleCard({ article }) {
                 </a>
             </div>
             <div className="w-full md:w-2/5 flex-shrink-0 flex items-center justify-center">
-                <img src={article.imageUrl} alt={article.title} className="w-40 md:w-60 h-auto object-cover rounded-lg"/>
+                <img src={article.imageUrl} alt={article.title} className="w-40 size-image h-auto object-cover rounded-lg"/>
             </div>
         </div>
     );

@@ -28,10 +28,10 @@ function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
                     <form onSubmit={handleSubmit(onSubmit)} className="gap-4">
                         <Controller name="content" control={control} defaultValue="" render={({ field }) => (<Content {...field} errorMessage={errors.content?.message} />)} rules={{ required: "Contenu requis" }}/>
                         <div className="gap-2">
-                            <button type="button" onClick={() => setIsEditing(false)} className="px-4 py-2 text-white bg-secondary rounded-lg">Annuler</button>
                             <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark"><FontAwesomeIcon icon={faCheck}/></button>
+                            <button type="button" onClick={() => setIsEditing(false)} className="px-4 py-2 text-white bg-secondary rounded-lg">Annuler</button>
                         </div>
-                    </form>
+                    </form> 
                 </div>
             ) : (
                 <div>
