@@ -18,8 +18,10 @@ async function createArticles(formData, token) {
     }
 }
 
-async function getOneArticle(id) {
-    const response = await fetch(`${url}/articles/${id}`)
+async function getOneArticle(id, token) {
+    const response = await fetch(`${url}/articles/${id}`, {
+        headers: {'Authorization': `Bearer ${token}`}
+    })
     if (!response.ok) {
         throw new Error("Erreur lors de la récupération de l'article");
     }

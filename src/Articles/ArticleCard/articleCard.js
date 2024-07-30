@@ -16,7 +16,6 @@ function ArticleCard({ article }) {
                     <span className='pr-1 md:pr-3'>by</span>
                     <span className="text-primary py-4 dark:text-white font-bold">{article.pseudo}</span>
                 </p>
-             
                 <p className="my-3 text-base md:text-3xl font-semibold text-gray-700 dark:text-gray-400 text-container" dangerouslySetInnerHTML={{ __html: article.content || '<p>No description available.</p>' }}></p>
                 <a href={`/articles/${article._id}`} className="inline-flex items-center px-2 py-1 text-xs md:text-sm font-medium text-white bg-primary rounded-lg hover:bg-secondary focus:ring-4 focus:ring-primary-300">
                     Lire la suite
@@ -31,3 +30,4 @@ function ArticleCard({ article }) {
 }
 
 export default ArticleCard;
+ 

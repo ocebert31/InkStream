@@ -14,20 +14,20 @@ function Article() {
     const [article, setArticle] = useState(null);
     const { id } = useParams();
     const [isEditing, setIsEditing] = useState(false);
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     useEffect(() => {
         const loadArticle = async () => {
             try {
-                const fetchedArticle = await getOneArticle(id);
+                const fetchedArticle = await getOneArticle(id, token);
                 setArticle(fetchedArticle);
             } catch (error) {
                 setShowErrorAlert(true);
             }
         };
         loadArticle();
-    }, [id]);
+    }, [id, token]);
 
     const editArticle = () => {
         setIsEditing(true);
@@ -56,7 +56,7 @@ function Article() {
                     <ArticleEdition article={article} setArticle={setArticle} cancelEdit={cancelEdit} />
                 ) : (
                     <div>
-                        <ArticleDisplay article={article} />
+                        <ArticleDisplay article={article}/>
                         <Comments articleId={article._id}/>
                     </div>
                 )}

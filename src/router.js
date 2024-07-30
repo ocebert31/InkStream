@@ -15,6 +15,7 @@ function routeur() {
                 <Route path="/articles/new" element={<NewArticle />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/login" element={<Login/>} />
+                {/* <Route path="/favorites" element={<Favorites/>} /> */}
             </Routes>
         </div>
     )

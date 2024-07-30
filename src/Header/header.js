@@ -17,6 +17,7 @@ function Header() {
         {token ? (
           <>
             <Link to='/articles/new' className='text-white hover:text-secondary font-semibold transition-colors duration-300'>Écrire un article</Link>
+            <Link to='/favorites' className='text-white hover:text-secondary font-semibold transition-colors duration-300'>Favoris</Link>
             <button className='bg-secondary text-white py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors duration-300' onClick={logout}>Déconnexion</button>
           </>
         ) : (
