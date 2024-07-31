@@ -1,28 +1,33 @@
-import React, { useState } from 'react';
-import useGetArticles from '../API/Article/useGetArticles';
+import React, { useState, useEffect } from 'react';
+import {getArticles} from '../API/articleAPI';
 import ArticleCard from './ArticleCard/articleCard';
 import Search from './Search/search';
 import './articles.css';
+import { useAuth } from '../AuthContext';
 
-function Articles() {
+function Articles({ type }) {
+    const { token } = useAuth();
+    const [articles, setArticles] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [page, setPage] = useState(1);
     const [limit] = useState(20);
 
-    const { loading, articles, errors } = useGetArticles(searchQuery, page, limit);
+    useEffect(() => {
+        const loadArticles = async () => {
+            try {
+                const fetchedArticles = await getArticles(searchQuery, page, limit, type, token);
+                setArticles(fetchedArticles);
+            } catch (error) {
+               alert(error);
+            }
+        };
+        loadArticles();
+    }, [searchQuery, page, limit, type, token]);
 
     const handleSearchQueryChange = (search) => {
         setSearchQuery(search);
         setPage(1);
     };
-
-    if (loading) {
-        return <div className="text-center py-10">Loading...</div>;
-    }
-
-    if (errors) {
-        return <div className="text-center py-10 text-red-500">Error: {errors.message}</div>;
-    }
 
     return (
         <div className="container mx-auto px-4">

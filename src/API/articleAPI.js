@@ -1,5 +1,27 @@
 const url = 'http://localhost:3001';
 
+async function getArticles(searchQuery = '', page = 1, limit = 20, type = 'all', token = null) {
+    const params = new URLSearchParams({searchQuery, page, limit, type}).toString();
+    const urlGetArticles = `${url}/articles?${params}`;
+    try {
+        const response = await fetch(urlGetArticles, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json; charset=UTF-8',
+                ...(token && { 'Authorization': `Bearer ${token}` }) 
+            }
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
+}
+
 async function createArticles(formData, token) {
     try {
         const response = await fetch(`${url}/articles`, {
@@ -62,4 +84,4 @@ async function updateArticle (id, formData, token) {
     }
 };
 
-export {createArticles, getOneArticle, deleteArticle, updateArticle};
+export {getArticles, createArticles, getOneArticle, deleteArticle, updateArticle};

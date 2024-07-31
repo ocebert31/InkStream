@@ -6,19 +6,19 @@ import Article from './Articles/Article/article';
 import Registration from './Registration/registration';
 import Login from './Login/login';
 
-function routeur() {
+function RouterComponent() {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Articles />} />
+                <Route path="/" element={<Articles type='all' />} />
+                <Route path="/favorites" element={<Articles type='favorites'/>} />
                 <Route path="/articles/:id" element={<Article />} />
                 <Route path="/articles/new" element={<NewArticle />} />
                 <Route path="/registration" element={<Registration />} />
-                <Route path="/login" element={<Login/>} />
-                {/* <Route path="/favorites" element={<Favorites/>} /> */}
+                <Route path="/login" element={<Login />} />
             </Routes>
         </div>
-    )
+    );
 }
 
-export default routeur;
+export default RouterComponent;
