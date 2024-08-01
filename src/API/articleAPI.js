@@ -1,4 +1,4 @@
-const url = 'http://localhost:3001';
+const url = process.env.REACT_APP_API_URL;
 
 async function getArticles(searchQuery = '', page = 1, limit = 20, type = 'all', token = null) {
     const params = new URLSearchParams({searchQuery, page, limit, type}).toString();

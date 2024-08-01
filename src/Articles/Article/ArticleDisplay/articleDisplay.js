@@ -3,6 +3,7 @@ import parse from 'html-react-parser';
 import { format } from 'date-fns';
 import './articleDisplay.css';
 import Favorite from '../../../Favorites/favorites';
+import ArticleShare from '../../ArticleShare/articleShare';
 
 function ArticleDisplay({ article }) {
     const sanitizeHtml = (content) => {
@@ -16,7 +17,10 @@ function ArticleDisplay({ article }) {
         <div>
             <p className='text-xs md:text-base text-primary text-center'>{formattedDate}</p>
             <h1 className="text-2xl md:text-6xl font-bold my-4 text-center">{article.title}</h1>
-                <Favorite article={article}></Favorite>
+                <div className='flex justify-center items-center'>
+                    <Favorite article={article}></Favorite>
+                    <ArticleShare article={article}></ArticleShare>
+                </div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm md:text-lg text-center">
                     <span className='pr-1 md:pr-3'>by</span>
                     <span className="text-primary py-4 dark:text-white font-bold">{article.pseudo}</span>

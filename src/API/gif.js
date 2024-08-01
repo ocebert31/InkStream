@@ -4,6 +4,8 @@ function GifSelector({ onSelect }) {
     const [gifs, setGifs] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
+    const apiKey = process.env.REACT_APP_GIPHY_API_KEY;
+    const baseUrl = process.env.REACT_APP_GIPHY_API_BASE_URL;
 
     useEffect(() => {
         if (search.length < 2) return;
@@ -11,7 +13,7 @@ function GifSelector({ onSelect }) {
         const fetchGifs = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=enmoPufSZZKq9HIIk0MAX1nJTyYE0qbl&q=${search}&limit=10`);
+                const response = await fetch(`${baseUrl}?api_key=${apiKey}&q=${search}&limit=10`);
                 const data = await response.json();
                 setGifs(data.data);
             } catch (error) {
@@ -22,7 +24,7 @@ function GifSelector({ onSelect }) {
         };
 
         fetchGifs();
-    }, [search]);
+    }, [baseUrl, apiKey, search]);
 
     return (
         <div className="max-w-4xl mx-auto p-4 bg-white shadow-lg rounded-lg">

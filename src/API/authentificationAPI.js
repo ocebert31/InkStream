@@ -1,4 +1,4 @@
-const url = 'http://localhost:3001';
+const url = process.env.REACT_APP_API_URL;
 
 async function postInscription(data) {
   try {
