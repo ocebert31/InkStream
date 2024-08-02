@@ -1,6 +1,6 @@
 const url = process.env.REACT_APP_API_URL;
 
-async function voteComment (commentId, voteType, token) {
+async function createVote (commentId, voteType, token) {
     const response = await fetch(`${url}/votes/`, {
         method: 'POST',
         headers: {
@@ -17,4 +17,4 @@ async function voteComment (commentId, voteType, token) {
     return response.json();
 };
 
-export {voteComment};
+export {createVote};

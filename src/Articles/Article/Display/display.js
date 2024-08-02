@@ -1,11 +1,11 @@
 import React from 'react';
 import parse from 'html-react-parser';
 import { format } from 'date-fns';
-import './articleDisplay.css';
-import Favorite from '../../../Favorites/favorites';
-import ArticleShare from '../../ArticleShare/articleShare';
+import './display.css';
+import Favorites from '../../../Favorites/favorites';
+import Share from '../../Share/share';
 
-function ArticleDisplay({ article }) {
+function Display({ article }) {
     const sanitizeHtml = (content) => {
         return content.replace(/<p>\s*(<h1>[^<]*<\/h1>)\s*<\/p>/g, '<div>$1</div>');
     };
@@ -18,8 +18,8 @@ function ArticleDisplay({ article }) {
             <p className='text-xs md:text-base text-primary text-center'>{formattedDate}</p>
             <h1 className="text-2xl md:text-6xl font-bold my-4 text-center">{article.title}</h1>
                 <div className='flex justify-center items-center'>
-                    <Favorite article={article}></Favorite>
-                    <ArticleShare article={article}></ArticleShare>
+                    <Favorites article={article}></Favorites>
+                    <Share article={article}></Share>
                 </div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm md:text-lg text-center">
                     <span className='pr-1 md:pr-3'>by</span>
@@ -31,4 +31,4 @@ function ArticleDisplay({ article }) {
     );
 }
 
-export default ArticleDisplay;
+export default Display;

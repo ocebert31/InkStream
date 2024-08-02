@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CommentForm ({ register, errors, handleSubmit, onSubmit, setShowGifSelector }) {
+function Form ({ register, errors, handleSubmit, onSubmit, setShowGifSelector }) {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
@@ -16,4 +16,4 @@ function CommentForm ({ register, errors, handleSubmit, onSubmit, setShowGifSele
     );
 }
 
-export default CommentForm;
+export default Form;

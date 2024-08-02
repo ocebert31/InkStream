@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons'; 
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 
-function Favorite({ article }) {
+function Favorites({ article }) {
     const { token } = useAuth();
     const [favorite, setFavorite] = useState(article.favorite);
 
@@ -33,4 +33,4 @@ function Favorite({ article }) {
     );
 }
 
-export default Favorite;
+export default Favorites;

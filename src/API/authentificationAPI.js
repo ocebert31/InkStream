@@ -36,7 +36,7 @@ async function postSession(data) {
     const responseData = await response.json();
     const { user, token } = responseData;
     return { user, token };
-  } catch (error) {
+    } catch (error) {
     console.error(error);
     throw error;
   }

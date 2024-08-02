@@ -7,9 +7,9 @@ import Image from '../../Components/Articles/image';
 import { buildArticleFormData } from '../../Components/buildFormData';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../AuthContext";
-import './newArticle.css';
+import './new.css';
 
-function NewArticle() {
+function New() {
     const { control, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const { token } = useAuth();
@@ -43,4 +43,4 @@ function NewArticle() {
     );
 }   
 
-export default NewArticle;
+export default New;

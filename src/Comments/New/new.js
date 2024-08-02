@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { postComment } from '../../API/commentAPI'; 
 import { useAuth } from '../../AuthContext';
-import CommentForm from './commentForm';
+import Form from './form';
 import GifSelector from '../../API/gif';
 
 function NewComment({ articleId, onAdded }) {
@@ -39,7 +39,7 @@ function NewComment({ articleId, onAdded }) {
                     <GifSelector onSelect={handleGifSelect} />
                 </div>
             ) : (
-                <CommentForm register={register} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} setShowGifSelector={setShowGifSelector} />
+                <Form register={register} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} setShowGifSelector={setShowGifSelector} />
             )}
         </div>
     );

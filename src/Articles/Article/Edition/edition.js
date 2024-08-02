@@ -6,9 +6,9 @@ import Title from '../../../Components/Articles/title';
 import Content from '../../../Components/Articles/content';
 import Image from '../../../Components/Articles/image';
 import { useAuth } from "../../../AuthContext";
-import './articleEdition.css';
+import './edition.css';
 
-function ArticleEdition({ article, setArticle, cancelEdit }) {
+function Edition({ article, setArticle, cancelEdit }) {
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { title: article.title, content: article.content, image: null } });
     const { token } = useAuth();
     const myRef = useRef(null); 
@@ -43,4 +43,4 @@ function ArticleEdition({ article, setArticle, cancelEdit }) {
     );
 }
 
-export default ArticleEdition;
+export default Edition;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getComments } from '../API/commentAPI';
 import Comment from './Comment/comment';
-import NewComment from './NewComment/newComment';
+import New from './New/new';
 import { useAuth } from '../AuthContext';
 
 function Comments({ articleId }) {
@@ -36,7 +36,7 @@ function Comments({ articleId }) {
                     <Comment key={comment._id} comment={comment} onDelete={handleCommentDeleted}/>
                 )}
             </div>
-            <NewComment articleId={articleId} onAdded={handleCommentAdded} />
+            <New articleId={articleId} onAdded={handleCommentAdded} />
         </div>
     );
 }

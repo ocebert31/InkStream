@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { getOneArticle } from '../../API/articleAPI';
 import { useParams } from 'react-router-dom';
 import Delete from './Delete/delete';
-import Edit from './Edit/edit';
+import Edit from './Button/edit';
 import './article.css';
-import ArticleDisplay from '../Article/ArticleDisplay/articleDisplay';
-import ArticleEdition from './ArticleEdition/articleEdition';
+import ArticleDisplay from '../Article/Display/display';
+import ArticleEdition from './Edition/edition';
 import { useAuth } from "../../AuthContext";
 import Comments from '../../Comments/comments';
-import ErrorAlert from '../../Alert/errorAlert';
+import ErrorAlert from '../../Alert/error';
 
 function Article() {
     const [article, setArticle] = useState(null);

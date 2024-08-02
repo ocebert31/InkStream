@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Delete from "../Delete/delete";
+import Delete from "./Button/delete";
 import { useAuth } from "../../AuthContext";
-import Edit from '../Edit/edit';
+import Edit from './Button/edit';
 import Vote from '../../Votes/votes';
-import CommentDisplay from '../CommentDisplay/commentDisplay';
+import Display from './Display/display';
 
 function Comment({ comment, onDelete }) {
     const { user } = useAuth();
@@ -91,7 +91,7 @@ function Comment({ comment, onDelete }) {
             </div>
             <div className='flex flex-col gap-2'>
                 <div>
-                    {!isEditing && (<CommentDisplay isHidden={isHidden} toggleHidden={toggleHidden} content={content} giphyUrl={giphyUrl} />)}
+                    {!isEditing && (<Display isHidden={isHidden} toggleHidden={toggleHidden} content={content} giphyUrl={giphyUrl} />)}
                     <div className="flex items-center gap-4">
                         {!isEditing && (<Vote comment={comment} onVoteDone={onVoteDone} upVotes={upVotes} downVotes={downVotes} userVoteType={userVoteType}/>)}
                         {isAuthor && (
