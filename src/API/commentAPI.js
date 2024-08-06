@@ -1,6 +1,6 @@
 const url = process.env.REACT_APP_API_URL;
 
-async function postComment(content, articleId, token) {
+async function postComment(content, articleId, commentId, token) {
     try {
         const response = await fetch(`${url}/comments`, {
             method: 'POST',
@@ -8,7 +8,7 @@ async function postComment(content, articleId, token) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify({content, articleId}),
+            body: JSON.stringify({content, articleId, commentId}),
         });
         if (!response.ok) {
             throw new Error("Erreur lors de l'ajout du commentaire");
@@ -30,7 +30,30 @@ async function getComments(articleId, token) {
         throw new Error('Erreur lors de la récupération des commentaires');
     }
     const comments = await response.json();
-    return comments;
+    const commentAndReplies = [];
+    comments.forEach(comment => {
+        if(commentIsReply(comment)) {
+            attachReplyToParentComment(commentAndReplies, comment);
+        } else {
+            commentAndReplies.push(comment);
+        }
+    });
+    return commentAndReplies;
+}
+
+function commentIsReply(comment) {
+    return comment.commentId;
+}
+
+function attachReplyToParentComment(commentAndReplies, reply) {
+    for (let comment of commentAndReplies) {
+        if (comment._id === reply.commentId) {
+            if(!comment.replies) {
+                comment.replies = [];
+            }
+            comment.replies.push(reply);
+        }
+    }
 }
 
 async function deleteComment(id, token) {

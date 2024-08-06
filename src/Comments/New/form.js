@@ -1,10 +1,19 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-function Form ({ register, errors, handleSubmit, onSubmit, setShowGifSelector }) {
+function Form ({ register, errors, handleSubmit, onSubmit, setShowGifSelector, setIsReply, typeForm }) {
+    const toggleIsReply = () => {
+        setIsReply(false)
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-                <label htmlFor="content" className="block text-gray-700">Commentaire</label>
+                <div className='flex'>
+                {typeForm === 'reply comment' && <button onClick={toggleIsReply}><FontAwesomeIcon icon={faXmark} /></button>}
+                <label htmlFor="content" className="block text-gray-700 pl-2">Commentaire</label>
+                </div>
                 <textarea id="content" name="content" {...register('content', { required: 'Le commentaire ne peut pas être vide' })} className="w-full p-2 border border-gray-300 rounded-md" />
                 {errors.content && <p className="text-red-500 text-sm">{errors.content.message}</p>}
             </div>

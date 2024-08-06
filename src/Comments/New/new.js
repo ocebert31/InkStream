@@ -5,14 +5,14 @@ import { useAuth } from '../../AuthContext';
 import Form from './form';
 import GifSelector from '../../API/gif';
 
-function NewComment({ articleId, onAdded }) {
+function NewComment({ articleId, onAdded, commentId, isReply, setIsReply, comment, typeForm}) {
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm();
     const { token, user } = useAuth();
     const [showGifSelector, setShowGifSelector] = useState(false);
 
     const onSubmit = async (data) => {
         try {
-            const result = await postComment(data.content, articleId, token);
+            const result = await postComment(data.content, articleId, commentId, token);
             const comment = result.comment;
             reset();
             comment.pseudo = user.pseudo;
@@ -39,7 +39,7 @@ function NewComment({ articleId, onAdded }) {
                     <GifSelector onSelect={handleGifSelect} />
                 </div>
             ) : (
-                <Form register={register} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} setShowGifSelector={setShowGifSelector} />
+                <Form register={register} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} setShowGifSelector={setShowGifSelector} setIsReply={setIsReply} comment={comment} typeForm={typeForm}/>
             )}
         </div>
     );

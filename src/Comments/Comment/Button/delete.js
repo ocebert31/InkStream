@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../../AuthContext";
 
-function Delete({ id, onDelete, comment, isEditing }) {
+function Delete({ onDelete, comment, isEditing }) {
     const { token } = useAuth();
 
     const handleDelete = async () => {
         if (window.confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')) {
             try {
-                await deleteComment(comment._id, token);
-                onDelete(id);
+                await deleteComment(comment._id, token); 
+                onDelete(comment);
             } catch (error) {
                 alert(`Erreur lors de la suppression du commentaire : ${error.message}`);
             }

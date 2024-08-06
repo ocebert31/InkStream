@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getOneArticle } from '../../API/articleAPI';
 import { useParams } from 'react-router-dom';
-import Delete from './Delete/delete';
+import Delete from './Button/delete';
 import Edit from './Button/edit';
 import './article.css';
 import ArticleDisplay from '../Article/Display/display';
