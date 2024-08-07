@@ -6,11 +6,11 @@ Inkstream is a blog application that allows users to easily create, edit, and pu
 ![inkstream](./doc/show_inkstream.mp4)
 
 ## Features
-For Users:
+### For Users:
 ![Registration](./doc/registration.PNG)
 ![login](./doc/login.PNG)
 
-For articles:
+### For articles:
 ![write article and editor text](./doc/write_article.PNG)
 ![article List](./doc/article_List.PNG)
 ![search an article](./doc/search_an_article.PNG)
@@ -20,7 +20,7 @@ For articles:
 ![share article](./doc/share_article.PNG)
 ![favorite article](./doc/favorite_article.mp4)
 
-For comments:
+#### For comments:
 ![add comment or gif](./doc/add_comment_or_gif.PNG)
 ![comment List](./doc/comment_list.PNG)
 ![edit or delete comment](./doc/edit_or_delete_comment.PNG)
