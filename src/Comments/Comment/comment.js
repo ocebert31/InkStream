@@ -4,7 +4,8 @@ import { useAuth } from "../../AuthContext";
 import Edit from './Button/edit';
 import Vote from '../../Votes/votes';
 import Display from './Display/display';
-import New from '../New/new'; 
+import NewReply from '../Reply/New/new';
+import DisplayReply from '../Reply/Display/display';
 
 function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
     const { user } = useAuth();
@@ -14,15 +15,14 @@ function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
     const [userVoteType, setUserVoteType] = useState(comment.userVote ? comment.userVote.voteType : null);
     const [isEditing, setIsEditing] = useState(false);
     const [isHidden, setIsHidden] = useState(downVotes >= 3 && downVotes > upVotes);
-    const [isReply, setIsReply] = useState(false);
-
+   
     const isAuthor = user && (user._id === comment.userId || user.role === 'admin');
     
     const date = new Date(comment.createdAt);
     const formattedDate = date.toLocaleDateString('fr-FR', {
         day: '2-digit',
         month: '2-digit',
-        year: 'numeric'
+        year: 'numeric',
     });
 
     const toggleHidden = () => {
@@ -81,19 +81,6 @@ function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
         }
     };
 
-    const giphyUrl = () => {
-        return content.split('#')[1];
-    }
-
-    const toggleReply = () => {
-        setIsReply(!isReply);
-    }
-
-    const handleReplyAdded = (newComment) => {
-        onReply(newComment);
-        setIsReply(false);
-    }
-
     return (
         <div className="bg-white p-4 rounded-lg shadow-md mb-4">
             <div className='flex justify-between items-center border-b border-gray-300 pb-2 mb-2'>
@@ -101,39 +88,19 @@ function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
                 <p className="text-sm text-gray-500">{formattedDate}</p>
             </div>
             <div className='flex flex-col gap-2'>
-                <div>
-                    {!isEditing && (<Display isHidden={isHidden} toggleHidden={toggleHidden} content={content} giphyUrl={giphyUrl} comment={comment}/>)}
-                    <div className="flex items-center gap-4">
-                        {!isEditing && (<Vote comment={comment} onVoteDone={onVoteDone} upVotes={upVotes} downVotes={downVotes} userVoteType={userVoteType}/>)}
-                        {isAuthor && comment.content !== 'ce commentaire a été supprimé' && !comment.deletedAt && (
-                            <div className='flex items-center gap-2'>
-                                <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing}/>
-                                <Delete id={comment._id} onDelete={onDelete} comment={comment} isEditing={isEditing}/>
-                            </div>
-                        )}
-                    </div>
+                {!isEditing && (<Display isHidden={isHidden} toggleHidden={toggleHidden} content={content} comment={comment} isEditing={isEditing}/>)}
+                <div className="flex items-center gap-4">
+                    <Vote comment={comment} onVoteDone={onVoteDone} upVotes={upVotes} downVotes={downVotes} userVoteType={userVoteType} isEditing={isEditing}/>
+                    {isAuthor && comment.content !== 'ce commentaire a été supprimé' && !comment.deletedAt && (
+                        <div className='flex items-center gap-2'>
+                            <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing}/>
+                            <Delete id={comment._id} onDelete={onDelete} comment={comment} isEditing={isEditing}/>
+                        </div>
+                    )}
                 </div>
             </div>
-            {/* Formulaire pour ajouter une réponse */}
-            {isReply ? (
-                <New articleId={comment.articleId} onAdded={handleReplyAdded} commentId={comment._id} setIsReply={setIsReply} comment={comment} typeForm={typeForm}/>
-            ) : (
-                <>
-                    {!comment.commentId &&
-                    <div className='pt-4 text-primary font-medium'>
-                        <button onClick={toggleReply}>Répondre</button>
-                    </div>
-                    }
-                </>
-            )}
-            {/* Afficher les réponses */}
-            {comment.replies && comment.replies.length > 0 && (
-                <div className="ml-4 border-l-2 border-gray-300 pl-4 mt-2">
-                    {comment.replies.map(reply => (
-                        <Comment key={reply._id} comment={reply} onDelete={onDelete} onReply={onReply} />
-                    ))}
-                </div>
-            )}
+            <NewReply comment={comment} typeForm={typeForm} onReply={onReply}/>
+            <DisplayReply comment={comment} onDelete={onDelete} onReply={onReply}/>
         </div>
     );
 }

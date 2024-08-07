@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { postSession } from '../API/authentificationAPI';
+import { postSession } from '../API/authentification';
 import { useNavigate, Link } from 'react-router-dom';
 import '../Registration/registration.css';
 import Email from '../Components/Users/email';

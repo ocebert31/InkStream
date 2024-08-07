@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { updateArticle } from '../../../API/articleAPI';
+import { updateArticle } from '../../../API/article';
 import { buildArticleFormData } from '../../../Components/buildFormData';
 import Title from '../../../Components/Articles/title';
 import Content from '../../../Components/Articles/content';

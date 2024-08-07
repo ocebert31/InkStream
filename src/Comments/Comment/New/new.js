@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { postComment } from '../../API/commentAPI'; 
-import { useAuth } from '../../AuthContext';
+import { postComment } from '../../../API/comment'; 
+import { useAuth } from '../../../AuthContext';
 import Form from './form';
-import GifSelector from '../../API/gif';
+import GifSelector from '../../../Gif/gifSelector';
 
 function NewComment({ articleId, onAdded, commentId, isReply, setIsReply, comment, typeForm}) {
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm();

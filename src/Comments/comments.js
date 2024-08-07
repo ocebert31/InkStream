@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { getComments } from '../API/commentAPI';
+import { getComments } from '../API/comment';
 import Comment from './Comment/comment';
-import New from './New/new';
+import New from './Comment/New/new';
 import { useAuth } from '../AuthContext';
 
 function Comments({ articleId }) {
@@ -43,9 +43,9 @@ function Comments({ articleId }) {
     const handleCommentDeleted = (comment) => {
         setComments((prevComments) => {
             if (comment.commentId) {
-                return setDeletedDateForReply(prevComments, comment)
+                return setDeletedDateForReply(prevComments, comment);
             } else {
-                return setDeletedDateForComment(prevComments, comment)
+                return setDeletedDateForComment(prevComments, comment);
             }
         });
     };

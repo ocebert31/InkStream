@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {getArticles} from '../API/articleAPI';
+import {getArticles} from '../API/article';
 import Card from './Card/card';
 import Search from './Search/search';
 import './articles.css';
@@ -11,6 +11,7 @@ function Articles({ type }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [page, setPage] = useState(1);
     const [limit] = useState(20)
+
     useEffect(() => {
         const loadArticles = async () => {
             try {
@@ -22,6 +23,7 @@ function Articles({ type }) {
         };
         loadArticles();
     }, [searchQuery, page, limit, type, token])
+    
     const handleSearchQueryChange = (search) => {
         setSearchQuery(search);
         setPage(1);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getOneArticle } from '../../API/articleAPI';
+import { getOneArticle } from '../../API/article';
 import { useParams } from 'react-router-dom';
 import Delete from './Button/delete';
 import Edit from './Button/edit';

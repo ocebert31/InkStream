@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { deleteArticle } from '../../../API/articleAPI'; 
+import { deleteArticle } from '../../../API/article'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../../AuthContext";
