@@ -41,5 +41,26 @@ async function postSession(data) {
         throw error;
   }
 }
+async function postConfirmation(token) {
+    try {
+        const response = await fetch(`${url}/auth/confirmation/${token}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
-export {postInscription, postSession};
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export {postInscription, postSession, postConfirmation};

@@ -5,6 +5,7 @@ import NewArticle from './Articles/New/new';
 import Article from './Articles/Article/article';
 import Registration from './Registration/registration';
 import Login from './Login/login';
+import Confirmation from './Confirmation/confirmation';
 
 function RouterComponent() {
     return (
@@ -16,6 +17,7 @@ function RouterComponent() {
                 <Route path="/articles/new" element={<NewArticle />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/confirmation/:token" element={<Confirmation />} />
             </Routes>
         </div>
     );
