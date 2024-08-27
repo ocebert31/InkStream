@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { postInscription } from '../API/authentification';
 import Email from '../Components/Users/email';
 import Password from '../Components/Users/password';
-import { useNavigate } from 'react-router-dom';
 import './registration.css';
 import { Link } from 'react-router-dom';
 import Success from '../Alert/success';
@@ -12,23 +11,23 @@ import React, { useState } from 'react';
 function Registration() {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const password = watch("password", "");
-    const navigate = useNavigate();
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [isConfirmationRegistration, setIsConfirmationRegistration] = useState(false)
 
     const onSubmit = async (data) => {
         try {
             await postInscription(data);
             setShowSuccessAlert(true);
-            setTimeout(() => {
-                navigate('/');
-            }, 2000);
+            setIsConfirmationRegistration(true)
         } catch (error) {
             setShowErrorAlert(true);
         }
     };
 
     return (
+        <div>
+        {!isConfirmationRegistration ? (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full p-6 max-w-md bg-white rounded-lg shadow-lg container-alignement-registration">
                 <h2 className="text-2xl font-bold text-center text-primary mb-6">Inscription</h2>
@@ -50,6 +49,15 @@ function Registration() {
             {showSuccessAlert && (<Success message="Vous êtes désormais inscrit avec succès !"  onClose={() => setShowSuccessAlert(false)}/>)}
             {showErrorAlert && (<Error message="Erreur lors de l'inscription. Veuillez réessayer." onClose={() => setShowErrorAlert(false)}/>
             )}
+        </div> 
+        ) : (
+            <div className="flex items-center justify-center min-h-screen bg-gray-100">
+                <div className="p-8 bg-white rounded-lg shadow-lg text-center max-w-md">
+                    <h2 className="text-2xl font-bold text-primary mb-4">Inscription réussie !</h2>
+                    <p className="text-lg text-gray-700 mb-6">Veuillez consulter votre boîte mail pour confirmer votre inscription.</p>
+                </div>
+            </div>
+        )}
         </div>
     );
 }

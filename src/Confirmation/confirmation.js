@@ -29,9 +29,8 @@ const ConfirmationRegistration = () => {
                 {isConfirmed === true && (
                     <div>
                         <p className="text-2xl font-bold text-primary mb-4">Votre compte est validé !</p>
-                        <p className="text-lg text-gray-700">Vous allez être redirigé...</p>
                         <Link to="/login" className="mt-4 inline-block px-6 py-2 text-white bg-secondary rounded-full hover:bg-[#e97a47] transition duration-300">
-                            Cliquez ici pour vous connecter immédiatement
+                            Cliquez ici pour vous connecter
                         </Link>
                     </div>
                 )}
