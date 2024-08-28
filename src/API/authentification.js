@@ -63,4 +63,28 @@ async function postConfirmation(token) {
     }
 }
 
-export {postInscription, postSession, postConfirmation};
+async function updateAvatarOptions(token, avatarOptions) {
+    try {
+        const response = await fetch(`${url}/auth/avatar-options`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({ avatarOptions }),
+        });
+
+        if (response.ok) {
+            return await response.json();
+        } else {
+            console.error('Failed to update avatar options', response.statusText);
+            return null;
+        }
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour des options d\'avatar', error);
+        return null;
+    }
+}
+
+
+export {postInscription, postSession, postConfirmation, updateAvatarOptions};
