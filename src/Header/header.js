@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import logo from './logo.png';
 import './header.css';
-import Avatar from 'avataaars';
-import AvatarEditor from '../AvatarEditor/avatarEditor'; 
+import AvatarEditor from '../Avatar/avatarEditor'; 
+import AvatarUser from '../Avatar/avatarUser';
 
 function Header() {
     const { token, logout, user, setUser } = useAuth();
@@ -61,7 +61,7 @@ function Header() {
                     <div className="relative">
                         {!showAvatarEditor && (
                         <div className="flex items-center space-x-2">
-                            <Avatar {...avatarOptions} />
+                            <AvatarUser avatarOptions={avatarOptions}></AvatarUser>
                             <button className='text-white hover:text-secondary font-semibold transition-colors duration-300' onClick={toggleAvatarEditor}>Modifier Avatar</button>
                         </div>
                         )}

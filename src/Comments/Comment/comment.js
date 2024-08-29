@@ -6,6 +6,7 @@ import Vote from '../../Votes/votes';
 import Display from './Display/display';
 import NewReply from '../Reply/New/new';
 import DisplayReply from '../Reply/Display/display';
+import AvatarUserComment from '../../Avatar/avatarUserComment';
 
 function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
     const { user } = useAuth();
@@ -83,8 +84,11 @@ function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-            <div className='flex justify-between items-center border-b border-gray-300 pb-2 mb-2'>
-                <p className="text-lg font-semibold text-primary">{comment.pseudo}</p>
+            <div className="flex items-center justify-between border-b border-gray-300 pb-2 mb-2">
+                <div className="flex items-center space-x-2">
+                    <AvatarUserComment comment={comment} />
+                    <p className="text-lg font-semibold text-primary">{comment.pseudo}</p>
+                </div>
                 <p className="text-sm text-gray-500">{formattedDate}</p>
             </div>
             <div className='flex flex-col gap-2'>

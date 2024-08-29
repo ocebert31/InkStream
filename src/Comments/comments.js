@@ -6,7 +6,7 @@ import { useAuth } from '../AuthContext';
 
 function Comments({ articleId }) {
     const [comments, setComments] = useState([]);
-    const { token } = useAuth();
+    const { token, user } = useAuth();
 
     useEffect(() => {
         const loadComments = async () => {
@@ -25,6 +25,7 @@ function Comments({ articleId }) {
     }, [articleId, token]);
 
     const handleCommentAdded = (newComment) => {
+        newComment.avatarOptions = user.avatarOptions;
         setComments((prevComments) => {
             if (newComment.commentId) {
                 return prevComments.map(comment => {
