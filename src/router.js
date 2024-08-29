@@ -6,6 +6,7 @@ import Article from './Articles/Article/article';
 import Registration from './Registration/registration';
 import Login from './Login/login';
 import Confirmation from './Confirmation/confirmation';
+import Profile from './Profile/profile';
 
 function RouterComponent() {
     return (
@@ -18,6 +19,7 @@ function RouterComponent() {
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/confirmation/:token" element={<Confirmation />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </div>
     );

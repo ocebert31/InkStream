@@ -1,81 +1,74 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import logo from './logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faGear, faPenToSquare, faStar, faSignOutAlt, faHouse } from '@fortawesome/free-solid-svg-icons';
 import './header.css';
-import AvatarEditor from '../Avatar/avatarEditor'; 
-import AvatarUser from '../Avatar/avatarUser';
 
 function Header() {
-    const { token, logout, user, setUser } = useAuth();
-    const [showAvatarEditor, setShowAvatarEditor] = useState(false);
+    const { token, logout } = useAuth();
+    const [showMenu, setShowMenu] = useState(false);
 
-    const valueOfAvatarOptions = (user) => {
-        if (!user || user.avatarOptions === undefined || (Object.keys(user.avatarOptions).length === 0)) {
-            return {
-                avatarStyle: 'Circle',
-                topType: 'ShortHairShortFlat',
-                accessoriesType: 'Prescription02',
-                hairColor: 'BrownDark',
-                facialHairType: 'BeardLight',
-                clotheType: 'Hoodie',
-                clotheColor: 'PastelBlue',
-                eyeType: 'Happy',
-                eyebrowType: 'Default',
-                mouthType: 'Smile',
-                skinColor: 'Light',
-            }
-        } else {
-            return user.avatarOptions
-        }
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
+
+    const handleLinkClick = () => {
+        setShowMenu(false);
+    };
+
+    const closeConnexionAndNav = () => {
+        logout()
+        setShowMenu(false)
     }
 
-    const [avatarOptions, setAvatarOptions] = useState(valueOfAvatarOptions(user))
-
-    const handleAvatarChange = (user) => {
-        setUser(user); 
-        setAvatarOptions(user.avatarOptions);
-        setShowAvatarEditor(false); 
-    };
-
-    useEffect(() => {
-        setAvatarOptions(valueOfAvatarOptions(user));
-    }, [user]);
-
-    const toggleAvatarEditor = () => {
-        setShowAvatarEditor(!showAvatarEditor);
-    };
-
-  return (
-    <header className='background text-white md:flex items-center justify-between p-4 shadow-md'>
-        <div className='flex justify-center'>
-            <img src={logo} alt="Logo" className='w-32 h-auto' />
-        </div>
-        <nav className='text-center md:flex items-center justify-center space-x-4'>
-            <Link to='/' className='text-white hover:text-secondary font-semibold transition-colors duration-300'>Accueil</Link>
-            {token ? (
-                <>
-                    <Link to='/articles/new' className='text-white hover:text-secondary font-semibold transition-colors duration-300'>Écrire un article</Link>
-                    <Link to='/favorites' className='text-white hover:text-secondary font-semibold transition-colors duration-300'>Favoris</Link>
-                    <button className='bg-secondary text-white py-2 px-4 rounded-md hover:bg-opacity-80 transition-colors duration-300' onClick={logout}>Déconnexion</button>
-                    <div className="relative">
-                        {!showAvatarEditor && (
-                        <div className="flex items-center space-x-2">
-                            <AvatarUser avatarOptions={avatarOptions}></AvatarUser>
-                            <button className='text-white hover:text-secondary font-semibold transition-colors duration-300' onClick={toggleAvatarEditor}>Modifier Avatar</button>
-                        </div>
-                        )}
-                        {showAvatarEditor && (<AvatarEditor avatarOptions={avatarOptions} onAvatarChange={handleAvatarChange}/>)}
+    return (
+        <header className='background text-white md:flex items-center justify-between p-4 shadow-md'>
+            <Link to='/' className='flex justify-center' onClick={handleLinkClick}><img src={logo} alt="Logo" className='w-32 h-auto' /></Link>
+            <nav className='text-center md:flex items-center justify-center space-x-4'>
+                {token ? (
+                    <div>
+                        <button onClick={toggleMenu} className='text-white hover:text-secondary font-semibold transition-colors duration-300'>
+                            <FontAwesomeIcon icon={faBars} className='size-6' />
+                        </button>
                     </div>
-                </>
                 ) : (
-                <>
-                    <Link to='/registration' className='text-white hover:text-secondary font-semibold transition-colors duration-300'>Inscription</Link>
-                    <Link to='/login' className='text-white hover:text-secondary font-semibold transition-colors duration-300'>Connexion</Link>
-                </>
+                    <div>
+                        <Link to='/registration' className='text-white hover:text-secondary font-semibold transition-colors duration-300 pr-2'>Inscription</Link>
+                        <Link to='/login' className='text-white hover:text-secondary font-semibold transition-colors duration-300 pl-2'>Connexion</Link>
+                    </div>
+                )}
+            </nav>
+            {showMenu && (
+                <div className="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 flex justify-end">
+                    <div className="bg-white w-64 h-full p-4 shadow-lg">
+                        <button onClick={toggleMenu} className="text-gray-800 text-2xl float-right">&times;</button>
+                        <ul className="mt-8">
+                            {token && (
+                                <>
+                                    <li>
+                                        <Link to='/' className='block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded' onClick={handleLinkClick}><FontAwesomeIcon icon={faHouse} className='pr-2'/>Articles</Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/profile' className='block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded' onClick={handleLinkClick}><FontAwesomeIcon icon={faGear} className='pr-2'/>Paramètres</Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/articles/new' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faPenToSquare} className='pr-2'/>Écrire un article</Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/favorites' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faStar} className='pr-2'/>Favoris</Link>
+                                    </li>
+                                    <li>
+                                        <button className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={closeConnexionAndNav}><FontAwesomeIcon icon={faSignOutAlt} className="pr-2" />Déconnexion</button>
+                                    </li>
+                                </>
+                            )}
+                        </ul>
+                    </div>
+                </div>
             )}
-        </nav>
-    </header>
+        </header>
     );
 }
 
