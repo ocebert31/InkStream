@@ -5,7 +5,7 @@ import NewArticle from './Articles/New/new';
 import Article from './Articles/Article/article';
 import Registration from './Registration/registration';
 import Login from './Login/login';
-import Confirmation from './Confirmation/confirmationRegistration';
+import Confirmation from './ConfirmationEmail/confirmationEmail';
 import Profile from './Profile/profile';
 
 function RouterComponent() {

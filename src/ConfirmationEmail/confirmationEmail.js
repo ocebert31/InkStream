@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { postConfirmation } from '../API/authentification';
 import { useAuth } from '../AuthContext';
-import './confirmationRegistration.css';
+import './confirmationEmail.css';
 
 const ConfirmationPage = ({ isEmailUpdate = false }) => {
     const { token } = useParams();
@@ -56,7 +56,7 @@ const ConfirmationPage = ({ isEmailUpdate = false }) => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md style-p">
+            <div className={`${isConfirmed === null ? '' : 'bg-white shadow-lg'} p-8 rounded-lg text-center max-w-md style-p`}>
                 {renderContent()}
             </div>
         </div>
