@@ -54,7 +54,7 @@ You can access the deployed application by visiting: [https://inkstream.alwaysda
   ![Share Article](./doc/share_article.PNG)
   
 - **Favorite an Article**  
-  ![Favorite Article](./doc/favorite_article.mp4)
+  ![Favorite Article](./doc/favorite_article.gif)
   
 - **Listen to the Article**  
   ![Listen to Article](./doc/listen_article.PNG)
@@ -74,7 +74,7 @@ You can access the deployed application by visiting: [https://inkstream.alwaysda
   ![Comment Vote](./doc/comment_vote.PNG)
   
 - **Comment Moderation**  
-  ![Moderation of Comment](./doc/moderation.mp4)
+  ![Moderation of Comment](./doc/moderation.gif)
   
 - **Reply to Comment**  
   ![Reply to Comment](./doc/reply_to_comment.PNG)
@@ -86,8 +86,8 @@ You can access the deployed application by visiting: [https://inkstream.alwaysda
 
 - **Frontend**: React
 - **Style**: Tailwind CSS
-- **Backend**: Node.js, Express.js, MongoDB
-Backend repostiory : https://github.com/ocebert31/InkStream_API
+- **Backend**: Node.js, Express.js, MongoDB.
+- **Backend repostiory** : https://github.com/ocebert31/InkStream_API
 
 ## In Development
 
