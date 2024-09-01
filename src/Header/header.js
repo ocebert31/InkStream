@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import logo from './logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,7 @@ import './header.css';
 function Header() {
     const { token, logout } = useAuth();
     const [showMenu, setShowMenu] = useState(false);
+    const navigate = useNavigate();
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -21,6 +22,7 @@ function Header() {
     const closeConnexionAndNav = () => {
         logout()
         setShowMenu(false)
+        navigate('/');
     }
 
     return (

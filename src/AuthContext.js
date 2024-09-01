@@ -28,10 +28,14 @@ export const AuthProvider = ({ children }) => {
 
     const login = (user, token) => {
         setToken(token);
-        setUser(user);
+        updateUser(user);
         localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
     };
+
+    const updateUser = (user) => {
+        setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
+    }
 
     const logout = async() => {
         try {
@@ -45,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ login, logout, user, token, setUser }}>
+        <AuthContext.Provider value={{ login, logout, user, token, updateUser }}>
             {children}
         </AuthContext.Provider>
     );

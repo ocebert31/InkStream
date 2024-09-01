@@ -41,6 +41,7 @@ async function postSession(data) {
         throw error;
   }
 }
+
 async function postConfirmation(token) {
     try {
         const response = await fetch(`${url}/auth/confirmation/${token}`, {
@@ -54,9 +55,9 @@ async function postConfirmation(token) {
             const error = await response.json();
             throw new Error(error.message);
         }
-
-        const data = await response.json();
-        return data;
+        const responseData = await response.json();
+        const { user } = responseData;
+        return { user };
     } catch (error) {
         console.error(error);
         throw error;
@@ -86,5 +87,27 @@ async function updateAvatarOptions(token, avatarOptions) {
     }
 }
 
+async function updateEmail(newEmail, currentPassword, token) {
+    try {
+        const response = await fetch(`${url}/auth/update-email`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify({ newEmail, currentPassword })
+        });
 
-export {postInscription, postSession, postConfirmation, updateAvatarOptions};
+        if (response.ok) {
+            return await response.json();
+        } else {
+            const data = await response.json();
+            throw new Error(data.message || 'Erreur lors de la mise à jour de l\'e-mail.');
+        }
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour de l\'adresse e-mail.', error);
+        throw error;
+    }
+}
+
+export {postInscription, postSession, postConfirmation, updateAvatarOptions, updateEmail};
