@@ -3,12 +3,19 @@
 ## Description
 
 Inkstream is a blog application that allows users to easily create, edit, and publish articles. It features a user-friendly interface, comment management, and design customization options for articles.
-![inkstream](./doc/show_inkstream.mp4)
+
+## Link
+
+You can access the deployed application by visiting: https://inkstream.alwaysdata.net/
 
 ## Features
 ### For Users:
-![Registration](./doc/registration.PNG)
-![login](./doc/login.PNG)
+Registration: ![Registration](./doc/registration.PNG)
+Login: ![login](./doc/login.PNG)
+Send email confirmation for registration: ![email confirmation for registration](./doc/send_email_for_confirmation_registration.PNG)
+Modify email: ![modify email ](./doc/modify_email.PNG)
+Send email confirmation for update email: ![email confirmation for update email](./doc/send_email_for_confirmation_update_email.PNG)
+Add avatar for user: ![add avatar for user](./doc/add_avatar_for_user.PNG)
 
 ### For articles:
 ![write article and editor text](./doc/write_article.PNG)
@@ -19,6 +26,8 @@ Inkstream is a blog application that allows users to easily create, edit, and pu
 ![edit or delete article](./doc/edit_or_delete_article.PNG)
 ![share article](./doc/share_article.PNG)
 ![favorite article](./doc/favorite_article.mp4)
+![listen article](./doc/listen_article.PNG)
+
 
 #### For comments:
 ![add comment or gif](./doc/add_comment_or_gif.PNG)
