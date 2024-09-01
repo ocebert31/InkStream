@@ -5,9 +5,8 @@ import NewArticle from './Articles/New/new';
 import Article from './Articles/Article/article';
 import Registration from './Registration/registration';
 import Login from './Login/login';
-import ConfirmationRegistration from './Confirmation/confirmationRegistration';
+import Confirmation from './Confirmation/confirmationRegistration';
 import Profile from './Profile/profile';
-import ConfirmationUpdateEmail from './Confirmation/confirmationUpdateEmail';
 
 function RouterComponent() {
     return (
@@ -19,9 +18,9 @@ function RouterComponent() {
                 <Route path="/articles/new" element={<NewArticle />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/confirmation/:token" element={<ConfirmationRegistration />} />
+                <Route path="/confirmation/:token" element={<Confirmation isEmailUpdate={false}/>} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/confirmation-update-email/:token" element={<ConfirmationUpdateEmail />} />
+                <Route path="/confirmation-update-email/:token" element={<Confirmation isEmailUpdate={true}/>} />
             </Routes>
         </div>
     );
