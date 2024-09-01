@@ -87,6 +87,7 @@ You can access the deployed application by visiting: [https://inkstream.alwaysda
 - **Frontend**: React
 - **Style**: Tailwind CSS
 - **Backend**: Node.js, Express.js, MongoDB
+Backend repostiory : https://github.com/ocebert31/InkStream_API
 
 ## In Development
 
