@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { postConfirmation } from '../API/authentification';
+import './confirmationRegistration.css';
 
 const ConfirmationRegistration = () => {
     const { token } = useParams();
@@ -22,7 +23,7 @@ const ConfirmationRegistration = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md">
+            <div className="bg-white p-8 rounded-lg shadow-lg text-center max-w-md style-p">
                 {isConfirmed === null && (
                     <p className="text-lg text-gray-700 font-medium">En cours de chargement...</p>
                 )}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { postConfirmation } from '../API/authentification';
 import { useAuth } from '../AuthContext';
+import './confirmationRegistration.css';
 
 function EmailConfirmationPage() {
     const { token } = useParams()
@@ -20,11 +21,11 @@ function EmailConfirmationPage() {
         };
 
         confirmEmail();
-    }, [token, updateUser]);
+    }, [token]);
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="p-8 rounded-lg shadow-lg text-center max-w-md">
+            <div className="p-8 rounded-lg shadow-lg text-center max-w-md style-p">
                 {isConfirmed === null && (
                     <div className="flex justify-center items-center min-h-screen bg-gray-100">
                     <div className="text-center">
@@ -42,9 +43,9 @@ function EmailConfirmationPage() {
                     </div>
                 )}
                 {isConfirmed === false && (
-                    <p className="text-lg text-red-600 font-medium">
-                        Erreur lors de la confirmation du changement d'email
-                    </p>
+                        <p className="text-lg text-red-600 font-medium">
+                            Erreur lors de la confirmation du changement d'email
+                        </p>
                 )}
             </div>
         </div>

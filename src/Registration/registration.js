@@ -52,7 +52,7 @@ function Registration() {
         </div> 
         ) : (
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
-                <div className="p-8 bg-white rounded-lg shadow-lg text-center max-w-md">
+                <div className="p-8 bg-white rounded-lg shadow-lg text-center max-w-md style-p">
                     <h2 className="text-2xl font-bold text-primary mb-4">Inscription réussie !</h2>
                     <p className="text-lg text-gray-700 mb-6">Veuillez consulter votre boîte mail pour confirmer votre inscription.</p>
                 </div>

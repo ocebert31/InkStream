@@ -84,12 +84,12 @@ function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-            <div className="flex items-center justify-between border-b border-gray-300 pb-2 mb-2">
-                <div className="flex items-center space-x-2">
+            <div className="flex flex-col sm:flex-row items-center justify-between border-b border-gray-300 pb-2 mb-2 text-xs sm:text-sm">
+                <div className="sm:flex items-center space-x-2">
                     <AvatarUserComment comment={comment} />
-                    <p className="text-lg font-semibold text-primary">{comment.pseudo}</p>
+                    <p className="font-semibold text-primary text-xxs sm:text-lg">{comment.pseudo}</p>
                 </div>
-                <p className="text-sm text-gray-500">{formattedDate}</p>
+            <p className="text-gray-500 text-xs sm:text-sm">{formattedDate}</p>
             </div>
             <div className='flex flex-col gap-2'>
                 {!isEditing && (<Display isHidden={isHidden} toggleHidden={toggleHidden} content={content} comment={comment} isEditing={isEditing}/>)}

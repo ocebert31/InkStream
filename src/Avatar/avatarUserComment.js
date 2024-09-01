@@ -2,7 +2,7 @@ import Avatar from 'avataaars';
 
 function AvatarUser({comment}) {
     return(
-        <div >
+        <div className='sm: flex justify-center items-center' >
             <Avatar {...comment.avatarOptions} className="size-16"/>
         </div>
     )
