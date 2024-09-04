@@ -16,7 +16,6 @@ function ChangeEmail() {
 
     const handleEmailUpdate = async (data) => {
         try {
-        
             await updateEmail(data.newEmail, data.currentPassword, token);
             setEmailMessage('Un e-mail de confirmation a été envoyé à votre nouvelle adresse.');
             setEmailError('');

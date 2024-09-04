@@ -154,4 +154,27 @@ async function forgotPassword(email) {
     }
 }
 
-export {postInscription, postSession, postConfirmation, updateAvatarOptions, updateEmail, updatePassword, forgotPassword};
+async function postResetPassword(token, newPassword, confirmNewPassword) {
+    try {
+        const response = await fetch(`${url}/auth/reset-password/${token}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ newPassword, confirmNewPassword })
+        });
+
+        if (response.ok) {
+            console.log(response)
+            return await response.json();
+        } else {
+            const data = await response.json();
+            throw new Error(data.message);
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export {postInscription, postSession, postConfirmation, updateAvatarOptions, updateEmail, updatePassword, forgotPassword, postResetPassword};

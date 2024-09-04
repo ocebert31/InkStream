@@ -18,7 +18,7 @@ function ChangePassword() {
     const handlePasswordChange = async (data) => {
         try {
             await updatePassword(data.currentPassword, data.newPassword, data.confirmNewPassword, token);
-            setMessage('Vous avez bien modifié vos mot de passe');
+            setMessage('Vous avez bien modifié votre mot de passe');
             setError('');
         } catch (error) {
             setError('Erreur lors du changement de mot de passe.');
