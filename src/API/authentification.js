@@ -110,4 +110,28 @@ async function updateEmail(newEmail, currentPassword, token) {
     }
 }
 
-export {postInscription, postSession, postConfirmation, updateAvatarOptions, updateEmail};
+async function updatePassword(currentPassword, newPassword, confirmNewPassword, token) {
+    try {
+        const response = await fetch(`${url}/auth/update-password`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify({ currentPassword, newPassword, confirmNewPassword })
+        });
+
+        if (response.ok) {
+            return await response.json();
+        } else {
+            const data = await response.json();
+            throw new Error(data.message || 'Erreur lors de la mise à jour de l\'e-mail.');
+        }
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour de l\'adresse e-mail.', error);
+        throw error;
+    }
+};
+
+
+export {postInscription, postSession, postConfirmation, updateAvatarOptions, updateEmail, updatePassword};

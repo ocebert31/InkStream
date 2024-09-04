@@ -3,10 +3,26 @@ import { getComments } from '../API/comment';
 import Comment from './Comment/comment';
 import New from './Comment/New/new';
 import { useAuth } from '../AuthContext';
+import defaultAvatarOptions from '../Avatar/defaultAvatarOptions';
 
 function Comments({ articleId }) {
     const [comments, setComments] = useState([]);
     const { token, user } = useAuth();
+    const [avatarOptions, setAvatarOptions] = useState(null);
+
+    const valueOfAvatarOptions = (user) => {
+        if (!user || user.avatarOptions === undefined || (Object.keys(user.avatarOptions).length === 0)) {
+            return defaultAvatarOptions;
+        } else {
+            return user.avatarOptions;
+        }
+    }
+
+    useEffect(() => {
+        if (user) {
+            setAvatarOptions(valueOfAvatarOptions(user));
+        }
+    }, [user]);
 
     useEffect(() => {
         const loadComments = async () => {
@@ -25,7 +41,7 @@ function Comments({ articleId }) {
     }, [articleId, token]);
 
     const handleCommentAdded = (newComment) => {
-        newComment.avatarOptions = user.avatarOptions;
+        newComment.avatarOptions = avatarOptions;
         setComments((prevComments) => {
             if (newComment.commentId) {
                 return prevComments.map(comment => {
