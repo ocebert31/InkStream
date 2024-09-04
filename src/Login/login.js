@@ -19,7 +19,6 @@ function Login() {
 
     const onSubmit = async (data) => {
         try {
-            console.log(data)
             const { user, token } = await postSession(data);
             login(user, token);
             setShowSuccessAlert(true);
@@ -41,6 +40,7 @@ function Login() {
                     <div className="space-y-4">
                         <button type="submit" className="w-full bg-primary text-white py-3 px-4 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50 transition-colors duration-300">Se connecter</button>
                         <Link to='/registration' className="block mt-4 text-primary hover:text-secondary font-medium transition-colors duration-300 underline text-center">Vous n'avez pas de compte ?</Link>
+                        <Link to='/form-forgot-password' className="block mt-4 text-primary hover:text-secondary font-medium transition-colors duration-300 underline text-center">Mot de passe oublié ?</Link>
                     </div>
                 </form>
          

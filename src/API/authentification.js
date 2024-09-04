@@ -133,5 +133,25 @@ async function updatePassword(currentPassword, newPassword, confirmNewPassword, 
     }
 };
 
+async function forgotPassword(email) {
+    try {
+        const response = await fetch(`${url}/auth/forgot-password`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email })
+        });
+        if (response.ok) {
+            return await response.json();
+        } else {
+            const data = await response.json();
+            throw new Error(data.message);
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
 
-export {postInscription, postSession, postConfirmation, updateAvatarOptions, updateEmail, updatePassword};
+export {postInscription, postSession, postConfirmation, updateAvatarOptions, updateEmail, updatePassword, forgotPassword};

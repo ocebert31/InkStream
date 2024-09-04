@@ -4,7 +4,7 @@ import { postConfirmation } from '../API/authentification';
 import { useAuth } from '../AuthContext';
 import './confirmationEmail.css';
 
-const ConfirmationPage = ({ isEmailUpdate = false }) => {
+const ConfirmationPage = ({ isEmailUpdate = 'signup' }) => {
     const { token } = useParams();
     const { updateUser } = useAuth();
     const [isConfirmed, setIsConfirmed] = useState(null);
@@ -13,7 +13,7 @@ const ConfirmationPage = ({ isEmailUpdate = false }) => {
         const confirmEmail = async () => {
             try {
                 const { user } = await postConfirmation(token);
-                if (isEmailUpdate) {
+                if (isEmailUpdate === 'update') {
                     updateUser(user);
                 }
                 setIsConfirmed(true);
@@ -39,9 +39,9 @@ const ConfirmationPage = ({ isEmailUpdate = false }) => {
             return (
                 <div>
                     <p className="text-2xl font-bold text-primary mb-4">
-                        {isEmailUpdate ? 'Votre adresse mail a été mise à jour' : 'Votre compte est validé !'}
+                        {isEmailUpdate === 'update' ? 'Votre adresse mail a été mise à jour' : 'Votre compte est validé !'}
                     </p>
-                    <Link to={isEmailUpdate ? '/' : '/login'} className="mt-4 inline-block px-6 py-2 text-white bg-secondary rounded-full hover:bg-[#e97a47] transition duration-300">
+                    <Link to={isEmailUpdate === 'update' ? '/' : '/login'} className="mt-4 inline-block px-6 py-2 text-white bg-secondary rounded-full hover:bg-[#e97a47] transition duration-300">
                         {isEmailUpdate ? "Cliquez ici pour retourner à l'accueil" : 'Cliquez ici pour vous connecter'}
                     </Link>
                 </div>
@@ -49,7 +49,7 @@ const ConfirmationPage = ({ isEmailUpdate = false }) => {
         }
         return (
             <p className="text-lg text-red-600 font-medium">
-                {isEmailUpdate ? "Erreur lors de la confirmation du changement d'email" : "Erreur lors de la confirmation de création de votre compte"}
+                {isEmailUpdate === 'update' ? "Erreur lors de la confirmation du changement d'email" : "Erreur lors de la confirmation de création de votre compte"}
             </p>
         );
     };

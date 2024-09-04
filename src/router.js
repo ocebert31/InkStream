@@ -7,6 +7,7 @@ import Registration from './Registration/registration';
 import Login from './Login/login';
 import Confirmation from './ConfirmationEmail/confirmationEmail';
 import Profile from './Profile/profile';
+import RecoveryPassword from './RecoveryPassword/recoveryPassword.js';
 
 function RouterComponent() {
     return (
@@ -18,9 +19,10 @@ function RouterComponent() {
                 <Route path="/articles/new" element={<NewArticle />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/confirmation/:token" element={<Confirmation isEmailUpdate={false}/>} />
+                <Route path="/confirmation/:token" element={<Confirmation isEmailUpdate='signup'/>} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/confirmation-update-email/:token" element={<Confirmation isEmailUpdate={true}/>} />
+                <Route path="/confirmation-update-email/:token" element={<Confirmation isEmailUpdate='update'/>} />
+                <Route path="/form-forgot-password" element={<RecoveryPassword/>} />
             </Routes>
         </div>
     );
