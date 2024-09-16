@@ -3,11 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import logo from './logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faGear, faPenToSquare, faStar, faSignOutAlt, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faGear, faPenToSquare, faStar, faSignOutAlt, faHouse, faTableColumns } from '@fortawesome/free-solid-svg-icons';
 import './header.css';
 
 function Header() {
-    const { token, logout } = useAuth();
+    const { token, logout, user } = useAuth();
     const [showMenu, setShowMenu] = useState(false);
     const navigate = useNavigate();
 
@@ -24,6 +24,9 @@ function Header() {
         setShowMenu(false)
         navigate('/');
     }
+
+    const isAdmin = user && (user.role === 'admin');
+    const isReader = user && (user.role === 'reader');
 
     return (
         <header className='background text-white md:flex items-center justify-between p-4 shadow-md'>
@@ -55,9 +58,18 @@ function Header() {
                                     <li>
                                         <Link to='/profile' className='block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded' onClick={handleLinkClick}><FontAwesomeIcon icon={faGear} className='pr-2'/>Paramètres</Link>
                                     </li>
-                                    <li>
-                                        <Link to='/articles/new' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faPenToSquare} className='pr-2'/>Écrire un article</Link>
-                                    </li>
+                                    <>
+                                    {!isReader &&
+                                        <li>
+                                            <Link to='/articles/new' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faPenToSquare} className='pr-2'/>Écrire un article</Link>
+                                        </li>
+                                    }
+                                    </>
+                                    {isAdmin &&
+                                        <li>
+                                            <Link to='/dashboard' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faTableColumns} className='pr-2'/>Dashboard</Link>
+                                        </li>
+                                    }
                                     <li>
                                         <Link to='/favorites' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faStar} className='pr-2'/>Favoris</Link>
                                     </li>

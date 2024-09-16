@@ -177,4 +177,24 @@ async function postResetPassword(token, newPassword, confirmNewPassword) {
     }
 }
 
-export {postInscription, postSession, postConfirmation, updateAvatarOptions, updateEmail, updatePassword, forgotPassword, postResetPassword};
+async function getUserData(token) {
+    try {
+        const response = await fetch(`${url}/auth/userData`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json; charset=UTF-8',
+                ...(token && { 'Authorization': `Bearer ${token}` }) 
+            }
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export {postInscription, postSession, postConfirmation, updateAvatarOptions, updateEmail, updatePassword, forgotPassword, postResetPassword, getUserData};
