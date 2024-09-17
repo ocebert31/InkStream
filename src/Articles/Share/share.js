@@ -29,7 +29,7 @@ const Share = ({ article }) => {
 
     return (
         <div className='flex items-center justify-center'>
-            <button onClick={shareOnTwitter}>
+            <button onClick={shareOnTwitter} className='px-2 py-2'>
                 <FaTwitter className="text-2xl sm:text-3xl md:text-4xl" />
             </button>
         </div>

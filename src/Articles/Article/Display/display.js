@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import './display.css';
 import Favorites from '../../../Favorites/favorites';
 import Share from '../../Share/share';
+import ArticleVote from '../../../Votes/articleVote';
 
 function Display({ article }) {
     const sanitizeHtml = (content) => {
@@ -20,6 +21,7 @@ function Display({ article }) {
                 <div className='flex justify-center items-center'>
                     <Favorites article={article}></Favorites>
                     <Share article={article}></Share>
+                    <ArticleVote article={article}></ArticleVote>
                 </div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm md:text-lg text-center">
                     <span className='pr-1 md:pr-3'>by</span>

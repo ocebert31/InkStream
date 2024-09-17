@@ -1,5 +1,5 @@
 import React from 'react';
-import { createVote } from '../API/vote'; 
+import { commentVote } from '../API/vote'; 
 import { useAuth } from '../AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,7 @@ function Votes({ comment, onVoteDone, upVotes, downVotes, userVoteType, isEditin
 
     const handleVote = async (voteType) => {
         try {
-            const result = await createVote(comment._id, voteType, token);
+            const result = await commentVote(comment._id, voteType, token);
             onVoteDone(voteType, result);
         } catch (error) {
             alert(error.message);

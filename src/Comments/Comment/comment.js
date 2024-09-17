@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Delete from "./Button/delete";
 import { useAuth } from "../../AuthContext";
 import Edit from './Button/edit';
-import Vote from '../../Votes/votes';
+import Vote from '../../Votes/commentVote';
 import Display from './Display/display';
 import NewReply from '../Reply/New/new';
 import DisplayReply from '../Reply/Display/display';

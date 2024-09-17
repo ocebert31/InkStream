@@ -25,7 +25,7 @@ function Favorites({ article }) {
     return (
         <div className="flex justify-center items-center gap-4">
             {token && (
-                <button onClick={handleFavorite} className={`px-4 py-2 rounded ${favorite ? 'text-secondary' : 'text-primary'}`}>
+                <button onClick={handleFavorite} className={`px-2 py-2 rounded ${favorite ? 'text-secondary' : 'text-primary'}`}>
                     <FontAwesomeIcon className="text-2xl sm:text-3xl md:text-4xl" icon={favorite ? faStarSolid : faStarRegular} />
                 </button>
             )}    

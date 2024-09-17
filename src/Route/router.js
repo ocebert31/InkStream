@@ -50,7 +50,6 @@ function RouterComponent() {
                 <Route path="/request-reset-password" element={<AuthenticatedRoute  element={RecoveryPassword} hasToken={false}/>} />
                 <Route path="/form-reset-password/:token" element={<ChangePassword/>}/>
                 <Route path="/dashboard" element={<RoleRoute element={Dashboard} requiredRoles={['admin']} />} />
-
             </Routes>
         </div>
     );
