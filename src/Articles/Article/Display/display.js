@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import parse from 'html-react-parser';
 import { format } from 'date-fns';
 import './display.css';
 import Favorites from '../../../Favorites/favorites';
 import Share from '../../Share/share';
-import ArticleVote from '../../../Votes/articleVote';
+import Vote from '../../../Components/Votes/vote';
 
 function Display({ article }) {
+    const [articleState, setArticleState] = useState(article || {});
+
+    useEffect(() => {
+        setArticleState(article);
+    }, [article]);
+
     const sanitizeHtml = (content) => {
         return content.replace(/<p>\s*(<h1>[^<]*<\/h1>)\s*<\/p>/g, '<div>$1</div>');
     };
@@ -21,7 +27,7 @@ function Display({ article }) {
                 <div className='flex justify-center items-center'>
                     <Favorites article={article}></Favorites>
                     <Share article={article}></Share>
-                    <ArticleVote article={article}></ArticleVote>
+                    <Vote upvotes={articleState.upvotes} downvotes={articleState.downvotes} userVote={articleState.userVote} subject={articleState} type='article'/>
                 </div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm md:text-lg text-center">
                     <span className='pr-1 md:pr-3'>by</span>
