@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { voteOnArticle } from '../API/vote'; 
+import { vote } from '../API/vote'; 
 import { useAuth } from '../AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHeartCrack } from '@fortawesome/free-solid-svg-icons';
@@ -12,32 +12,34 @@ function ArticleVote({article}) {
     const { token } = useAuth();
 
     const upVote = () => {
-        setupVotes(upVotes + 1);
+        setupVotes(prevUpVotes => prevUpVotes + 1);
         if (userVoteType === 'downvote') {
-            setdownVotes(downVotes - 1);
+            setdownVotes(prevDownVotes => prevDownVotes - 1);
         }
         setUserVoteType('upvote');
     };
-
+    
     const downVote = () => {
-        setdownVotes(downVotes + 1);
+        setdownVotes(prevDownVotes => prevDownVotes + 1);
         if (userVoteType === 'upvote') {
-            setupVotes(upVotes - 1);
+            setupVotes(prevUpVotes => prevUpVotes - 1);
         }
         setUserVoteType('downvote');
     };
-
+    
     const cancelUpVote = () => {
-        setupVotes(upVotes - 1);
+        setupVotes(prevUpVotes => prevUpVotes - 1);
         setUserVoteType(null);
     };
-
+    
     const cancelDownVote = () => {
-        setdownVotes(downVotes - 1);
+        setdownVotes(prevDownVotes => prevDownVotes - 1);
         setUserVoteType(null);
     };
+    
 
     const onVoteDone = (voteType, voteResult) => {
+        console.log(voteResult)
         if (voteResult.vote) {
             if (voteType === 'upvote') {
                 upVote();
@@ -57,12 +59,18 @@ function ArticleVote({article}) {
 
     const handleVote = async (voteType) => {
         try {
-            const result = await voteOnArticle(article._id, voteType, token);
+            const result = await vote({ articleId: article._id, voteType }, token);
             onVoteDone(voteType, result);
         } catch (error) {
             alert(error.message);
         }
     };
+
+    useEffect(() => {
+        setUserVoteType(article.userVote ? article.userVote.voteType : null);
+        setupVotes(article.upvotes || 0);
+        setdownVotes(article.downvotes || 0);
+    }, [article]);
 
     return (
         <div>

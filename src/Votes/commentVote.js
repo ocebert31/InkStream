@@ -1,15 +1,15 @@
 import React from 'react';
-import { commentVote } from '../API/vote'; 
+import { vote } from '../API/vote'; 
 import { useAuth } from '../AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
-function Votes({ comment, onVoteDone, upVotes, downVotes, userVoteType, isEditing }) {
+function Votes({ comment, onVoteDone, upVotes, downVotes, userVoteType, isEditing}) {
     const { token } = useAuth();
 
     const handleVote = async (voteType) => {
         try {
-            const result = await commentVote(comment._id, voteType, token);
+            const result = await vote({ commentId: comment._id, voteType }, token);
             onVoteDone(voteType, result);
         } catch (error) {
             alert(error.message);

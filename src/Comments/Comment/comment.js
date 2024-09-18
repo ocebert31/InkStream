@@ -31,31 +31,31 @@ function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
     };
 
     const upVote = () => {
-        setupVotes(upVotes + 1);
+        setupVotes(prevUpVotes => prevUpVotes + 1);
         if (userVoteType === 'downvote') {
-            setdownVotes(downVotes - 1);
+            setdownVotes(prevDownVotes => prevDownVotes - 1);
         }
         setUserVoteType('upvote');
         checkIfHidden(upVotes + 1, downVotes);
     };
 
     const downVote = () => {
-        setdownVotes(downVotes + 1);
+        setdownVotes(prevDownVotes => prevDownVotes + 1);
         if (userVoteType === 'upvote') {
-            setupVotes(upVotes - 1);
+            setupVotes(prevUpVotes => prevUpVotes - 1);
         }
         setUserVoteType('downvote');
         checkIfHidden(upVotes, downVotes + 1);
     };
 
     const cancelUpVote = () => {
-        setupVotes(upVotes - 1);
+        setupVotes(prevUpVotes => prevUpVotes - 1);
         setUserVoteType(null);
         checkIfHidden(upVotes - 1, downVotes);
     };
 
     const cancelDownVote = () => {
-        setdownVotes(downVotes - 1);
+        setdownVotes(prevDownVotes => prevDownVotes - 1);
         setUserVoteType(null);
         checkIfHidden(upVotes, downVotes - 1);
     };
@@ -94,7 +94,7 @@ function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
             <div className='flex flex-col gap-2'>
                 {!isEditing && (<Display isHidden={isHidden} toggleHidden={toggleHidden} content={content} comment={comment} isEditing={isEditing}/>)}
                 <div className="flex items-center gap-4">
-                    <Vote comment={comment} onVoteDone={onVoteDone} upVotes={upVotes} downVotes={downVotes} userVoteType={userVoteType} isEditing={isEditing}/>
+                    <Vote comment={comment} onVoteDone={onVoteDone} upVotes={upVotes} downVotes={downVotes} userVoteType={userVoteType} isEditing={isEditing} setupVotes={setupVotes} setdownVotes={setdownVotes} setUserVoteType={setUserVoteType}/>
                     {isAuthor && comment.content !== 'ce commentaire a été supprimé' && !comment.deletedAt && (
                         <div className='flex items-center gap-2'>
                             <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing}/>
