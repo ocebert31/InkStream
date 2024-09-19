@@ -8,11 +8,20 @@ import Audio from '../Audio/audio';
 function Card({ article }) {
     const formattedDate = format(new Date(article.createdAt), 'MMM dd, yyyy');
 
+    if (!article.tags) {
+        return null; 
+    }
+
     return (
         <div className="flex flex-col md:flex-row bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-6">
             <div className="flex-1 p-2 md:p-6">
                 <p className='text-xs md:text-base text-primary'>{formattedDate}</p>
                 <h5 className="py-2 text-lg md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">{article.title}</h5>
+                <div className='flex py-2'>
+                    {article.tags.map((tag, index) => (
+                    <div key={index} className="flex items-center justify-center w-4/5 md:w-auto px-4 py-2 mr-4 text-xs md:text-sm font-medium text-white bg-primary rounded-3xl">{tag}</div>
+                    ))}
+                </div>
                 <p className="text-gray-500 dark:text-gray-400 text-sm md:text-lg">
                     <span className='pr-1 md:pr-3'>by</span>
                     <span className="text-primary py-4 dark:text-white font-bold">{article.pseudo}</span>

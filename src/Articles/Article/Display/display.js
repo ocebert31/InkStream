@@ -20,10 +20,19 @@ function Display({ article }) {
     const sanitizedContent = sanitizeHtml(article.content);
     const formattedDate = format(new Date(article.createdAt), 'MMM dd, yyyy');
 
+    if (!article.tags) {
+        return null; 
+    }
+
     return (
         <div>
             <p className='text-xs md:text-base text-primary text-center'>{formattedDate}</p>
             <h1 className="text-2xl md:text-6xl font-bold my-4 text-center">{article.title}</h1>
+                <div className='flex justify-center'>
+                    {article.tags.map((tag, index) => (
+                    <div key={index} className="flex items-center justify-center w-4/5 md:w-auto px-4 py-2 ml-4 text-xs md:text-sm font-medium text-white bg-primary rounded-3xl">{tag}</div>
+                    ))}
+                </div>
                 <div className='flex justify-center items-center'>
                     <Favorites article={article}></Favorites>
                     <Share article={article}></Share>
@@ -32,7 +41,7 @@ function Display({ article }) {
                 <p className="text-gray-500 dark:text-gray-400 text-sm md:text-lg text-center">
                     <span className='pr-1 md:pr-3'>by</span>
                     <span className="text-primary py-4 dark:text-white font-bold">{article.pseudo}</span>
-                </p>
+                </p> 
             <div className="p-6 rounded-lg shadow-lg max-w-2xl mx-auto image-article">{article.imageUrl && <img src={article.imageUrl} alt={article.title} className="w-full h-auto"/>}</div>
             <div className="pt-8 text-center">{parse(sanitizedContent)}</div>
         </div>
