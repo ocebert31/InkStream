@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { updateArticle } from '../../../API/article';
-import { buildArticleFormData } from '../../../Components/buildFormData';
+import { buildFormData } from '../../../Components/buildFormData';
 import Title from '../../../Components/Articles/title';
 import Content from '../../../Components/Articles/content';
 import Image from '../../../Components/Articles/image';
@@ -16,7 +16,7 @@ function Edition({ article, setArticle, cancelEdit }) {
 
     const onSubmit = async (data) => {
         try {
-            const formData = buildArticleFormData(data);
+            const formData = buildFormData(data);
             const result = await updateArticle(article._id, formData, token);
             alert('Article mis à jour avec succès');
             setArticle(result.article);

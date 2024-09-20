@@ -4,7 +4,7 @@ import { createArticles } from '../../API/article';
 import Title from '../../Components/Articles/title';
 import Content from '../../Components/Articles/content';
 import Image from '../../Components/Articles/image';
-import { buildArticleFormData } from '../../Components/buildFormData';
+import { buildFormData } from '../../Components/buildFormData';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../AuthContext";
 import './new.css';
@@ -17,7 +17,7 @@ function New() {
 
     const onSubmit = async (data) => {
         try {
-            const result = await createArticles(buildArticleFormData(data), token);
+            await createArticles(buildFormData(data), token);
             navigate('/');
         } catch (error) {
             alert(error.message);

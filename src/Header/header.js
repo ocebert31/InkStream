@@ -66,9 +66,14 @@ function Header() {
                                     }
                                     </>
                                     {isAdmin &&
-                                        <li>
-                                            <Link to='/dashboard' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faTableColumns} className='pr-2'/>Dashboard</Link>
-                                        </li>
+                                        <>
+                                            <li>
+                                                <Link to='/dashboard' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faTableColumns} className='pr-2'/>Dashboard</Link>
+                                            </li>
+                                            <li>
+                                                <Link to='/category' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faTableColumns} className='pr-2'/>Categorie</Link>
+                                            </li>
+                                        </>
                                     }
                                     <li>
                                         <Link to='/favorites' className="block py-2 px-4 text-gray-800 hover:bg-gray-200 rounded" onClick={handleLinkClick}><FontAwesomeIcon icon={faStar} className='pr-2'/>Favoris</Link>
