@@ -39,4 +39,20 @@ async function getCategories(token) {
     }
 }
 
-export {createCategories, getCategories}
+async function deleteCategory(id, token) {
+    try {
+        const response = await fetch(`${url}/categories/${id}`, {
+            method: 'DELETE',
+            headers: {'Authorization': `Bearer ${token}`}
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
+export {createCategories, getCategories, deleteCategory}

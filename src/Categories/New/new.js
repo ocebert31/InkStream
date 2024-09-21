@@ -19,8 +19,7 @@ function New({handleCategoryAdded}) {
     };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
-        <h2 className="text-xl font-bold mb-4">Créer une nouvelle catégorie</h2>
+    <div>
         <form onSubmit={handleSubmit(onSubmit)}>
             <Controller name="name" control={control} defaultValue="" render={({ field }) => (<Name {...field} />)} errorMessage={errors.name?.message} rules={{ required: "Nom de la catégorie requis" }}/>
             <button type="submit" className="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded-md hover:bg-purple-700 transition-colors">
