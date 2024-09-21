@@ -55,4 +55,24 @@ async function deleteCategory(id, token) {
     }
 };
 
-export {createCategories, getCategories, deleteCategory}
+async function updateCategory (id, name, token) {
+    try {
+        const response = await fetch(`${url}/categories/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({name}),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
+export {createCategories, getCategories, deleteCategory, updateCategory}
