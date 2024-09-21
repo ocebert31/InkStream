@@ -27,7 +27,7 @@ function CategoryList() {
         <div>
             <div>
                 {categories.map((category) => (
-                    <p>{category.name}</p>
+                    <p key={category._id}>{category.name}</p>
                 ))}
             </div>
             <New handleCategoryAdded={handleCategoryAdded}></New>

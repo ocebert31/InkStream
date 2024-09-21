@@ -2,19 +2,16 @@ const url = process.env.REACT_APP_API_URL;
 
 async function createCategories(data, token) {
     try {
-        console.log('1')
         const response = await fetch(`${url}/categories`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {'Authorization': `Bearer ${token}`, 
             'Content-Type': 'application/json'}
         });
-        console.log(data)
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.message);
         }
-        console.log(response)
         return await response.json();
     } catch (error) {
         console.error(error.message);

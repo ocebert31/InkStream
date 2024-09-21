@@ -1,22 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { createCategories } from '../../API/categories';
 import { useAuth } from '../../AuthContext';
 import { useForm, Controller } from 'react-hook-form';
 import Name from './name';
 
 function New({handleCategoryAdded}) {
-const { control, handleSubmit, formState: { errors } } = useForm();
-  const { token } = useAuth();
+    const { control, handleSubmit, reset, formState: { errors } } = useForm();
+    const { token } = useAuth();
 
-  const onSubmit = async (data) => {
-    try {
-        const result = await createCategories(data, token);
-        console.log(result);
-        handleCategoryAdded(result.categories.name);
-    } catch (error) {
-        alert(error.message)
-    }
-  };
+    const onSubmit = async (data) => {
+        try {
+            const result = await createCategories(data, token);
+            handleCategoryAdded(result.categories);
+            reset();
+        } catch (error) {
+            alert(error.message)
+        }
+    };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
