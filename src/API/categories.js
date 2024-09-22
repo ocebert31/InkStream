@@ -19,13 +19,13 @@ async function createCategories(data, token) {
     }
 }
 
-async function getCategories(token) {
+async function getCategories() {
     try {
         const response = await fetch(`${url}/categories`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json; charset=UTF-8',
-                ...(token && { 'Authorization': `Bearer ${token}` }) 
+                
             }
         });
         if (!response.ok) {
@@ -69,6 +69,7 @@ async function updateCategory (id, name, token) {
             const error = await response.json();
             throw new Error(error.message);
         }
+
         return await response.json();
     } catch (error) {
         throw error;

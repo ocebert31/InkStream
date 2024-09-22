@@ -1,7 +1,7 @@
 const url = process.env.REACT_APP_API_URL;
 
-async function getArticles(searchQuery = '', page = 1, limit = 20, type = 'all', token = null) {
-    const params = new URLSearchParams({searchQuery, page, limit, type}).toString();
+async function getArticles(searchQuery = '', page = 1, limit = 20, type = 'all', token = null, categoryId = '') {
+    const params = new URLSearchParams({searchQuery, page, limit, type, categoryId}).toString();
     const urlGetArticles = `${url}/articles?${params}`;
     try {
         const response = await fetch(urlGetArticles, {

@@ -16,7 +16,7 @@ function Article() {
     const [isEditing, setIsEditing] = useState(false);
     const { user, token } = useAuth();
     const [showErrorAlert, setShowErrorAlert] = useState(false);
-
+    
     useEffect(() => {
         const loadArticle = async () => {
             try {

@@ -1,33 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import {getArticles} from '../API/article';
+import { getArticles } from '../API/article';
 import Card from './Card/card';
 import Search from './Search/search';
 import './articles.css';
-import { useAuth } from '../AuthContext'
+import { useAuth } from '../AuthContext';
+import Filter from './Filter/filter';
 
 function Articles({ type }) {
     const { token } = useAuth();
     const [articles, setArticles] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [page, setPage] = useState(1);
-    const [limit] = useState(20)
+    const [limit] = useState(20);
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
         const loadArticles = async () => {
             try {
-                const fetchedArticles = await getArticles(searchQuery, page, limit, type, token);
+                const fetchedArticles = await getArticles(searchQuery, page, limit, type, token, selectedCategory);
                 setArticles(fetchedArticles);
             } catch (error) {
-            alert(error);
+                alert(error);
             }
         };
         loadArticles();
-    }, [searchQuery, page, limit, type, token])
+    }, [searchQuery, page, limit, type, token, selectedCategory]);
     
     const handleSearchQueryChange = (search) => {
         setSearchQuery(search);
         setPage(1);
     }
+
+    const handleCategoryChange = (categoryId) => {
+        setSelectedCategory(categoryId);
+        setPage(1);
+    }
+
     return (
         <div className="container mx-auto px-4">
             <div className="text-center my-16">
@@ -36,7 +44,11 @@ function Articles({ type }) {
                     <span className="block h-1 bg-primary mx-auto mt-2"></span>
                 </h1>
             </div>
-            <Search handleSearchQueryChange={handleSearchQueryChange} />
+            <div className='flex justify-center items-center'>
+                <Search handleSearchQueryChange={handleSearchQueryChange} />
+                <Filter onCategoryChange={handleCategoryChange} />
+            </div>
+            
             <div className="space-y-6 mt-8">
                 {articles.length > 0 ? (
                     articles.map((article, index) => (
@@ -53,4 +65,5 @@ function Articles({ type }) {
         </div>
     );
 }
+
 export default Articles;

@@ -27,7 +27,10 @@ function Display({ article }) {
     return (
         <div>
             <p className='text-xs md:text-base text-primary text-center'>{formattedDate}</p>
-            <h1 className="text-2xl md:text-6xl font-bold my-4 text-center">{article.title}</h1>
+            <div className='flex justify-center items-center'>
+                <h1 className="text-2xl md:text-6xl pr-2 font-bold my-4 text-center">{article.title}</h1>
+                <p className='pl-2'>{article.categoryName}</p>
+            </div>
                 <div className='flex justify-center'>
                     {article.tags.map((tag, index) => (
                     <div key={index} className="flex items-center justify-center w-4/5 md:w-auto px-4 py-2 ml-4 text-xs md:text-sm font-medium text-white bg-primary rounded-3xl">{tag}</div>
