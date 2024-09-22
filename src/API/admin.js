@@ -1,6 +1,6 @@
 const url = process.env.REACT_APP_API_URL;
 
-async function getUsers(searchQuery = '', page = 1, limit = 20, token = null) {
+async function getUsers(searchQuery = '', page = 1, limit = 10, token = null) {
     const params = new URLSearchParams({ searchQuery, page, limit }).toString();
     const urlGetUsers = `${url}/admin?${params}`;
 

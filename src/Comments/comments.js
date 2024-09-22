@@ -4,11 +4,19 @@ import Comment from './Comment/comment';
 import New from './Comment/New/new';
 import { useAuth } from '../AuthContext';
 import defaultAvatarOptions from '../Avatar/defaultAvatarOptions';
+import InfiniteScrollComponent from '../Components/infiniteScroll';
 
 function Comments({ articleId }) {
     const [comments, setComments] = useState([]);
     const { token, user } = useAuth();
     const [avatarOptions, setAvatarOptions] = useState(null);
+    const [page, setPage] = useState(1);
+    const [limit] = useState(20);
+    const [hasMore, setHasMore] = useState(true);
+
+    useEffect(() => {
+        loadComments();
+    }, [page]);
 
     const valueOfAvatarOptions = (user) => {
         if (!user || user.avatarOptions === undefined || (Object.keys(user.avatarOptions).length === 0)) {
@@ -16,7 +24,7 @@ function Comments({ articleId }) {
         } else {
             return user.avatarOptions;
         }
-    }
+    };
 
     useEffect(() => {
         if (user) {
@@ -24,21 +32,28 @@ function Comments({ articleId }) {
         }
     }, [user]);
 
-    useEffect(() => {
-        const loadComments = async () => {
-            try {
-                const fetchedComments = await getComments(articleId, token);
-                const commentsWithReplies = fetchedComments.map(comment => ({
-                    ...comment,
-                    replies: comment.replies || []
-                }));
-                setComments(commentsWithReplies);
-            } catch (error) {
-                alert(error);
+    const loadComments = async () => {
+        try {
+            const fetchedComments = await getComments(articleId, token, page, limit);
+            const commentsWithReplies = fetchedComments.map(comment => ({
+                ...comment,
+                replies: comment.replies || []
+            }));
+            setComments(prevComments => page === 1 ? commentsWithReplies : [...prevComments, ...commentsWithReplies]);
+
+            if (fetchedComments.length < limit) {
+                setHasMore(false);
             }
-        };
-        loadComments();
-    }, [articleId, token]);
+        } catch (error) {
+            alert(error);
+        }
+    };
+
+    useEffect(() => {
+        setComments([]);
+        setPage(1);
+        setHasMore(true);
+    }, [articleId]);
 
     const handleCommentAdded = (newComment) => {
         newComment.avatarOptions = avatarOptions;
@@ -71,35 +86,37 @@ function Comments({ articleId }) {
         return prevComments.map(c => {
             if (c._id === reply.commentId) {
                 const replies = c.replies ? c.replies.map(r => {
-                    if(r._id === reply._id) {
-                        return {...r, deletedAt: new Date().toISOString()};
+                    if (r._id === reply._id) {
+                        return { ...r, deletedAt: new Date().toISOString() };
                     }
                     return r;
-                }) : []
+                }) : [];
                 return { ...c, replies };
             }
             return c;
         });
-    }
+    };
 
     const setDeletedDateForComment = (prevComments, comment) => {
         return prevComments.map(c => {
-            if(c._id === comment._id) {
-                return {...c, deletedAt: new Date().toISOString()};
+            if (c._id === comment._id) {
+                return { ...c, deletedAt: new Date().toISOString() };
             }
             return c;
-        })
-    }
+        });
+    };
 
     return (
         <div className="p-4 bg-gray-100 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold text-primary mb-4">Commentaires</h3>
-            <div className="space-y-4 max-h-96 overflow-auto">
-                {comments.map(comment => 
-                    <Comment key={comment._id} comment={comment} onDelete={handleCommentDeleted} onReply={handleCommentAdded} />
-                )}
-            </div>
             <New articleId={articleId} onAdded={handleCommentAdded} />
+            <InfiniteScrollComponent loadMore={() => setPage(page + 1)} dataLength={comments.length} hasMore={hasMore}>
+                <ul>
+                    {comments.map(comment => (
+                        <Comment key={comment._id} comment={comment} onDelete={handleCommentDeleted} onReply={handleCommentAdded} />
+                    ))}
+                </ul>
+            </InfiniteScrollComponent>
         </div>
     );
 }

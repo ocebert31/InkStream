@@ -5,7 +5,7 @@ import { useAuth } from '../../../AuthContext';
 import Form from './form';
 import GifSelector from '../../../Gif/gifSelector';
 
-function NewComment({ articleId, onAdded, commentId, isReply, setIsReply, comment, typeForm}) {
+function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeForm}) {
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm();
     const { token, user } = useAuth();
     const [showGifSelector, setShowGifSelector] = useState(false);
@@ -33,7 +33,7 @@ function NewComment({ articleId, onAdded, commentId, isReply, setIsReply, commen
     }
 
     return (
-        <div className="bg-white p-4 rounded-lg shadow-md mt-4">
+        <div className="bg-white p-4 rounded-lg shadow-md m-2">
             {showGifSelector ? (
                 <div className="border border-gray-300 p-4 rounded-lg">
                     <GifSelector onSelect={handleGifSelect} />

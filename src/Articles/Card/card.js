@@ -17,6 +17,7 @@ function Card({ article }) {
             <div className="flex-1 p-2 md:p-6">
                 <p className='text-xs md:text-base text-primary'>{formattedDate}</p>
                 <h5 className="py-2 text-lg md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">{article.title}</h5>
+                <p>{article.categoryName}</p>
                 <div className='flex py-2'>
                     {article.tags.map((tag, index) => (
                     <div key={index} className="flex items-center justify-center w-4/5 md:w-auto px-4 py-2 mr-4 text-xs md:text-sm font-medium text-white bg-primary rounded-3xl">{tag}</div>

@@ -5,27 +5,40 @@ import Search from './Search/search';
 import './articles.css';
 import { useAuth } from '../AuthContext';
 import Filter from './Filter/filter';
+import InfiniteScrollComponent from '../Components/infiniteScroll';
 
 function Articles({ type }) {
     const { token } = useAuth();
     const [articles, setArticles] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [page, setPage] = useState(1);
-    const [limit] = useState(20);
     const [selectedCategory, setSelectedCategory] = useState('');
 
+    const [page, setPage] = useState(1);
+    const [limit] = useState(20);
+    const [hasMore, setHasMore] = useState(true);
+
     useEffect(() => {
-        const loadArticles = async () => {
-            try {
-                const fetchedArticles = await getArticles(searchQuery, page, limit, type, token, selectedCategory);
-                setArticles(fetchedArticles);
-            } catch (error) {
-                alert(error);
-            }
-        };
         loadArticles();
-    }, [searchQuery, page, limit, type, token, selectedCategory]);
-    
+    }, [page, searchQuery, selectedCategory]);
+
+    const loadArticles = async () => {
+        try {
+            const fetchedArticles = await getArticles(searchQuery, page, limit, type, token, selectedCategory);
+            setArticles(prevArticles => page === 1 ? fetchedArticles : [...prevArticles, ...fetchedArticles]);
+            if (fetchedArticles.length < limit) {
+                setHasMore(false);
+            }
+        } catch (error) {
+            alert(error);
+        }
+    };
+
+    useEffect(() => {
+        setArticles([]);
+        setPage(1);
+        setHasMore(true);
+    }, [searchQuery, selectedCategory]);
+
     const handleSearchQueryChange = (search) => {
         setSearchQuery(search);
         setPage(1);
@@ -48,20 +61,13 @@ function Articles({ type }) {
                 <Search handleSearchQueryChange={handleSearchQueryChange} />
                 <Filter onCategoryChange={handleCategoryChange} />
             </div>
-            
-            <div className="space-y-6 mt-8">
-                {articles.length > 0 ? (
-                    articles.map((article, index) => (
+            <InfiniteScrollComponent loadMore={() => setPage(page + 1)} dataLength={articles.length} hasMore={hasMore}>
+                <ul>
+                    {articles.map((article, index) => (
                         <Card key={index} article={article} />
-                    ))
-                ) : (
-                    <p className="text-center mt-10">Aucun article trouvé.</p>
-                )}
-            </div>
-            <div className="flex justify-between mt-8">
-                <button onClick={() => setPage(page > 1 ? page - 1 : 1)} disabled={page === 1} className="px-4 py-2 bg-primary text-white rounded-md disabled:bg-gray-300">Précédent</button>
-                <button onClick={() => setPage(page + 1)} disabled={articles.length < limit} className="px-4 py-2 bg-primary text-white rounded-md disabled:bg-gray-300">Suivant</button>
-            </div>
+                    ))}
+                </ul>
+            </InfiniteScrollComponent>
         </div>
     );
 }
