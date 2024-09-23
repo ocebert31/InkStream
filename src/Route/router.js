@@ -15,7 +15,6 @@ import Dashboard from '../Dashboard/dashboard.js';
 import { getUserData } from '../API/authentification.js';
 import RoleRoute from './roleRoute.js';
 import AuthenticatedRoute  from './authenticatedRoute.js';
-import Category from '../Categories/categoryList.js';
 
 function RouterComponent() {
     const location = useLocation();
@@ -51,7 +50,6 @@ function RouterComponent() {
                 <Route path="/request-reset-password" element={<AuthenticatedRoute  element={RecoveryPassword} hasToken={false}/>} />
                 <Route path="/form-reset-password/:token" element={<ChangePassword/>}/>
                 <Route path="/dashboard" element={<RoleRoute element={Dashboard} requiredRoles={['admin']} />} />
-                <Route path="/category" element={<RoleRoute element={Category} requiredRoles={['admin']} />} />
             </Routes>
         </div>
     );
