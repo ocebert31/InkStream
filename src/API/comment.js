@@ -1,39 +1,19 @@
-const url = process.env.REACT_APP_API_URL;
+import { fetchRequest } from "./fetchRequest";
 
 async function postComment(content, articleId, commentId, token) {
-    try {
-        const response = await fetch(`${url}/comments`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({content, articleId, commentId}),
-        });
-        if (!response.ok) {
-            throw new Error("Erreur lors de l'ajout du commentaire");
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error posting comment:', error);
-        throw error;
-    }
-};
+    return fetchRequest(`/comments`, { method: 'POST', body: {content, articleId, commentId}, token });
+}
 
 async function getComments(articleId, token, page = 1, limit = 20) {
-    let headers = {};
-    const params = new URLSearchParams({articleId, page, limit}).toString();
-    if(token) {
-        headers = { ...headers, 'Authorization': `Bearer ${token}` };
-    }
-    const response = await fetch(`${url}/comments?${params}`, { headers });
-    if (!response.ok) {
-        throw new Error('Erreur lors de la récupération des commentaires');
-    }
-    const comments = await response.json();
+    const params = new URLSearchParams({ articleId, page, limit }).toString();
+    const comments = await fetchRequest(`/comments?${params}`, { method: 'GET', token });
+    return orderComments(comments)
+}
+
+function orderComments(comments) {
     const commentAndReplies = [];
     comments.forEach(comment => {
-        if(commentIsReply(comment)) {
+        if (commentIsReply(comment)) {
             attachReplyToParentComment(commentAndReplies, comment);
         } else {
             commentAndReplies.push(comment);
@@ -49,48 +29,24 @@ function commentIsReply(comment) {
 function attachReplyToParentComment(commentAndReplies, reply) {
     for (let comment of commentAndReplies) {
         if (comment._id === reply.commentId) {
-            if(!comment.replies) {
-                comment.replies = [];
-            }
+            initReplies(comment);
             comment.replies.push(reply);
         }
     }
 }
 
-async function deleteComment(id, token) {
-    try {
-        const response = await fetch(`${url}/comments/${id}`, {
-            method: 'DELETE',
-            headers: {'Authorization': `Bearer ${token}`}
-        });
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message);
-        }
-        return await response.json();
-    } catch (error) {
-        throw error;
+function initReplies(comment) {
+    if (!comment.replies) {
+        comment.replies = [];
     }
-};
+}
 
-async function updateComment (id, content, token) {
-    try {
-        const response = await fetch(`${url}/comments/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify({content}),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message);
-        }
-        return await response.json();
-    } catch (error) {
-        throw error;
-    }
-};
+async function deleteComment(id, token) {
+    return fetchRequest(`/comments/${id}`, { method: 'DELETE', token });
+}
+
+async function updateComment(id, content, token) {
+    return fetchRequest(`/comments/${id}`, { method: 'PUT', body: {content}, token });
+}
 
 export {postComment, getComments, deleteComment, updateComment};
