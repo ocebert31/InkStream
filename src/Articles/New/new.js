@@ -33,7 +33,7 @@ function New() {
                     <Controller name="title" control={control} defaultValue="" render={({ field }) => (<Title {...field} errorMessage={errors.title?.message} />)} rules={{ required: "Titre requis" }}/>
                     <Controller name="content" control={control} defaultValue="" render={({ field }) => (<Content {...field} errorMessage={errors.content?.message} />)} rules={{ required: "Contenu requis" }}/>
                     <Controller name="tags" control={control} defaultValue='' render={({ field }) => (<Tags {...field}/>)}/>
-                    <Controller name="categoryId" control={control} defaultValue="" rules={{ required: "Catégorie requise" }} render={({ field }) => ( <Categories {...field} errors={errors.category} isSelect />)}/>
+                    <Controller name="categoryId" control={control} defaultValue="" rules={{ required: "Catégorie requise" }} render={({ field }) => ( <Categories {...field} errors={errors.category}/>)}/>
                     <Controller name="image" control={control} defaultValue="" render={({ field }) => (<Image {...field} errorMessage={errors.image?.message} />)} rules={{ required: "Image requise" }}/>
                     <div className="flex justify-center">
                         <button type="submit" className="bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-colors duration-300">

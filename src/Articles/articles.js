@@ -59,7 +59,7 @@ function Articles({ type }) {
             </div>
             <div className='flex justify-center items-center'>
                 <Search handleSearchQueryChange={handleSearchQueryChange} />
-                <Filter onCategoryChange={handleCategoryChange} />
+                <Filter onCategoryChange={handleCategoryChange}/>
             </div>
             <InfiniteScrollComponent loadMore={() => setPage(page + 1)} dataLength={articles.length} hasMore={hasMore}>
                 <ul>

@@ -11,7 +11,7 @@ import Tags from '../../../Components/Articles/tags';
 import Categories from '../../../Components/Articles/categories';
 
 function Edition({ article, setArticle, cancelEdit }) {
-    const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { title: article.title, content: article.content, tags: article.tags, category: article.categoryId ,image: null } });
+    const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { title: article.title, content: article.content, tags: article.tags, categoryId: article.categoryId ,image: null } });
     const { token } = useAuth();
     const myRef = useRef(null); 
 
@@ -35,7 +35,7 @@ function Edition({ article, setArticle, cancelEdit }) {
                 <Controller name="title" control={control} render={({ field }) => (<Title {...field} errorMessage={errors.title?.message} ref={myRef}/>)} rules={{ required: "Titre requis" }}/>
                 <Controller name="content" control={control} render={({ field }) => (<Content {...field} errorMessage={errors.content?.message} ref={myRef}/>)} rules={{ required: "Contenu requis" }}/>
                 <Controller name="tags" control={control} render={({ field }) => (<Tags {...field}  ref={myRef}/>)}/>
-                <Controller name="categoryId" control={control} render={({ field }) => ( <Categories {...field} errors={errors.category} rules={{ required: "Catégorie requise" }} isSelect />)}/>
+                <Controller name="categoryId" control={control} render={({ field }) => ( <Categories {...field} errors={errors.categoryId} rules={{ required: "Catégorie requise" }}/>)}/>
                 <Controller name="image" control={control} render={({ field: { onChange } }) => (<Image onChange={file => onChange(file)} errorMessage={errors.image?.message} ref={myRef}/>)}/>
                 <div className="flex justify-end space-x-4">
                     <button type="submit" className="bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-opacity-50 transition-colors duration-300">Enregistrer</button>
