@@ -1,20 +1,7 @@
-const url = process.env.REACT_APP_API_URL;
+import { fetchRequest } from "./fetchRequest";
 
-async function favoriteArticle (articleId, token) {
-    const response = await fetch(`${url}/favorites/`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ articleId })
-    });
-
-    if (!response.ok) {
-        throw new Error('Failed to favorite');
-    }
-
-    return response.json();
-};
+async function favoriteArticle(articleId, token) {
+    return fetchRequest(`/favorites`, { method: 'POST', body: {articleId}, token });
+}
 
 export {favoriteArticle};
