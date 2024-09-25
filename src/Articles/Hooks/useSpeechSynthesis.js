@@ -1,73 +1,72 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 
-export const useSpeechSynthesis = () => {
-    const [isPaused, setIsPaused] = useState(false);
+function useSpeechSynthesis() {
+    const [isPaused] = useState(false);
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [isGlobalSpeaking, setGlobalSpeaking] = useState(false);
     const utteranceRef = useRef(null);
 
+    const readAloud = useCallback((htmlContent) => {
+        if (!isSpeechSynthesisSupported()) return;
+        cancelGlobalSpeaking();
+        const cleanText = extractTextFromHtml(htmlContent);
+        utteranceRef.current = configureUtterance(cleanText);
+        window.speechSynthesis.speak(utteranceRef.current);
+    }, [isPaused]);
+
+    const isSpeechSynthesisSupported = () => {
+        const supported = 'speechSynthesis' in window;
+        if (!supported) {
+            console.warn("La synthèse vocale n'est pas supportée par ce navigateur.");
+        }
+        return supported;
+    };
+
+    const cancelGlobalSpeaking = () => {
+        if (isGlobalSpeaking) {
+            window.speechSynthesis.cancel();
+            setGlobalSpeaking(false);
+        }
+    };
+
     const extractTextFromHtml = (html) => {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = html;
-        tempDiv.querySelectorAll('a').forEach(link => {
-            link.outerHTML = link.innerHTML;
-        });
+        tempDiv.querySelectorAll('a').forEach(link => link.outerHTML = link.innerHTML);
         tempDiv.querySelectorAll('img, script, style').forEach(el => el.remove());
-        let textContent = tempDiv.textContent || tempDiv.innerText || '';
-        textContent = textContent.replace(/\./g, '.<break time="500ms"/>'); 
-        return textContent;
+        return (tempDiv.textContent || tempDiv.innerText || '').replace(/\./g, '.<break time="500ms"/>');
     };
 
-    const readAloud = useCallback((htmlContent) => {
-        if ('speechSynthesis' in window) {
-            if (isGlobalSpeaking) {
-                window.speechSynthesis.cancel();
-                setGlobalSpeaking(false);
-            }
-            if (utteranceRef.current && isPaused) {
-                window.speechSynthesis.resume();
-                setIsPaused(false);
-                return;
-            }
-            const cleanText = extractTextFromHtml(htmlContent);
-            utteranceRef.current = new SpeechSynthesisUtterance(cleanText);
-            utteranceRef.current.lang = 'fr-FR';
-            utteranceRef.current.onstart = () => {
-                setIsSpeaking(true);
-                setGlobalSpeaking(true);
-            };
-            utteranceRef.current.onend = () => {
-                setIsSpeaking(false);
-                setGlobalSpeaking(false);
-            };
-            window.speechSynthesis.speak(utteranceRef.current);
-        } else {
-            alert("La synthèse vocale n'est pas supportée par ce navigateur.");
-        }
-    }, [isPaused, isGlobalSpeaking, setGlobalSpeaking]);
+    const configureUtterance = (cleanText) => {
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'fr-FR';
 
-    const stopSpeaking = () => {
+        utterance.onstart = () => {
+            setIsSpeaking(true);
+            setGlobalSpeaking(true);
+        };
+
+        utterance.onend = () => {
+            setIsSpeaking(false);
+            setGlobalSpeaking(false);
+        };
+        return utterance;
+    };
+
+    const stopSpeaking = useCallback(() => {
         if (window.speechSynthesis.speaking) {
             window.speechSynthesis.cancel();
             setIsSpeaking(false);
             setGlobalSpeaking(false);
         }
-    };
-
-    useEffect(() => {
-        const handleBeforeUnload = () => {
-            stopSpeaking();
-        };
-
-        window.addEventListener('beforeunload', handleBeforeUnload);
-
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-            if (window.speechSynthesis.speaking) {
-                window.speechSynthesis.cancel();
-            }
-        };
     }, []);
 
+    useEffect(() => {
+        window.addEventListener('beforeunload', stopSpeaking);
+        return () => window.removeEventListener('beforeunload', stopSpeaking);
+    }, [stopSpeaking]);
+
     return { isSpeaking, isGlobalSpeaking, readAloud, stopSpeaking };
-};
+}
+
+export default useSpeechSynthesis;

@@ -1,4 +1,4 @@
-import { useSpeechSynthesis } from '.././Hooks/useSpeechSynthesis';
+import  useSpeechSynthesis  from '.././Hooks/useSpeechSynthesis';
 import { faVolumeUp, faStop } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
