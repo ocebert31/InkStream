@@ -1,6 +1,6 @@
 import Avatar from 'avataaars';
 import React, { useEffect, useState } from 'react';
-import defaultAvatarOptions from './defaultAvatarOptions';
+import defaultAvatarOptions from './defaultAvatarData';
 
 function AvatarUser({comment}) {
     const [avatarOptions, setAvatarOptions] = useState(defaultAvatarOptions);

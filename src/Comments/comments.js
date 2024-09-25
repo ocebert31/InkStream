@@ -3,7 +3,7 @@ import { getComments } from '../API/comment';
 import Comment from './Comment/comment';
 import New from './Comment/New/new';
 import { useAuth } from '../AuthContext';
-import defaultAvatarOptions from '../Avatar/defaultAvatarOptions';
+import defaultAvatarData from '../Avatar/defaultAvatarData';
 import InfiniteScrollComponent from '../Components/infiniteScroll';
 
 function Comments({ articleId }) {
@@ -20,7 +20,7 @@ function Comments({ articleId }) {
 
     const valueOfAvatarOptions = (user) => {
         if (!user || user.avatarOptions === undefined || (Object.keys(user.avatarOptions).length === 0)) {
-            return defaultAvatarOptions;
+            return defaultAvatarData;
         } else {
             return user.avatarOptions;
         }

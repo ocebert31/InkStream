@@ -12,7 +12,6 @@ function Articles({ type }) {
     const [articles, setArticles] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
-
     const [page, setPage] = useState(1);
     const [limit] = useState(20);
     const [hasMore, setHasMore] = useState(true);
@@ -25,13 +24,17 @@ function Articles({ type }) {
         try {
             const fetchedArticles = await getArticles(searchQuery, page, limit, type, token, selectedCategory);
             setArticles(prevArticles => page === 1 ? fetchedArticles : [...prevArticles, ...fetchedArticles]);
-            if (fetchedArticles.length < limit) {
-                setHasMore(false);
-            }
+            checkHasMoreArticles(fetchedArticles)
         } catch (error) {
             alert(error);
         }
     };
+
+    const checkHasMoreArticles = (fetchedArticles) => {
+        if (fetchedArticles.length < limit) {
+            setHasMore(false);
+        }
+    }
 
     useEffect(() => {
         setArticles([]);

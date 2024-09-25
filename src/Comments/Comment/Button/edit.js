@@ -5,7 +5,6 @@ import { updateComment } from '../../../API/comment';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../../AuthContext';
 import Content from '../../../Components/Comments/content';
-import './edit.css';
 import EditActions from '../../../Components/editActions';
 import ErrorAlert from '../../../Alert/error';
 
