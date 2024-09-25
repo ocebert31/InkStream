@@ -8,7 +8,7 @@ import AvatarUserComment from '../../Avatar/avatarUserComment';
 import Delete from "./Button/delete";
 import CommonVote from '../../Components/Votes/vote';
 
-function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
+function Comment({ comment, handleCommentDeleted, onReply, typeForm='reply comment' }) {
     const [commentState, setCommentState] = useState(comment || {});
     const { user } = useAuth();
     const [content, setContent] = useState(comment.content);
@@ -47,14 +47,22 @@ function Comment({ comment, onDelete, onReply, typeForm='reply comment' }) {
                     <CommonVote upvotes={commentState.upvotes} downvotes={commentState.downvotes} userVote={commentState.userVote} subject={commentState} setIsHidden={setIsHidden} type='comment'></CommonVote>
                     {isAuthor && comment.content !== 'ce commentaire a été supprimé' && !comment.deletedAt && (
                         <div className='flex items-center gap-2'>
-                            <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing}/>
-                            <Delete id={comment._id} onDelete={onDelete} comment={comment} isEditing={isEditing}/>
+                            {!isEditing ? (
+                                <>
+                                    <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing}/>
+                                    <Delete id={comment._id} handleCommentDeleted={handleCommentDeleted} comment={comment}/>
+                                </>
+                            ) : (
+                                <Edit comment={comment} content={content} setContent={setContent} isEditing={isEditing} setIsEditing={setIsEditing}/>
+                            )}
                         </div>
                     )}
+
+
                 </div>
             </div>
             <NewReply comment={comment} typeForm={typeForm} onReply={onReply}/>
-            <DisplayReply comment={comment} onDelete={onDelete} onReply={onReply}/>
+            <DisplayReply comment={comment} handleCommentDeleted={handleCommentDeleted} onReply={onReply}/>
         </div>
     );
 }

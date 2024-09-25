@@ -1,24 +1,31 @@
-import React from 'react';
-import { faPen, faCheck } from '@fortawesome/free-solid-svg-icons';
+import React, {useState} from 'react';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { updateComment } from '../../../API/comment';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../../AuthContext';
 import Content from '../../../Components/Comments/content';
 import './edit.css';
+import EditActions from '../../../Components/editActions';
+import ErrorAlert from '../../../Alert/error';
 
 function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
     const { token } = useAuth(); 
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { content } });
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     const onSubmit = async (data) => {
         try {
             await updateComment(comment._id, data.content, token);
             setContent(data.content);
             setIsEditing(false);
-        } catch (error) {
-            alert(`Erreur lors de la mise à jour du commentaire : ${error.message}`);
+        } catch {
+            setShowErrorAlert(true);
         }
+    };
+
+    const handleEditingEnd = () => {
+        setIsEditing(false); 
     };
 
     return (
@@ -27,10 +34,7 @@ function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
                 <div className="p-4 border rounded-lg bg-gray-50 shadow-md">
                     <form onSubmit={handleSubmit(onSubmit)} className="gap-4">
                         <Controller name="content" control={control} defaultValue="" render={({ field }) => (<Content {...field} errorMessage={errors.content?.message} />)} rules={{ required: "Contenu requis" }}/>
-                        <div className="gap-2">
-                            <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark"><FontAwesomeIcon icon={faCheck}/></button>
-                            <button type="button" onClick={() => setIsEditing(false)} className="px-4 py-2 text-white bg-secondary rounded-lg">Annuler</button>
-                        </div>
+                        <EditActions cancelEdit={handleEditingEnd}></EditActions>
                     </form> 
                 </div>
             ) : (
@@ -42,6 +46,7 @@ function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
                     )}
                 </div>
             )}
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de l'édition du commentaire." onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

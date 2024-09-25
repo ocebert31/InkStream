@@ -113,7 +113,7 @@ function Comments({ articleId }) {
             <InfiniteScrollComponent loadMore={() => setPage(page + 1)} dataLength={comments.length} hasMore={hasMore}>
                 <ul>
                     {comments.map(comment => (
-                        <Comment key={comment._id} comment={comment} onDelete={handleCommentDeleted} onReply={handleCommentAdded} />
+                        <Comment key={comment._id} comment={comment} handleCommentDeleted={handleCommentDeleted} onReply={handleCommentAdded} />
                     ))}
                 </ul>
             </InfiniteScrollComponent>

@@ -1,26 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { deleteComment } from '../../../API/comment'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../../AuthContext";
+import ErrorAlert from '../../../Alert/error';
 
-function Delete({ onDelete, comment, isEditing }) {
+function Delete({ handleCommentDeleted, comment }) {
     const { token } = useAuth();
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     const handleDelete = async () => {
-        if (window.confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')) {
             try {
                 await deleteComment(comment._id, token); 
-                onDelete(comment);
+                handleCommentDeleted(comment);
             } catch (error) {
-                alert(`Erreur lors de la suppression du commentaire : ${error.message}`);
+                setShowErrorAlert(true);
             }
         }
-    };
 
     return (
         <div>
-            {!isEditing && <button onClick={handleDelete} className="text-red-500 hover:text-red-700 transition-colors duration-150" aria-label="Supprimer le commentaire"><FontAwesomeIcon icon={faTrash} /></button>}
+            <button onClick={handleDelete} className="text-red-500 hover:text-red-700 transition-colors duration-150" aria-label="Supprimer le commentaire">
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de la suppression du commentaire." onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

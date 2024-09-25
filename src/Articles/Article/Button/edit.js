@@ -8,10 +8,11 @@ function Edit({ editArticle, isEditing }) {
 
     return (
         <div>
-        {!isEditing && (
-            <button onClick={activateEditing} className="text-primary transition-colors duration-300">
-                <FontAwesomeIcon icon={faPen} />
-            </button>)}
+            {!isEditing && (
+                <button onClick={activateEditing} className="text-primary transition-colors duration-300">
+                    <FontAwesomeIcon icon={faPen} />
+                </button>
+            )}
         </div>
     )
 }

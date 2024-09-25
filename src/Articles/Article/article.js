@@ -22,7 +22,7 @@ function Article() {
             try {
                 const fetchedArticle = await getOneArticle(id, token);
                 setArticle(fetchedArticle);
-            } catch (error) {
+            } catch {
                 setShowErrorAlert(true);
             }
         };
