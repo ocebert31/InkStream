@@ -1,18 +1,3 @@
-.style-image {
-    width: 70%;
-    height: 500px;
-    object-fit: cover;
-}
-
-.article {
-    width: 30%;
-}
-
-.style-underline{
-    text-decoration: underline;
-    text-decoration-color:  #ff8f5f;
-}
-
 .text-container {
     display: -webkit-box;   
     -webkit-box-orient: vertical;
@@ -21,10 +6,4 @@
     text-overflow: ellipsis;    
     white-space: normal;       
     line-clamp: 2;           
-}
-
-@media (min-width: 769px) {
-    .size-image {
-        width: 30rem;
-    }
 }

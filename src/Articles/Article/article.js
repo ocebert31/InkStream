@@ -3,7 +3,6 @@ import { getOneArticle } from '../../API/article';
 import { useParams } from 'react-router-dom';
 import Delete from './Button/delete';
 import Edit from './Button/edit';
-import './article.css';
 import ArticleDisplay from '../Article/Display/display';
 import ArticleEdition from './Edition/edition';
 import { useAuth } from "../../AuthContext";

@@ -13,7 +13,7 @@ function Card({ article }) {
     }
 
     return (
-        <div className="flex flex-col md:flex-row bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-6">
+        <div className="flex flex-col md:flex-row bg-white m-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-6">
             <div className="flex-1 p-2 md:p-6">
                 <h5 className="py-2 text-lg md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">{article.title}</h5>
                 <div className='flex items-center'>
