@@ -10,37 +10,38 @@ import InfiniteScrollComponent from '../Components/infiniteScroll';
 function Articles({ type }) {
     const { token } = useAuth();
     const [articles, setArticles] = useState([]);
+    const [articleLength, setArticleLength] = useState(0);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [page, setPage] = useState(1);
     const [limit] = useState(20);
     const [hasMore, setHasMore] = useState(true);
-
+    
     useEffect(() => {
+        const loadArticles = async () => {
+            try {
+                const fetchedArticles = await getArticles(searchQuery, page, limit, type, token, selectedCategory);
+                setArticles(prevArticles => page === 1 ? fetchedArticles : [...prevArticles, ...fetchedArticles]);
+                setArticleLength(fetchedArticles.length);
+                checkHasMoreArticles(fetchedArticles)
+            } catch (error) {
+                alert(error);
+            }
+        };
         loadArticles();
-    }, [page, searchQuery, selectedCategory]);
-
-    const loadArticles = async () => {
-        try {
-            const fetchedArticles = await getArticles(searchQuery, page, limit, type, token, selectedCategory);
-            setArticles(prevArticles => page === 1 ? fetchedArticles : [...prevArticles, ...fetchedArticles]);
-            checkHasMoreArticles(fetchedArticles)
-        } catch (error) {
-            alert(error);
-        }
-    };
+    }, [searchQuery, page, limit, type, token, selectedCategory]);
 
     const checkHasMoreArticles = (fetchedArticles) => {
         if (fetchedArticles.length < limit) {
             setHasMore(false);
-        }
+        } else setHasMore(true)
     }
 
     useEffect(() => {
         setArticles([]);
         setPage(1);
         setHasMore(true);
-    }, [searchQuery, selectedCategory]);
+    }, [searchQuery, selectedCategory, type]);
 
     const handleSearchQueryChange = (search) => {
         setSearchQuery(search);
@@ -64,7 +65,7 @@ function Articles({ type }) {
                 <Search handleSearchQueryChange={handleSearchQueryChange} />
                 <Filter onCategoryChange={handleCategoryChange}/>
             </div>
-            <InfiniteScrollComponent loadMore={() => setPage(page + 1)} dataLength={articles.length} hasMore={hasMore}>
+            <InfiniteScrollComponent loadMore={() => setPage(page + 1)} dataLength={articleLength} hasMore={hasMore}>
                 <ul>
                     {articles.map((article, index) => (
                         <Card key={index} article={article} />
