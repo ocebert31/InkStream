@@ -13,7 +13,7 @@ function Delete({ handleCommentDeleted, comment }) {
             try {
                 await deleteComment(comment._id, token); 
                 handleCommentDeleted(comment);
-            } catch (error) {
+            } catch {
                 setShowErrorAlert(true);
             }
         }

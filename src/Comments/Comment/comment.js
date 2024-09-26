@@ -4,7 +4,7 @@ import Edit from './Button/edit';
 import Display from './Display/display';
 import NewReply from '../Reply/New/new';
 import DisplayReply from '../Reply/Display/display';
-import AvatarUserComment from '../../Avatar/avatarUserComment';
+import HeaderComment from '../../Avatar/headerComment';
 import Delete from "./Button/delete";
 import CommonVote from '../../Components/Votes/vote';
 
@@ -21,12 +21,7 @@ function Comment({ comment, handleCommentDeleted, onReply, typeForm='reply comme
         setCommentState(comment);
     }, [comment]);
     
-    const date = new Date(comment.createdAt);
-    const formattedDate = date.toLocaleDateString('fr-FR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-    });
+    
  
     const toggleHidden = () => {
         setIsHidden(!isHidden);
@@ -34,13 +29,7 @@ function Comment({ comment, handleCommentDeleted, onReply, typeForm='reply comme
 
     return (
         <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-            <div className="flex flex-col sm:flex-row items-center justify-between border-b border-gray-300 pb-2 mb-2 text-xs sm:text-sm">
-                <div className="sm:flex items-center space-x-2">
-                    <AvatarUserComment comment={comment} />
-                    <p className="font-semibold text-primary text-xxs sm:text-lg">{comment.pseudo}</p>
-                </div>
-            <p className="text-gray-500 text-xs sm:text-sm">{formattedDate}</p>
-            </div>
+            <HeaderComment comment={comment} />
             <div className='flex flex-col gap-2'>
                 {!isEditing && (<Display isHidden={isHidden} toggleHidden={toggleHidden} content={content} comment={comment} isEditing={isEditing}/>)}
                 <div className="flex items-center gap-4">
@@ -57,8 +46,6 @@ function Comment({ comment, handleCommentDeleted, onReply, typeForm='reply comme
                             )}
                         </div>
                     )}
-
-
                 </div>
             </div>
             <NewReply comment={comment} typeForm={typeForm} onReply={onReply}/>

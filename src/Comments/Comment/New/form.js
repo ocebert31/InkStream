@@ -11,8 +11,8 @@ function Form ({ register, errors, handleSubmit, onSubmit, setShowGifSelector, s
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
                 <div className='flex'>
-                {typeForm === 'reply comment' && <button onClick={toggleIsReply}><FontAwesomeIcon icon={faXmark} /></button>}
-                <label htmlFor="content" className="block text-gray-700 pl-2">Commentaire</label>
+                    {typeForm === 'reply comment' && <button onClick={toggleIsReply}><FontAwesomeIcon icon={faXmark} /></button>}
+                    <label htmlFor="content" className="block text-gray-700 pl-2">Commentaire</label>
                 </div>
                 <textarea id="content" name="content" {...register('content', { required: 'Le commentaire ne peut pas être vide' })} className="w-full p-2 border border-gray-300 rounded-md" />
                 {errors.content && <p className="text-red-500 text-sm">{errors.content.message}</p>}
