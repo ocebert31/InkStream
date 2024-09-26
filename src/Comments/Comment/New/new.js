@@ -4,11 +4,13 @@ import { postComment } from '../../../API/comment';
 import { useAuth } from '../../../AuthContext';
 import Form from './form';
 import GifSelector from '../../../Gif/gifSelector';
+import ErrorAlert from '../../../Alert/error';
 
 function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeForm}) {
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm();
     const { token, user } = useAuth();
     const [showGifSelector, setShowGifSelector] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     const onSubmit = async (data) => {
         try {
@@ -17,8 +19,8 @@ function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeFo
             reset();
             comment.pseudo = user.pseudo;
             onAdded(comment);
-        } catch (error) {
-            console.error(error);
+        } catch {
+            setShowErrorAlert(true);
         }
     };
 
@@ -41,6 +43,7 @@ function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeFo
             ) : (
                 <Form register={register} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} setShowGifSelector={setShowGifSelector} setIsReply={setIsReply} comment={comment} typeForm={typeForm}/>
             )}
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération des commentaires." onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

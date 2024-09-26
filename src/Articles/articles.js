@@ -6,6 +6,7 @@ import './articles.css';
 import { useAuth } from '../AuthContext';
 import Filter from './Filter/filter';
 import InfiniteScrollComponent from '../Components/infiniteScroll';
+import ErrorAlert from '../Alert/error';
 
 function Articles({ type }) {
     const { token } = useAuth();
@@ -16,6 +17,7 @@ function Articles({ type }) {
     const [page, setPage] = useState(1);
     const [limit] = useState(20);
     const [hasMore, setHasMore] = useState(true);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
     
     useEffect(() => {
         const loadArticles = async () => {
@@ -24,8 +26,8 @@ function Articles({ type }) {
                 setArticles(prevArticles => page === 1 ? fetchedArticles : [...prevArticles, ...fetchedArticles]);
                 setArticleLength(fetchedArticles.length);
                 checkHasMoreArticles(fetchedArticles)
-            } catch (error) {
-                alert(error);
+            } catch {
+                setShowErrorAlert(true);
             }
         };
         loadArticles();
@@ -72,6 +74,7 @@ function Articles({ type }) {
                     ))}
                 </ul>
             </InfiniteScrollComponent>
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération de l article." onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

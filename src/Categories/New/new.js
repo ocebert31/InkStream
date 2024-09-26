@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { createCategories } from '../../API/categories';
 import { useAuth } from '../../AuthContext';
 import { useForm, Controller } from 'react-hook-form';
