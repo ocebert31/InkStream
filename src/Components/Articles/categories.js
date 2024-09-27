@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getCategories } from '../../API/categories';
+import ErrorAlert from '../../Alert/error';
 
 function Categories(props) {
-    const { value, onChange, errorMessage } = props;
+    const { value, onChange } = props;
     const [categories, setCategories] = useState([]);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -11,7 +13,7 @@ function Categories(props) {
                 const fetchedCategories = await getCategories();
                 setCategories(fetchedCategories);
             } catch (error) {
-                alert("Erreur lors de la récupération des catégories.");
+                setShowErrorAlert(true)
             }
         };
         fetchCategories();
@@ -28,7 +30,7 @@ function Categories(props) {
                     </option>
                 ))}
             </select>
-            {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération des catégories." onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

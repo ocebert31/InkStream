@@ -5,6 +5,7 @@ import New from './Comment/New/new';
 import { useAuth } from '../AuthContext';
 import defaultAvatarData from '../Avatar/defaultAvatarData';
 import InfiniteScrollComponent from '../Components/infiniteScroll';
+import ErrorAlert from '../Alert/error';
 
 function Comments({ articleId }) {
     const [comments, setComments] = useState([]);
@@ -13,10 +14,42 @@ function Comments({ articleId }) {
     const [page, setPage] = useState(1);
     const [limit] = useState(20);
     const [hasMore, setHasMore] = useState(true);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     useEffect(() => {
+        const loadComments = async () => {
+            try {
+                const fetchedComments = await getComments(articleId, token, page, limit);
+                const commentsWithReplies = fetchedComments.map(comment => ({
+                    ...comment,
+                    replies: comment.replies || []
+                }));
+                setComments(prevComments => page === 1 ? commentsWithReplies : [...prevComments, ...commentsWithReplies]);
+                checkHasMoreComments(fetchedComments);
+            } catch {
+                setShowErrorAlert(true);
+            }
+        };
         loadComments();
     }, [page]);
+
+    const checkHasMoreComments = (fetchedComments) => {
+        if (fetchedComments.length < limit) {
+            setHasMore(false);
+        } else setHasMore(true)
+    }
+
+    useEffect(() => {
+        if (user) {
+            setAvatarOptions(valueOfAvatarOptions(user));
+        }
+    }, [user]);
+
+    useEffect(() => {
+        setComments([]);
+        setPage(1);
+        setHasMore(true);
+    }, [articleId]);
 
     const valueOfAvatarOptions = (user) => {
         if (!user || user.avatarOptions === undefined || (Object.keys(user.avatarOptions).length === 0)) {
@@ -26,51 +59,26 @@ function Comments({ articleId }) {
         }
     };
 
-    useEffect(() => {
-        if (user) {
-            setAvatarOptions(valueOfAvatarOptions(user));
-        }
-    }, [user]);
-
-    const loadComments = async () => {
-        try {
-            const fetchedComments = await getComments(articleId, token, page, limit);
-            const commentsWithReplies = fetchedComments.map(comment => ({
-                ...comment,
-                replies: comment.replies || []
-            }));
-            setComments(prevComments => page === 1 ? commentsWithReplies : [...prevComments, ...commentsWithReplies]);
-
-            if (fetchedComments.length < limit) {
-                setHasMore(false);
-            }
-        } catch (error) {
-            alert(error);
-        }
-    };
-
-    useEffect(() => {
-        setComments([]);
-        setPage(1);
-        setHasMore(true);
-    }, [articleId]);
-
     const handleCommentAdded = (newComment) => {
         newComment.avatarOptions = avatarOptions;
         setComments((prevComments) => {
             if (newComment.commentId) {
                 return prevComments.map(comment => {
-                    if (comment._id === newComment.commentId) {
-                        const replies = comment.replies ? comment.replies : [];
-                        return { ...comment, replies: [...replies, newComment] };
-                    }
-                    return comment;
+                    return attachReplyToParentComment(comment, newComment)
                 });
             } else {
                 return [...prevComments, newComment];
             }
         });
     };
+
+    const attachReplyToParentComment = (comment, newComment) => {
+        if (comment._id === newComment.commentId) {
+            const replies = comment.replies ? comment.replies : [];
+            return { ...comment, replies: [...replies, newComment] };
+        }
+        return comment;
+    }
 
     const handleCommentDeleted = (comment) => {
         setComments((prevComments) => {
@@ -86,16 +94,20 @@ function Comments({ articleId }) {
         return prevComments.map(c => {
             if (c._id === reply.commentId) {
                 const replies = c.replies ? c.replies.map(r => {
-                    if (r._id === reply._id) {
-                        return { ...r, deletedAt: new Date().toISOString() };
-                    }
-                    return r;
+                    return updateReplyById(r, reply)
                 }) : [];
                 return { ...c, replies };
             }
             return c;
         });
     };
+
+    const updateReplyById = (r, reply) => {
+        if (r._id === reply._id) {
+            return { ...r, deletedAt: new Date().toISOString() };
+        }
+        return r;
+    }
 
     const setDeletedDateForComment = (prevComments, comment) => {
         return prevComments.map(c => {
@@ -117,6 +129,7 @@ function Comments({ articleId }) {
                     ))}
                 </ul>
             </InfiniteScrollComponent>
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération des commentaires." onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

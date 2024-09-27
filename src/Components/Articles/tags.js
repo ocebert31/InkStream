@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
+import ErrorAlert from '../../Alert/error';
 
 function Tags({ value = [], onChange }) {
     const [tagInput, setTagInput] = useState('');
     const [tags, setTags] = useState(value || []);
+    const [showErrorAlert, setShowErrorAlert] = useState('');
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
             const trimmedInput = tagInput.trim();
-            if (trimmedInput !== '') {
-                return checkTag(trimmedInput);
-            }
+            checkInputNotEmpty(trimmedInput)
         }
     };
 
+    const checkInputNotEmpty = (trimmedInput) => {
+        if (trimmedInput !== '') {
+            return checkTag(trimmedInput);
+        }
+    }
+
     const checkTag = (trimmedInput) => {
         if (trimmedInput.length > 15) {
-            alert('Le tag ne doit pas dépasser 15 caractères');
+            setShowErrorAlert('Le tag ne doit pas dépasser 15 caractères');
         } else if (tags.length < 5) {
             return checkExistingTag(trimmedInput)
         } else {
-            alert('Vous pouvez ajouter seulement 5 tags');
+            setShowErrorAlert('Vous pouvez ajouter seulement 5 tags')
         }
     }
 
@@ -31,12 +37,8 @@ function Tags({ value = [], onChange }) {
             onChange(newTags);
             setTagInput('');
         } else {
-            alert('Votre tag existe déjà');
+            setShowErrorAlert('Votre tag existe déjà');
         }
-    }
-    
-    if (!tags) {
-        return null; 
     }
 
     const handleRemoveTag = (indexToRemove) => {
@@ -44,6 +46,10 @@ function Tags({ value = [], onChange }) {
         setTags(newTags);
         onChange(newTags); 
     };
+        
+    if (!tags) {
+        return null; 
+    }
 
     return (
         <div>
@@ -59,6 +65,7 @@ function Tags({ value = [], onChange }) {
                     <input type="text" value={tagInput} onChange={(e) => setTagInput(e.target.value)} onKeyDown={handleKeyDown} placeholder="Ajouter un tag" className="outline-none flex-grow text-sm"/>
                 )}
             </div>
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert('')}/>)}
         </div>
     );
 }

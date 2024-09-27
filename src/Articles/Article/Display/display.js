@@ -20,10 +20,6 @@ function Display({ article }) {
     const sanitizedContent = sanitizeHtml(article.content);
     const formattedDate = format(new Date(article.createdAt), 'MMM dd, yyyy');
 
-    if (!article.tags) {
-        return null; 
-    }
-
     return (
         <div>
             <div className='flex justify-center items-center'>
@@ -37,7 +33,7 @@ function Display({ article }) {
                 <p>{formattedDate}</p> 
             </div> 
             <div className='flex justify-start py-3'>
-                {article.tags.map((tag, index) => (
+                {article.tags && article.tags.map((tag, index) => (
                 <div key={index} className="flex items-center justify-center w-4/5 md:w-auto px-4 py-2 mr-4 text-xs md:text-sm font-medium text-white bg-primary rounded-3xl">{tag}</div>
                 ))}
             </div>

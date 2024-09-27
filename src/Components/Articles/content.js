@@ -1,7 +1,7 @@
-import React, { forwardRef, useState } from 'react';
+import React, { useState } from 'react';
 import Editor from 'react-simple-wysiwyg';
 
-function Content(props, ref) {
+function Content(props) {
     const { value, onChange, errorMessage } = props;
     const [html, setHtml] = useState(value);
 
@@ -19,6 +19,4 @@ function Content(props, ref) {
     );
 }
 
-const ForwardedContent = forwardRef(Content);
-
-export default ForwardedContent;
+export default Content;
