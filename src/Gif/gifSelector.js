@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { getGifs } from '../API/gif';
+import ErrorAlert from '../Alert/error';
 
 function Gifs({ onSelect }) {
     const [gifs, setGifs] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     useEffect(() => {
         if (search.length < 2) return;
-
         const loadGifs = async () => {
             setLoading(true);
             try {
                 const fetchedGifs = await getGifs(search);
                 setGifs(fetchedGifs);
-            } catch (error) {
-                console.error(error);
+            } catch {
+                setShowErrorAlert(true);
             } finally {
                 setLoading(false);
             }
@@ -39,6 +40,7 @@ function Gifs({ onSelect }) {
                     !loading && <p className="text-center text-gray-500">Aucun GIF trouvé</p>
                 )}
             </div>
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération des gifs" onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

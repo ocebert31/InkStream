@@ -4,10 +4,12 @@ import { useAuth } from '../AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons'; 
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
+import ErrorAlert from '../Alert/error';
 
 function Favorites({ article }) {
     const { token } = useAuth();
     const [favorite, setFavorite] = useState(article.favorite);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     useEffect(() => {
         setFavorite(article.favorite);
@@ -15,10 +17,10 @@ function Favorites({ article }) {
 
     const handleFavorite = async () => {
         try {
-            const result = await favoriteArticle(article._id, token);
+            const result = await favoriteArticle(article._id);
             setFavorite(result.favorite);
-        } catch (error) {
-            alert(error.message);
+        } catch {
+            setShowErrorAlert(true);
         }
     };
 
@@ -29,6 +31,7 @@ function Favorites({ article }) {
                     <FontAwesomeIcon className="text-2xl sm:text-3xl md:text-4xl" icon={favorite ? faStarSolid : faStarRegular} />
                 </button>
             )}    
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de l'ajout de l'article dans la liste des favoris" onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }
