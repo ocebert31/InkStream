@@ -3,89 +3,14 @@ import { vote } from '../../API/vote';
 import { useAuth } from "../../AuthContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHeartCrack, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import ErrorAlert from '../../Alert/error';
 
-function CommonVote({upvotes, downvotes, userVote, subject, setIsHidden, type}) {
+function Vote({upvotes, downvotes, userVote, subject, setIsHidden, type}) {
     const [upVotes, setupVotes] = useState(upvotes || 0);
     const [downVotes, setdownVotes] = useState(downvotes || 0);
     const [userVoteType, setUserVoteType] = useState(userVote ? userVote.voteType : null);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
     const { token } = useAuth();
-
-    const upVote = () => {
-        setupVotes(prevUpVotes => prevUpVotes + 1);
-        if (userVoteType === 'downvote') {
-            setdownVotes(prevDownVotes => prevDownVotes - 1);
-        }
-        setUserVoteType('upvote');
-        if (subject.vote && subject.vote.commentId) {
-            checkIfHidden(upVotes + 1, downVotes);
-        }
-    };
-    
-    const downVote = () => {
-        setdownVotes(prevDownVotes => prevDownVotes + 1);
-        if (userVoteType === 'upvote') {
-            setupVotes(prevUpVotes => prevUpVotes - 1);
-        }
-        setUserVoteType('downvote');
-        if (subject.vote && subject.vote.commentId) {
-            checkIfHidden(upVotes, downVotes + 1);
-        }
-    };
-    
-    const cancelUpVote = () => {
-        setupVotes(prevUpVotes => prevUpVotes - 1);
-        setUserVoteType(null);
-        if (subject.vote && subject.vote.commentId) {
-            checkIfHidden(upVotes - 1, downVotes);
-        }
-    };
-    
-    const cancelDownVote = () => {
-        setdownVotes(prevDownVotes => prevDownVotes - 1);
-        setUserVoteType(null);
-        if(subject.vote && subject.vote.commentId) {
-            checkIfHidden(upVotes, downVotes - 1);
-        }
-    };
-
-    const checkIfHidden = (upVotes, downVotes) => {
-        setIsHidden(downVotes >= 3 && downVotes > upVotes);
-    };
-
-    const onVoteDone = (voteType, voteResult) => {
-        console.log(voteResult)
-        if (voteResult.vote) {
-            if (voteType === 'upvote') {
-                upVote();
-            }
-            if (voteType === 'downvote') {
-                downVote();
-            }
-        } else {
-            if (voteType === 'upvote') {
-                cancelUpVote();
-            }
-            if (voteType === 'downvote') {
-                cancelDownVote();
-            }
-        }
-    };
-
-    const handleVote = async (voteType) => {
-        console.log(subject)
-        try {
-            if(type === 'article') {
-            const result = await vote({ articleId: subject._id, voteType }, token);
-            onVoteDone(voteType, result);
-            }
-            if(type === 'comment') {
-                const result = await vote({ commentId: subject._id, voteType }, token);
-                onVoteDone(voteType, result);
-            }
-        } catch (error) {
-            alert(error.message);
-        }
-    };
 
     useEffect(() => {
         if(subject) {
@@ -94,6 +19,84 @@ function CommonVote({upvotes, downvotes, userVote, subject, setIsHidden, type}) 
             setdownVotes(downvotes || 0);
         }
     }, [subject, downvotes, upvotes, userVote]);
+
+    const handleVote = async (voteType) => {
+        try {
+            voteForArticle(voteType);
+            voteForComment(voteType);
+        } catch {
+            setShowErrorAlert(true);
+        }
+    };
+
+    const voteForArticle = async (voteType) => {
+        if(type === 'article') {
+            const result = await vote({ articleId: subject._id, voteType }, token);
+            onVoteDone(voteType, result);
+        }
+    }
+
+    const voteForComment = async (voteType) => {
+        if(type === 'comment') {
+            const result = await vote({ commentId: subject._id, voteType }, token);
+            onVoteDone(voteType, result);
+        }
+    }
+
+    const onVoteDone = (voteType, voteResult) => {
+        if (voteResult.vote) {
+            onVoteSuccess(voteType);
+        } else {
+           onVoteCancel(voteType);
+        }
+    };
+
+    const onVoteSuccess = (voteType) => {
+        if (voteType === 'upvote') {
+            upVote();
+        }
+        if (voteType === 'downvote') {
+            downVote();
+        }
+    }
+
+    const onVoteCancel = (voteType) => {
+        if (voteType === 'upvote') {
+            cancelUpVote();
+        }
+        if (voteType === 'downvote') {
+            cancelDownVote();
+        }
+    }
+
+    const handleVoteChange = (voteType, deltaUp, deltaDown) => {
+        setupVotes(prevUpVotes => prevUpVotes + deltaUp);
+        setdownVotes(prevDownVotes => prevDownVotes + deltaDown);
+        setUserVoteType(voteType);
+        if (subject.vote && subject.vote.commentId) {
+            checkIfHidden(upVotes + deltaUp, downVotes + deltaDown);
+        }
+    };
+    
+    const upVote = () => {
+        handleVoteChange('upvote', 1, userVoteType === 'downvote' ? -1 : 0);
+    };
+    
+    const downVote = () => {
+        handleVoteChange('downvote', userVoteType === 'upvote' ? -1 : 0, 1);
+    };
+    
+    const cancelUpVote = () => {
+        handleVoteChange(null, -1, 0);
+    };
+    
+    const cancelDownVote = () => {
+        handleVoteChange(null, 0, -1);
+    };
+
+    const checkIfHidden = (upVotes, downVotes) => {
+        setIsHidden(downVotes >= 3 && downVotes > upVotes);
+    };
 
     return (
         <div className="flex items-center">
@@ -113,9 +116,10 @@ function CommonVote({upvotes, downvotes, userVote, subject, setIsHidden, type}) 
                 )}
                 <span className="ml-2">{downVotes}</span>
             </button>
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de la création du vote" onClose={() => setShowErrorAlert(false)}/>)}
         </div> 
     )
 }
 
-export default CommonVote;
+export default Vote;
 
