@@ -2,32 +2,18 @@ import { useAuth } from '../AuthContext';
 import AvatarEditor from '../Avatar/avatarEditor'; 
 import AvatarUser from '../Avatar/avatarUser';
 import React, { useState, useEffect } from 'react';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChangeEmail from './changeEmail';
 import ChangePassword from './changePassword';
+import defaultAvatarOptions from '../Avatar/defaultAvatarData';
 
 function Profile() {
     const { user, updateUser } = useAuth();
     const [showAvatarEditor, setShowAvatarEditor] = useState(false);
     const [avatarOptions, setAvatarOptions] = useState(null);
 
-
     const valueOfAvatarOptions = (user) => {
         if (!user || user.avatarOptions === undefined || (Object.keys(user.avatarOptions).length === 0)) {
-            return {
-                avatarStyle: 'Circle',
-                topType: 'ShortHairShortFlat',
-                accessoriesType: 'Prescription02',
-                hairColor: 'BrownDark',
-                facialHairType: 'BeardLight',
-                clotheType: 'Hoodie',
-                clotheColor: 'PastelBlue',
-                eyeType: 'Happy',
-                eyebrowType: 'Default',
-                mouthType: 'Smile',
-                skinColor: 'Light',
-            }
+            return defaultAvatarOptions;
         } else {
             return user.avatarOptions;
         }
@@ -64,16 +50,9 @@ function Profile() {
             {user.email}
             <div className="flex justify-center"> 
                 {showAvatarEditor ? (
-                    <div className="mt-6">
-                        <AvatarEditor avatarOptions={avatarOptions} onAvatarChange={handleAvatarChange} />
-                    </div>
+                    <AvatarEditor avatarOptions={avatarOptions} onAvatarChange={handleAvatarChange} />
                 ) : (
-                <div className="relative inline-block">
-                    <AvatarUser avatarOptions={avatarOptions} />
-                    <button className="absolute bottom-0 right-0 p-2 bg-secondary text-white rounded-full border-2 border-white hover:bg-primary transition-colors duration-300" onClick={toggleAvatarEditor}>
-                        <FontAwesomeIcon icon={faPen} />
-                    </button>
-                 </div>
+                    <AvatarUser avatarOptions={avatarOptions} toggleAvatarEditor={toggleAvatarEditor}/>
                 )}
             </div>
             <ChangeEmail></ChangeEmail>

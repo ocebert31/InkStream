@@ -17,7 +17,7 @@ function Favorites({ article }) {
 
     const handleFavorite = async () => {
         try {
-            const result = await favoriteArticle(article._id);
+            const result = await favoriteArticle(article._id, token);
             setFavorite(result.favorite);
         } catch {
             setShowErrorAlert(true);

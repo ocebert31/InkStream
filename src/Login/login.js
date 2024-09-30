@@ -25,7 +25,7 @@ function Login() {
             setTimeout(() => {
                 navigate('/');
             }, 2000);
-        } catch (error) {
+        } catch {
             setShowErrorAlert(true);
         }
     };

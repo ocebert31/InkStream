@@ -28,7 +28,7 @@ const AvatarEditor = ({ avatarOptions, onAvatarChange }) => {
     };
 
     return (
-        <div className="p-4 bg-white rounded-md shadow-md w-96">
+        <div className="mt-6 p-4 bg-white rounded-md shadow-md w-96">
             <div className="flex items-center justify-center mb-4">
                 <Avatar {...localAvatarOptions} />
             </div>
