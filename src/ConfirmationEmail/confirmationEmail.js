@@ -3,11 +3,13 @@ import { useParams, Link } from 'react-router-dom';
 import { postConfirmation } from '../API/authentification';
 import { useAuth } from '../AuthContext';
 import './confirmationEmail.css';
+import ErrorAlert from '../Alert/error';
 
 function ConfirmationEmail ({ isEmailUpdate = false }) {
     const { token } = useParams();
     const { updateUser } = useAuth();
     const [isConfirmed, setIsConfirmed] = useState(null);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     useEffect(() => {
         const confirmEmail = async () => {
@@ -19,6 +21,7 @@ function ConfirmationEmail ({ isEmailUpdate = false }) {
                 setIsConfirmed(true);
             } catch (error) {
                 setIsConfirmed(false);
+                setShowErrorAlert(true)
             }
         };
         confirmEmail();
@@ -59,6 +62,7 @@ function ConfirmationEmail ({ isEmailUpdate = false }) {
             <div className={`${isConfirmed === null ? '' : 'bg-white shadow-lg'} p-8 rounded-lg text-center max-w-md style-p`}>
                 {renderContent()}
             </div>
+            {showErrorAlert && (<ErrorAlert message="Erreur lors de la confirmation d'email" onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 };
