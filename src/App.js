@@ -1,5 +1,5 @@
 import './App.css';
-import Router from './Route/router';
+import Router from './routes/RouterComponent';
 import Header from './Header/header';
 import Footer from './Footer/footer';
 

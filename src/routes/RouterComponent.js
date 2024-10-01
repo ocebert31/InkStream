@@ -13,8 +13,8 @@ import RecoveryPassword from '../ResetPassword/resetPassword.js';
 import ChangePassword from '../ResetPassword/formResetPassword.js';
 import Dashboard from '../Dashboard/dashboard.js';
 import { getUserData } from '../services/authenticationService.js';
-import RoleRoute from './roleRoute.js';
-import AuthenticatedRoute  from './authenticatedRoute.js';
+import RoleRoute from './role.js';
+import AuthenticatedRoute  from './autrh.js';
 import ErrorAlert from '../Alert/error.js';
 
 function RouterComponent() {
