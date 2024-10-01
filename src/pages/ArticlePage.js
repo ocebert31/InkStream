@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getOneArticle } from '../services/articleService';
 import { useParams } from 'react-router-dom';
-import Delete from '../Articles/Article/Button/delete';
-import Edit from '../Articles/Article/Button/edit';
-import ArticleDisplay from '../Articles/Article/Display/display';
-import ArticleEdition from '../Articles/Article/Edition/edition';
+import Delete from '../components/Article/ManagementArticle/DeleteButtonArticle';
+import Edit from '../components/Article/ManagementArticle/EditButtonArticle';
+import ArticleDisplay from '../components/Article/DisplayArticle/ContentArticle';
+import ArticleEdition from '../components/Article/ManagementArticle/EditFormArticle';
 import { useAuth } from "../context/AuthContext";
 import Comments from '../Comments/comments';
 import ErrorAlert from '../components/Notifications/ErrorAlert';

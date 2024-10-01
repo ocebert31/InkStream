@@ -2,8 +2,8 @@ import React from 'react';
 import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import './card.css';
-import Audio from '../Audio/audio';
+import './CardArticle.css';
+import Audio from '../AudioArticle';
 
 function Card({ article }) {
     const formattedDate = format(new Date(article.createdAt), 'd MMMM yyyy')

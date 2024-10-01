@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { deleteArticle } from '../../../services/articleService'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from "./../../../context/AuthContext";
-import ErrorAlert from '../../../components/Notifications/ErrorAlert';
+import { useAuth } from "../../../context/AuthContext";
+import ErrorAlert from '../../Notifications/ErrorAlert';
 
 function Delete({ id }) {
     const navigate = useNavigate();

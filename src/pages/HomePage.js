@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getArticles } from '../services/articleService';
-import Card from '../Articles/Card/card';
-import Search from '../Articles/Search/search';
+import Card from '../components/Article/DisplayArticle/CardArticle.js';
+import Search from '../common/Articles/SearchBar.js';
 import './HomePage.css';
 import { useAuth } from '../context/AuthContext';
-import Filter from '../Articles/Filter/filter';
-import InfiniteScrollComponent from '../common/UI/infiniteScroll';
+import Filter from '../components/Article/FilterArticle.js';
+import InfiniteScrollComponent from '../common/UI/InfiniteScroll.js';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function Articles({ type }) {

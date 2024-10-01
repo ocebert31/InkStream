@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import parse from 'html-react-parser';
 import { format } from 'date-fns';
-import './display.css';
-import Favorites from '../../../Favorites/favorites';
-import Share from '../../Share/share';
+import './ContentArticle.css';
+import Favorites from '../ManagementArticle/favoriteButtonArticle';
+import Share from '../ManagementArticle/ShareArticle';
 import Vote from '../../../common/Votes/Vote';
 
 function Display({ article }) {

@@ -6,11 +6,11 @@ import Title from '../../../common/Articles/TitleInput';
 import Content from '../../../common/Articles/ContentEditor';
 import Image from '../../../common/Articles/ImageUploader';
 import { useAuth } from "../../../context/AuthContext";
-import './edition.css';
+import './EditFormArticle.css';
 import Tags from '../../../common/Articles/TagManager';
 import Categories from '../../../common/Articles/CategorySelector';
 import EditActions from '../../../common/UI/EditActions';
-import ErrorAlert from '../../../components/Notifications/ErrorAlert';
+import ErrorAlert from '../../Notifications/ErrorAlert';
 
 function Edition({ article, setArticle, cancelEdit }) {
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { title: article.title, content: article.content, tags: article.tags, categoryId: article.categoryId ,image: null } });
