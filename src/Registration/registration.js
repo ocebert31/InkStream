@@ -4,8 +4,8 @@ import Email from '../common/Users/EmailInput';
 import Password from '../common/Users/EmailInput';
 import './registration.css';
 import { Link } from 'react-router-dom';
-import Success from '../Alert/success';
-import Error from '../Alert/error';
+import Success from '../components/Notifications/SuccessAlert';
+import Error from '../components/Notifications/ErrorAlert';
 import React, { useState } from 'react';
 import ConfirmPassword from '../common/Users/ConfirmPasswordInput';
 

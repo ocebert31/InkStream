@@ -5,7 +5,7 @@ import New from './Comment/New/new';
 import { useAuth } from '../context/AuthContext';
 import defaultAvatarData from '../utils/constants/defaultAvatarOptions';
 import InfiniteScrollComponent from '../common/UI/infiniteScroll';
-import ErrorAlert from '../Alert/error';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function Comments({ articleId }) {
     const [comments, setComments] = useState([]);

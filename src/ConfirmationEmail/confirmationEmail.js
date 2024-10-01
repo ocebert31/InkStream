@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { postConfirmation } from '../services/authenticationService';
 import { useAuth } from '../context/AuthContext';
 import './confirmationEmail.css';
-import ErrorAlert from '../Alert/error';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function ConfirmationEmail ({ isEmailUpdate = false }) {
     const { token } = useParams();

@@ -3,7 +3,7 @@ import { createCategories } from '../../services/categoryService';
 import { useAuth } from '../../context/AuthContext';
 import { useForm, Controller } from 'react-hook-form';
 import Name from './name';
-import ErrorAlert from '../../Alert/error';
+import ErrorAlert from '../../components/Notifications/ErrorAlert';
 
 function New({handleCategoryAdded}) {
     const { control, handleSubmit, reset, formState: { errors } } = useForm();

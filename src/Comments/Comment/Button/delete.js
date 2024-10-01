@@ -3,7 +3,7 @@ import { deleteComment } from '../../../services/commentService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../../context/AuthContext";
-import ErrorAlert from '../../../Alert/error';
+import ErrorAlert from '../../../components/Notifications/ErrorAlert';
 
 function Delete({ handleCommentDeleted, comment }) {
     const { token } = useAuth();

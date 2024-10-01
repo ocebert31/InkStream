@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ErrorAlert from '../../Alert/error';
+import ErrorAlert from '../../components/Notifications/ErrorAlert';
 
 function Image(props) {
     const { onChange } = props;

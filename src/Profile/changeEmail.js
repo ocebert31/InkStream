@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 import Email from '../common/Users/EmailInput';
 import { useAuth } from '../context/AuthContext';
 import Password from '../common/Users/PasswordInput';
-import SuccessAlert from '../Alert/success';
-import ErrorAlert from '../Alert/error';
+import SuccessAlert from '../components/Notifications/SuccessAlert';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function ChangeEmail() {
     const [showSuccessAlert, setShowSuccessAlert] = useState('');

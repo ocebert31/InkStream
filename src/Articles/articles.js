@@ -6,7 +6,7 @@ import './articles.css';
 import { useAuth } from '../context/AuthContext';
 import Filter from './Filter/filter';
 import InfiniteScrollComponent from '../common/UI/infiniteScroll';
-import ErrorAlert from '../Alert/error';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function Articles({ type }) {
     const { token } = useAuth();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getCategories } from '../../services/categoryService';
-import ErrorAlert from '../../Alert/error';
+import ErrorAlert from '../../components/Notifications/ErrorAlert';
 
 function Categories(props) {
     const { value, onChange } = props;

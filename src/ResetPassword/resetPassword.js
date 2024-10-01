@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Email from '../common/Users/EmailInput';
 import { forgotPassword } from '../services/authenticationService';
-import SuccessAlert from '../Alert/success';
-import ErrorAlert from '../Alert/error';
+import SuccessAlert from '../components/Notifications/SuccessAlert';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function ResetPassword() {
     const [showSuccessAlert, setShowSuccessAlert] = useState('');

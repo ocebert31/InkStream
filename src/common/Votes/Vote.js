@@ -3,7 +3,7 @@ import { vote } from '../../services/voteService';
 import { useAuth } from "../../context/AuthContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHeartCrack, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-import ErrorAlert from '../../Alert/error';
+import ErrorAlert from '../../components/Notifications/ErrorAlert';
 
 function Vote({upvotes, downvotes, userVote, subject, setIsHidden, type}) {
     const [upVotes, setupVotes] = useState(upvotes || 0);

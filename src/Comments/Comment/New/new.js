@@ -4,7 +4,7 @@ import { postComment } from '../../../services/commentService';
 import { useAuth } from '../../../context/AuthContext';
 import Form from './form';
 import GifSelector from '../../../Gif/gifSelector';
-import ErrorAlert from '../../../Alert/error';
+import ErrorAlert from '../../../components/Notifications/ErrorAlert';
 
 function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeForm}) {
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm();

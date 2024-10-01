@@ -15,7 +15,7 @@ import Dashboard from '../Dashboard/dashboard.js';
 import { getUserData } from '../services/authenticationService.js';
 import RoleRoute from './RoleRoute.js';
 import AuthenticatedRoute  from './AuthenticatedRoute.js';
-import ErrorAlert from '../Alert/error.js';
+import ErrorAlert from '../components/Notifications/ErrorAlert.js';
 
 function RouterComponent() {
     const location = useLocation();

@@ -6,7 +6,7 @@ import Delete from './Delete/delete';
 import Edit from './Edit/edit';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ErrorAlert from '../Alert/error';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function CategoryList() {
     const { token } = useAuth();

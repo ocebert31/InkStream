@@ -4,7 +4,7 @@ import { updateAvatarOptions } from '../services/authenticationService';
 import { useAuth } from '../context/AuthContext';
 import Select from './selectAvatar';
 import avatarOptionsData from '../utils/constants/avatarCustomizationOptions';
-import ErrorAlert from '../Alert/error';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 const AvatarEditor = ({ avatarOptions, onAvatarChange }) => {
     const [localAvatarOptions, setLocalAvatarOptions] = useState(avatarOptions);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getGifs } from '../services/gifService';
-import ErrorAlert from '../Alert/error';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function Gifs({ onSelect }) {
     const [gifs, setGifs] = useState([]);

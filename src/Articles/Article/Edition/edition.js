@@ -10,7 +10,7 @@ import './edition.css';
 import Tags from '../../../common/Articles/TagManager';
 import Categories from '../../../common/Articles/CategorySelector';
 import EditActions from '../../../common/UI/EditActions';
-import ErrorAlert from '../../../Alert/error';
+import ErrorAlert from '../../../components/Notifications/ErrorAlert';
 
 function Edition({ article, setArticle, cancelEdit }) {
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { title: article.title, content: article.content, tags: article.tags, categoryId: article.categoryId ,image: null } });

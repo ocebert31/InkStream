@@ -7,7 +7,7 @@ import ArticleDisplay from '../Article/Display/display';
 import ArticleEdition from './Edition/edition';
 import { useAuth } from "../../context/AuthContext";
 import Comments from '../../Comments/comments';
-import ErrorAlert from '../../Alert/error';
+import ErrorAlert from '../../components/Notifications/ErrorAlert';
 
 function Article() {
     const [article, setArticle] = useState(null);

@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../../context/AuthContext';
 import Content from '../../../common/Comments/ContentInput';
 import EditActions from '../../../common/UI/EditActions';
-import ErrorAlert from '../../../Alert/error';
+import ErrorAlert from '../../../components/Notifications/ErrorAlert';
 
 function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
     const { token } = useAuth(); 

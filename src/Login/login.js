@@ -7,8 +7,8 @@ import Password from '../common/Users/PasswordInput';
 import { useAuth } from '../context/AuthContext';
 import './login.css';
 import React, { useState } from 'react';
-import Success from '../Alert/success';
-import Error from '../Alert/error';
+import Success from '../components/Notifications/SuccessAlert';
+import Error from '../components/Notifications/ErrorAlert';
 
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();

@@ -6,8 +6,8 @@ import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import Password from '../common/Users/PasswordInput';
 import { useForm } from 'react-hook-form';
 import ConfirmPassword from '../common/Users/ConfirmPasswordInput';
-import SuccessAlert from '../Alert/success';
-import ErrorAlert from '../Alert/error';
+import SuccessAlert from '../components/Notifications/SuccessAlert';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function ChangePassword() {
     const { token } = useAuth();

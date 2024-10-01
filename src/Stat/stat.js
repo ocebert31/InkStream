@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllStat } from '../services/statisticService'; 
 import { useAuth } from "../context/AuthContext"; 
-import ErrorAlert from '../Alert/error';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function Statistiques() {
     const [stats, setStats] = useState(null);

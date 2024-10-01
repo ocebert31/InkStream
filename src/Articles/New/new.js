@@ -10,7 +10,7 @@ import { useAuth } from "../../context/AuthContext";
 import './new.css';
 import Tags from '../../common/Articles/TagManager';
 import Categories from '../../common/Articles/CategorySelector';
-import ErrorAlert from '../../Alert/error';
+import ErrorAlert from '../../components/Notifications/ErrorAlert';
 
 function New() {
     const { control, handleSubmit, formState: { errors } } = useForm();

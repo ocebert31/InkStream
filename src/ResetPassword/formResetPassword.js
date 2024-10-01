@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import Password from '../common/Users/PasswordInput';
 import ConfirmPassword from '../common/Users/ConfirmPasswordInput';
-import SuccessAlert from '../Alert/success';
-import ErrorAlert from '../Alert/error';
+import SuccessAlert from '../components/Notifications/SuccessAlert';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function FormRecoveryPassword() {
     const [showSuccessAlert, setShowSuccessAlert] = useState('');

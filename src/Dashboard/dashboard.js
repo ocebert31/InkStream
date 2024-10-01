@@ -5,7 +5,7 @@ import InfiniteScrollComponent from '../common/UI/infiniteScroll';
 import Search from '../Articles/Search/search';
 import CategoryList from '../Categories/categoryList';
 import Stat from '../Stat/stat';
-import ErrorAlert from '../Alert/error';
+import ErrorAlert from '../components/Notifications/ErrorAlert';
 import tabs from '../utils/constants/tabs';
 
 function UsersList() {
