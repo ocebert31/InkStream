@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import './display.css';
 import Favorites from '../../../Favorites/favorites';
 import Share from '../../Share/share';
-import Vote from '../../../Components/Votes/vote';
+import Vote from '../../../common/Votes/Vote';
 
 function Display({ article }) {
     const [articleState, setArticleState] = useState(article || {});

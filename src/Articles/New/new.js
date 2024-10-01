@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { createArticles } from '../../services/articleService';
-import Title from '../../Components/Articles/title';
-import Content from '../../Components/Articles/content';
-import Image from '../../Components/Articles/image';
+import Title from '../../common/Articles/TitleInput';
+import Content from '../../common/Articles/ContentEditor';
+import Image from '../../common/Articles/ImageUploader';
 import { buildFormData } from '../../utils/constants/formDataBuilder';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../context/AuthContext";
 import './new.css';
-import Tags from '../../Components/Articles/tags';
-import Categories from '../../Components/Articles/categories';
+import Tags from '../../common/Articles/TagManager';
+import Categories from '../../common/Articles/CategorySelector';
 import ErrorAlert from '../../Alert/error';
 
 function New() {

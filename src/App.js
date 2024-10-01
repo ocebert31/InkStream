@@ -1,7 +1,7 @@
 import './App.css';
-import Router from './routes/vdsRouterComponent';
-import Header from './Header/header';
-import Footer from './Footer/footer';
+import Router from './routes/RouterComponent';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (

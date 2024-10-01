@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import { updateCategory } from '../../services/categoryService';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../context/AuthContext';
-import Content from '../../Components/Comments/content';
-import EditActions from '../../Components/editActions';
+import Content from '../../common/Comments/ContentInput';
+import EditActions from '../../common/UI/EditActions';
 import ErrorAlert from '../../Alert/error';
 
 function Edit({ category, handleCategoryUpdated, editCategory }) {

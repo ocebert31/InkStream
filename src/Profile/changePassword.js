@@ -3,9 +3,9 @@ import { useAuth } from '../context/AuthContext';
 import { updatePassword } from '../services/authenticationService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
-import Password from '../Components/Users/password';
+import Password from '../common/Users/PasswordInput';
 import { useForm } from 'react-hook-form';
-import ConfirmPassword from '../Components/Users/confirmPassword';
+import ConfirmPassword from '../common/Users/ConfirmPasswordInput';
 import SuccessAlert from '../Alert/success';
 import ErrorAlert from '../Alert/error';
 

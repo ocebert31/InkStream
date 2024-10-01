@@ -1,6 +1,6 @@
 import Edit from '../Button/edit';
 import Delete from "../Button/delete";
-import CommonVote from '../../../Components/Votes/vote';
+import CommonVote from '../../../common/Votes/Vote';
 import { useAuth } from "../../../context/AuthContext";
 
 function CommentActions({comment, commentState, isEditing, setIsEditing, setIsHidden, content, setContent, handleCommentDeleted}) {

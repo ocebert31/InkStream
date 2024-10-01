@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getUsers, updateUserRole } from '../services/adminService'; 
 import { useAuth } from "../context/AuthContext";
-import InfiniteScrollComponent from '../Components/infiniteScroll';
+import InfiniteScrollComponent from '../common/UI/infiniteScroll';
 import Search from '../Articles/Search/search';
 import CategoryList from '../Categories/categoryList';
 import Stat from '../Stat/stat';

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import logo from '../assets/logo.png';
+import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars} from '@fortawesome/free-solid-svg-icons';
-import './header.css';
-import Menu from './menu';
+import './Header.css';
+import Menu from './SideBarMenu';
 
 function Header() {
     const { token, logout } = useAuth();

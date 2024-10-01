@@ -5,7 +5,7 @@ import Search from './Search/search';
 import './articles.css';
 import { useAuth } from '../context/AuthContext';
 import Filter from './Filter/filter';
-import InfiniteScrollComponent from '../Components/infiniteScroll';
+import InfiniteScrollComponent from '../common/UI/infiniteScroll';
 import ErrorAlert from '../Alert/error';
 
 function Articles({ type }) {

@@ -4,7 +4,7 @@ import Comment from './Comment/comment';
 import New from './Comment/New/new';
 import { useAuth } from '../context/AuthContext';
 import defaultAvatarData from '../utils/constants/defaultAvatarOptions';
-import InfiniteScrollComponent from '../Components/infiniteScroll';
+import InfiniteScrollComponent from '../common/UI/infiniteScroll';
 import ErrorAlert from '../Alert/error';
 
 function Comments({ articleId }) {

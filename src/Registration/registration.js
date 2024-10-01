@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { postInscription } from '../services/authenticationService';
-import Email from '../Components/Users/email';
-import Password from '../Components/Users/password';
+import Email from '../common/Users/EmailInput';
+import Password from '../common/Users/EmailInput';
 import './registration.css';
 import { Link } from 'react-router-dom';
 import Success from '../Alert/success';
 import Error from '../Alert/error';
 import React, { useState } from 'react';
-import ConfirmPassword from '../Components/Users/confirmPassword';
+import ConfirmPassword from '../common/Users/ConfirmPasswordInput';
 
 function Registration() {
     const { register, handleSubmit, formState: { errors }, getValues } = useForm();
