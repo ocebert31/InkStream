@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
 import Email from '../Components/Users/email';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../context/AuthContext';
 import Password from '../Components/Users/password';
 import SuccessAlert from '../Alert/success';
 import ErrorAlert from '../Alert/error';

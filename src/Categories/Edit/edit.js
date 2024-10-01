@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { updateCategory } from '../../services/categoryService';
 import { useForm, Controller } from 'react-hook-form';
-import { useAuth } from '../../AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import Content from '../../Components/Comments/content';
 import EditActions from '../../Components/editActions';
 import ErrorAlert from '../../Alert/error';

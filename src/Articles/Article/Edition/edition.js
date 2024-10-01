@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { updateArticle } from '../../../services/articleService';
-import { buildFormData } from '../../../Components/buildFormData';
+import { buildFormData } from '../../../utils/constants/formDataBuilder';
 import Title from '../../../Components/Articles/title';
 import Content from '../../../Components/Articles/content';
 import Image from '../../../Components/Articles/image';
-import { useAuth } from "../../../AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 import './edition.css';
 import Tags from '../../../Components/Articles/tags';
 import Categories from '../../../Components/Articles/categories';

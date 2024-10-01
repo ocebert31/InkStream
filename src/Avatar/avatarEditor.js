@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Avatar from 'avataaars';
 import { updateAvatarOptions } from '../services/authenticationService';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../context/AuthContext';
 import Select from './selectAvatar';
-import avatarOptionsData from './avatarOptionsData';
+import avatarOptionsData from '../utils/constants/avatarCustomizationOptions';
 import ErrorAlert from '../Alert/error';
 
 const AvatarEditor = ({ avatarOptions, onAvatarChange }) => {

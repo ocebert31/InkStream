@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { deleteArticle } from '../../../services/articleService'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from "../../../AuthContext";
+import { useAuth } from "./../../../context/AuthContext";
 import ErrorAlert from '../../../Alert/error';
 
 function Delete({ id }) {

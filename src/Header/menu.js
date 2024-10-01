@@ -1,7 +1,7 @@
 import { faGear, faPenToSquare, faStar, faSignOutAlt, faHouse, faTableColumns } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 function Menu ({ onClose, onLogout }) {
     const { user } = useAuth();

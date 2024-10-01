@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { favoriteArticle } from '../services/favoritesService'; 
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons'; 
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';

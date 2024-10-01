@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useAuth } from '../AuthContext.js';
+import { useAuth } from '../context/AuthContext.js';
 import { Routes, Route } from 'react-router-dom';
 import Articles from '../Articles/articles.js';
 import NewArticle from '../Articles/New/new.js';

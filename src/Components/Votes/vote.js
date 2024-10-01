@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { vote } from '../../services/voteService'; 
-import { useAuth } from "../../AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHeartCrack, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import ErrorAlert from '../../Alert/error';

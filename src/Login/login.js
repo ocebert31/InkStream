@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import '../Registration/registration.css';
 import Email from '../Components/Users/email';
 import Password from '../Components/Users/password';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../context/AuthContext';
 import './login.css';
 import React, { useState } from 'react';
 import Success from '../Alert/success';

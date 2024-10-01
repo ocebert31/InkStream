@@ -1,6 +1,6 @@
 import React , {useState} from 'react';
 import { createCategories } from '../../services/categoryService';
-import { useAuth } from '../../AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { useForm, Controller } from 'react-hook-form';
 import Name from './name';
 import ErrorAlert from '../../Alert/error';

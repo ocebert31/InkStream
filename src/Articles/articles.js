@@ -3,7 +3,7 @@ import { getArticles } from '../services/articleService';
 import Card from './Card/card';
 import Search from './Search/search';
 import './articles.css';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../context/AuthContext';
 import Filter from './Filter/filter';
 import InfiniteScrollComponent from '../Components/infiniteScroll';
 import ErrorAlert from '../Alert/error';

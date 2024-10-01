@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {getCategories} from '../services/categoryService';
-import { useAuth } from '../AuthContext'
+import { useAuth } from '../context/AuthContext'
 import New from './New/new';
 import Delete from './Delete/delete';
 import Edit from './Edit/edit';

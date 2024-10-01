@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getUsers, updateUserRole } from '../services/adminService'; 
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../context/AuthContext";
 import InfiniteScrollComponent from '../Components/infiniteScroll';
 import Search from '../Articles/Search/search';
 import CategoryList from '../Categories/categoryList';
 import Stat from '../Stat/stat';
 import ErrorAlert from '../Alert/error';
-import tabs from './tabs';
+import tabs from '../utils/constants/tabs';
 
 function UsersList() {
     const [users, setUsers] = useState([]);

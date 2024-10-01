@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { postComment } from '../../../services/commentService'; 
-import { useAuth } from '../../../AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import Form from './form';
 import GifSelector from '../../../Gif/gifSelector';
 import ErrorAlert from '../../../Alert/error';

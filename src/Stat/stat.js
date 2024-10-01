@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllStat } from '../services/statisticService'; 
-import { useAuth } from "../AuthContext"; 
+import { useAuth } from "../context/AuthContext"; 
 import ErrorAlert from '../Alert/error';
 
 function Statistiques() {

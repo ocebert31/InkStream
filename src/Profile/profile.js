@@ -1,10 +1,10 @@
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../context/AuthContext';
 import AvatarEditor from '../Avatar/avatarEditor'; 
 import AvatarUser from '../Avatar/avatarUser';
 import React, { useState, useEffect } from 'react';
 import ChangeEmail from './changeEmail';
 import ChangePassword from './changePassword';
-import defaultAvatarOptions from '../Avatar/defaultAvatarData';
+import defaultAvatarOptions from '../utils/constants/defaultAvatarOptions';
 
 function Profile() {
     const { user, updateUser } = useAuth();
