@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { postInscription } from '../services/authenticationService';
 import Email from '../common/Users/EmailInput';
 import Password from '../common/Users/EmailInput';
-import './registration.css';
+import './RegisterPage.css';
 import { Link } from 'react-router-dom';
 import Success from '../components/Notifications/SuccessAlert';
 import Error from '../components/Notifications/ErrorAlert';

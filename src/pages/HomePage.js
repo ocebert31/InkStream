@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getArticles } from '../services/articleService';
-import Card from './Card/card';
-import Search from './Search/search';
-import './articles.css';
+import Card from '../Articles/Card/card';
+import Search from '../Articles/Search/search';
+import './HomePage.css';
 import { useAuth } from '../context/AuthContext';
-import Filter from './Filter/filter';
+import Filter from '../Articles/Filter/filter';
 import InfiniteScrollComponent from '../common/UI/infiniteScroll';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 

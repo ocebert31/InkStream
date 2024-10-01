@@ -1,11 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { postSession } from '../services/authenticationService';
 import { useNavigate, Link } from 'react-router-dom';
-import '../Registration/registration.css';
 import Email from '../common/Users/EmailInput';
 import Password from '../common/Users/PasswordInput';
 import { useAuth } from '../context/AuthContext';
-import './login.css';
+import './LoginPage.css';
 import React, { useState } from 'react';
 import Success from '../components/Notifications/SuccessAlert';
 import Error from '../components/Notifications/ErrorAlert';

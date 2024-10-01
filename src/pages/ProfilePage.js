@@ -2,8 +2,8 @@ import { useAuth } from '../context/AuthContext';
 import AvatarEditor from '../Avatar/avatarEditor'; 
 import AvatarUser from '../Avatar/avatarUser';
 import React, { useState, useEffect } from 'react';
-import ChangeEmail from './changeEmail';
-import ChangePassword from './changePassword';
+import ChangeEmail from '../Profile/changeEmail';
+import ChangePassword from '../Profile/changePassword';
 import defaultAvatarOptions from '../utils/constants/defaultAvatarOptions';
 
 function Profile() {

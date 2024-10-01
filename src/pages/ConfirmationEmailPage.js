@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { postConfirmation } from '../services/authenticationService';
 import { useAuth } from '../context/AuthContext';
-import './confirmationEmail.css';
+import './ConfirmationEmailPage.css';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function ConfirmationEmail ({ isEmailUpdate = false }) {
