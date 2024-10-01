@@ -1,5 +1,5 @@
 import './App.css';
-import Router from './routes/RouterComponent';
+import Router from './routes/vdsRouterComponent';
 import Header from './Header/header';
 import Footer from './Footer/footer';
 
