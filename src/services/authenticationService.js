@@ -1,4 +1,4 @@
-import { fetchRequest } from "./fetchRequest";
+import { fetchRequest } from "./apiRequest";
 
 async function postInscription(data) {
     return fetchRequest(`/auth/registration`, { method: 'POST', body: data });

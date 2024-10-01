@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getComments } from '../API/comment';
+import { getComments } from '../services/commentService';
 import Comment from './Comment/comment';
 import New from './Comment/New/new';
 import { useAuth } from '../AuthContext';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getArticles } from '../API/article';
+import { getArticles } from '../services/articleService';
 import Card from './Card/card';
 import Search from './Search/search';
 import './articles.css';

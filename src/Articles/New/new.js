@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { createArticles } from '../../API/article';
+import { createArticles } from '../../services/articleService';
 import Title from '../../Components/Articles/title';
 import Content from '../../Components/Articles/content';
 import Image from '../../Components/Articles/image';

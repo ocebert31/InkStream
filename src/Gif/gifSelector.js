@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getGifs } from '../API/gif';
+import { getGifs } from '../services/gifService';
 import ErrorAlert from '../Alert/error';
 
 function Gifs({ onSelect }) {

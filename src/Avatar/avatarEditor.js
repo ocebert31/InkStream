@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Avatar from 'avataaars';
-import { updateAvatarOptions } from '../API/authentification';
+import { updateAvatarOptions } from '../services/authenticationService';
 import { useAuth } from '../AuthContext';
 import Select from './selectAvatar';
 import avatarOptionsData from './avatarOptionsData';

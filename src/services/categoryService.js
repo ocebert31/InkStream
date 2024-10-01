@@ -1,4 +1,4 @@
-import { fetchRequest } from "./fetchRequest";
+import { fetchRequest } from "./apiRequest";
 
 async function createCategories(data, token) {
     return fetchRequest(`/categories`, { method: 'POST', body: data, token });

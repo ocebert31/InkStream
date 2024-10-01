@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { deleteComment } from '../../../API/comment'; 
+import { deleteComment } from '../../../services/commentService'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../../AuthContext";

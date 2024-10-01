@@ -1,4 +1,4 @@
-import { fetchRequest } from "./fetchRequest";
+import { fetchRequest } from "./apiRequest";
 
 async function getUsers(searchQuery = '', page = 1, limit = 10, token = null) {
     const params = new URLSearchParams({ searchQuery, page, limit}).toString();

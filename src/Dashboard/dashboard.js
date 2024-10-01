@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUsers, updateUserRole } from '../API/admin'; 
+import { getUsers, updateUserRole } from '../services/adminService'; 
 import { useAuth } from "../AuthContext";
 import InfiniteScrollComponent from '../Components/infiniteScroll';
 import Search from '../Articles/Search/search';

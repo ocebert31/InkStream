@@ -1,4 +1,4 @@
-import { fetchRequest } from "./fetchRequest";
+import { fetchRequest } from "./apiRequest";
 
 async function getArticles(searchQuery = '', page = 1, limit = 20, type = 'all', token = null, categoryId = null) {
     const params = new URLSearchParams({ searchQuery, page, limit, type, categoryId }).toString();

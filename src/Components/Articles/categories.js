@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getCategories } from '../../API/categories';
+import { getCategories } from '../../services/categoryService';
 import ErrorAlert from '../../Alert/error';
 
 function Categories(props) {

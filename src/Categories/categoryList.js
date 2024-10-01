@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {getCategories} from '../API/categories';
+import {getCategories} from '../services/categoryService';
 import { useAuth } from '../AuthContext'
 import New from './New/new';
 import Delete from './Delete/delete';

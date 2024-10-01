@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { updateEmail } from '../API/authentification';
+import { updateEmail } from '../services/authenticationService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';

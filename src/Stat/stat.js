@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllStat } from '../API/stat'; 
+import { getAllStat } from '../services/statisticService'; 
 import { useAuth } from "../AuthContext"; 
 import ErrorAlert from '../Alert/error';
 

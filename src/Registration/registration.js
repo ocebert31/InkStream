@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { postInscription } from '../API/authentification';
+import { postInscription } from '../services/authenticationService';
 import Email from '../Components/Users/email';
 import Password from '../Components/Users/password';
 import './registration.css';

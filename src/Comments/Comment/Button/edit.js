@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { updateComment } from '../../../API/comment';
+import { updateComment } from '../../../services/commentService';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../../AuthContext';
 import Content from '../../../Components/Comments/content';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { postResetPassword } from '../API/authentification';
+import { postResetPassword } from '../services/authenticationService';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import Password from '../Components/Users/password';

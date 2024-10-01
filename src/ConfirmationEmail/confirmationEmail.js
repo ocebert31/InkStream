@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { postConfirmation } from '../API/authentification';
+import { postConfirmation } from '../services/authenticationService';
 import { useAuth } from '../AuthContext';
 import './confirmationEmail.css';
 import ErrorAlert from '../Alert/error';

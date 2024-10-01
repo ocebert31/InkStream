@@ -1,4 +1,4 @@
-import { fetchRequest } from "./fetchRequest";
+import { fetchRequest } from "./apiRequest";
 
 async function postComment(content, articleId, commentId, token) {
     return fetchRequest(`/comments`, { method: 'POST', body: {content, articleId, commentId}, token });
