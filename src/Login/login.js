@@ -14,19 +14,19 @@ function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const { login } = useAuth();
-    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showSuccessAlert, setShowSuccessAlert] = useState("");
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     const onSubmit = async (data) => {
         try {
             const { user, token } = await postSession(data);
             login(user, token);
-            setShowSuccessAlert(true);
+            setShowSuccessAlert("Vous êtes désormais connectés");
             setTimeout(() => {
                 navigate('/');
             }, 2000);
         } catch {
-            setShowErrorAlert(true);
+            setShowErrorAlert("Erreur lors de la connexion");
         }
     };
 
@@ -45,8 +45,8 @@ function Login() {
                 </form>
          
             </div>
-            {showSuccessAlert && (<Success message="Vous êtes désormais connectés" onClose={() => setShowSuccessAlert(false)}/>)}
-            {showErrorAlert && (<Error message="Erreur lors de la connexion" onClose={() => setShowErrorAlert(false)}/>)}
+            {showSuccessAlert && (<Success message={showSuccessAlert} onClose={() => setShowSuccessAlert(false)}/>)}
+            {showErrorAlert && (<Error message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

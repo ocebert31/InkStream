@@ -1,33 +1,7 @@
-.style-title-sign-in {
-    text-align: center;
-}
-
-.alignement {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .style-form {
     display: flex;
     flex-direction: column;
     width: 300px;
-}
-
-.style-formulaire {
-    padding: 10px
-}
-
-.style-button-sign-in {
-    margin-top: 10px;
-}
-
-div > label {
-    display: block;
-}
-  
-div > input {
-    display: block;
 }
 
 .container-alignement-registration {

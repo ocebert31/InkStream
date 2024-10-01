@@ -14,7 +14,7 @@ function Article() {
     const { id } = useParams();
     const [isEditing, setIsEditing] = useState(false);
     const { user, token } = useAuth();
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
     
     useEffect(() => {
         const loadArticle = async () => {
@@ -22,7 +22,7 @@ function Article() {
                 const fetchedArticle = await getOneArticle(id, token);
                 setArticle(fetchedArticle);
             } catch {
-                setShowErrorAlert(true);
+                setShowErrorAlert("Erreur lors de la récupération de l article.");
             }
         };
         loadArticle();
@@ -37,7 +37,12 @@ function Article() {
     };
 
     if (!article) {
-        return <div>Loading...</div>;
+        return  <div className="flex justify-center items-center min-h-screen bg-gray-100">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-primary border-solid"></div>
+                        <p className="mt-4 text-xl text-gray-700 font-semibold">Chargement...</p>
+                    </div>
+                </div>
     }
 
     const isAuthor = user && (user._id === article.userId || user.role === 'admin');
@@ -60,7 +65,7 @@ function Article() {
                     </div>
                 )}
             </div>
-        {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération de l article." onClose={() => setShowErrorAlert(false)}/>)}
+        {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

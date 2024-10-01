@@ -9,14 +9,14 @@ import ErrorAlert from '../../../Alert/error';
 function Delete({ id }) {
     const navigate = useNavigate();
     const { token } = useAuth();
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     const handleDelete = async () => {
         try {
             await deleteArticle(id, token);
             navigate('/');
         } catch (error) {
-            setShowErrorAlert(true)
+            setShowErrorAlert("Erreur lors de la suppression de l article.")
         }
     };
 
@@ -25,7 +25,7 @@ function Delete({ id }) {
             <button onClick={handleDelete} className="text-secondary transition-colors duration-300">
                 <FontAwesomeIcon icon={faTrash} />
             </button>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la suppression de l article." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 };

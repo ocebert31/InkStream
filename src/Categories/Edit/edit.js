@@ -10,7 +10,7 @@ function Edit({ category, handleCategoryUpdated, editCategory }) {
     const { token } = useAuth(); 
     const [content, setContent] = useState(category.name);
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { content } });
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     const onSubmit = async (data) => {
         try {
@@ -19,7 +19,7 @@ function Edit({ category, handleCategoryUpdated, editCategory }) {
             handleEditingEnd();
             handleCategoryUpdated(result.category);
         } catch {
-            setShowErrorAlert(true);
+            setShowErrorAlert("Erreur lors de l'édition de la catégorie.");
         }
     };
 
@@ -33,7 +33,7 @@ function Edit({ category, handleCategoryUpdated, editCategory }) {
                 <Controller name="content" control={control} defaultValue={content} render={({ field }) => (<Content {...field} errorMessage={errors.content?.message} />)} rules={{ required: "Contenu requis" }}/>
                 <EditActions cancelEdit={handleEditingEnd}></EditActions>
             </form> 
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de l'édition de la catégorie." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

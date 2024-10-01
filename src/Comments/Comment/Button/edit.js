@@ -11,7 +11,7 @@ import ErrorAlert from '../../../Alert/error';
 function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
     const { token } = useAuth(); 
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { content } });
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     const onSubmit = async (data) => {
         try {
@@ -19,7 +19,7 @@ function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
             setContent(data.content);
             setIsEditing(false);
         } catch {
-            setShowErrorAlert(true);
+            setShowErrorAlert("Erreur lors de l'édition du commentaire.");
         }
     };
 
@@ -45,7 +45,7 @@ function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
                     )}
                 </div>
             )}
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de l'édition du commentaire." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

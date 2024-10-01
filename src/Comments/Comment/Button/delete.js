@@ -7,14 +7,14 @@ import ErrorAlert from '../../../Alert/error';
 
 function Delete({ handleCommentDeleted, comment }) {
     const { token } = useAuth();
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     const handleDelete = async () => {
             try {
                 await deleteComment(comment._id, token); 
                 handleCommentDeleted(comment);
             } catch {
-                setShowErrorAlert(true);
+                setShowErrorAlert("Erreur lors de la suppression du commentaire.");
             }
         }
 
@@ -23,7 +23,7 @@ function Delete({ handleCommentDeleted, comment }) {
             <button onClick={handleDelete} className="text-red-500 hover:text-red-700 transition-colors duration-150" aria-label="Supprimer le commentaire">
                 <FontAwesomeIcon icon={faTrash} />
             </button>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la suppression du commentaire." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

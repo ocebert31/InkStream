@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../AuthContext.js';
 import { Routes, Route } from 'react-router-dom';
@@ -15,9 +15,11 @@ import Dashboard from '../Dashboard/dashboard.js';
 import { getUserData } from '../API/authentification.js';
 import RoleRoute from './roleRoute.js';
 import AuthenticatedRoute  from './authenticatedRoute.js';
+import ErrorAlert from '../Alert/error.js';
 
 function RouterComponent() {
     const location = useLocation();
+    const [showErrorAlert, setShowErrorAlert] = useState('');
     const { user, updateUser, token } = useAuth();
 
     useEffect(() => {
@@ -30,8 +32,8 @@ function RouterComponent() {
         try {
             const userData = await getUserData(token);
             updateUser(userData)
-        } catch (error) {
-           console.error(error)
+        } catch {
+            setShowErrorAlert('Erreur lors de la récupération de vos données utilisateur')
         }
     };
 
@@ -51,6 +53,7 @@ function RouterComponent() {
                 <Route path="/form-reset-password/:token" element={<ChangePassword/>}/>
                 <Route path="/dashboard" element={<RoleRoute element={Dashboard} requiredRoles={['admin']} />} />
             </Routes>
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

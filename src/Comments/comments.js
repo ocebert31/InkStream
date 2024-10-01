@@ -14,7 +14,7 @@ function Comments({ articleId }) {
     const [page, setPage] = useState(1);
     const [limit] = useState(20);
     const [hasMore, setHasMore] = useState(true);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     useEffect(() => {
         const loadComments = async () => {
@@ -27,7 +27,7 @@ function Comments({ articleId }) {
                 setComments(prevComments => page === 1 ? commentsWithReplies : [...prevComments, ...commentsWithReplies]);
                 checkHasMoreComments(fetchedComments);
             } catch {
-                setShowErrorAlert(true);
+                setShowErrorAlert("Erreur lors de la récupération des commentaires.");
             }
         };
         loadComments();
@@ -129,7 +129,7 @@ function Comments({ articleId }) {
                     ))}
                 </ul>
             </InfiniteScrollComponent>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération des commentaires." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

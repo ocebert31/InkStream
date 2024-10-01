@@ -5,7 +5,7 @@ import ErrorAlert from '../../Alert/error';
 function Categories(props) {
     const { value, onChange } = props;
     const [categories, setCategories] = useState([]);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -13,7 +13,7 @@ function Categories(props) {
                 const fetchedCategories = await getCategories();
                 setCategories(fetchedCategories);
             } catch (error) {
-                setShowErrorAlert(true)
+                setShowErrorAlert("Erreur lors de la récupération des catégories.")
             }
         };
         fetchCategories();
@@ -30,7 +30,7 @@ function Categories(props) {
                     </option>
                 ))}
             </select>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération des catégories." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

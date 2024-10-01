@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { createArticles } from '../../API/article';
 import Title from '../../Components/Articles/title';
@@ -10,18 +10,20 @@ import { useAuth } from "../../AuthContext";
 import './new.css';
 import Tags from '../../Components/Articles/tags';
 import Categories from '../../Components/Articles/categories';
+import ErrorAlert from '../../Alert/error';
 
 function New() {
     const { control, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const { token } = useAuth();
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     const onSubmit = async (data) => {
         try {
             await createArticles(buildFormData(data), token);
             navigate('/');
-        } catch (error) {
-            alert(error.message);
+        } catch {
+            setShowErrorAlert("Erreur lors de la création de l'article")
         }
     };
 
@@ -42,6 +44,7 @@ function New() {
                     </div>
                 </form>
             </div>
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }   

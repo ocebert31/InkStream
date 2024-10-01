@@ -11,7 +11,7 @@ import tabs from './tabs';
 function UsersList() {
     const [users, setUsers] = useState([]);
     const { token } = useAuth(); 
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
     const [searchQuery, setSearchQuery] = useState(''); 
     const [page, setPage] = useState(1); 
     const [limit] = useState(10);
@@ -32,7 +32,7 @@ function UsersList() {
                     setUsers(prevUsers => page === 1 ? fetchedUsers.users : [...prevUsers, ...fetchedUsers.users]);
                     checkHasMoreUsers(fetchedUsers);
                 } catch {
-                    setShowErrorAlert(true);
+                    setShowErrorAlert("Erreur lors du chargement des utilisateurs");
                 }
             };
             loadUsers();
@@ -98,7 +98,7 @@ function UsersList() {
                 {activeTab === 'category' && (<CategoryList></CategoryList>)}
                 {activeTab === 'stat' && (<Stat></Stat>)}
             </div>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors du chargement des utilisateurs" onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

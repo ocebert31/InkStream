@@ -6,19 +6,21 @@ import Delete from './Delete/delete';
 import Edit from './Edit/edit';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ErrorAlert from '../Alert/error';
 
 function CategoryList() {
     const { token } = useAuth();
     const [categories, setCategories] = useState([]);
     const [isEditing, setIsEditing] = useState(null);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
     
     useEffect(() => {
         const loadArticles = async () => {
             try {
                 const fetchedCategories = await getCategories(token);
                 setCategories(fetchedCategories);
-            } catch (error) {
-            alert(error);
+            } catch {
+                setShowErrorAlert("Erreur lors de la récupération des catégories");
             }
         };
         loadArticles();
@@ -63,6 +65,7 @@ function CategoryList() {
                 </div>
             ))}
             <New handleCategoryAdded={handleCategoryAdded}></New>
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     )
 }

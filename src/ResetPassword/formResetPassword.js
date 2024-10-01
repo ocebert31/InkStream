@@ -4,28 +4,33 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import Password from '../Components/Users/password';
 import ConfirmPassword from '../Components/Users/confirmPassword';
+import SuccessAlert from '../Alert/success';
+import ErrorAlert from '../Alert/error';
 
 function FormRecoveryPassword() {
-    const [success, setSuccess] = useState('');
-    const [error, setError] = useState('');
+    const [showSuccessAlert, setShowSuccessAlert] = useState('');
+    const [showErrorAlert, setShowErrorAlert] = useState('');
+    const [checkConfirmPassword, setCheckConfirmPassword] = useState('');
     const { token } = useParams();
     const { register, handleSubmit, formState: { errors }, getValues } = useForm();  
 
     const handlePasswordUpdate = async (data) => {
-        const { newPassword, confirmNewPassword } = getValues();
-        if (newPassword !== confirmNewPassword) {
-            setError('Les mots de passe ne correspondent pas.');
-            return;
-        }
+        confirmPasswordMatch();
         try {
             await postResetPassword(token, data.newPassword, data.confirmNewPassword);
-            setSuccess('Votre mot de passe a bien été changé');
-            setError('');
-        } catch (error) {
-            setError('Erreur lors de la mise à jour de votre mot de passe');
-            setSuccess('');
+            setShowSuccessAlert('Votre mot de passe a bien été changé');
+        } catch {
+            setShowErrorAlert('Erreur lors de la mise à jour de votre mot de passe');
         }
     };
+
+    const confirmPasswordMatch = () => {
+        const { newPassword, confirmNewPassword } = getValues();
+        if (newPassword !== confirmNewPassword) {
+            setCheckConfirmPassword('Les mots de passe ne correspondent pas.');
+            return;
+        }
+    }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -35,11 +40,12 @@ function FormRecoveryPassword() {
                     <form onSubmit={handleSubmit(handlePasswordUpdate)} className="space-y-4 style-form">
                         <Password register={register} errors={errors} name='newPassword' label='Nouveau mot de passe :'/>
                         <ConfirmPassword register={register} errors={errors} name='confirmNewPassword' label='Confirmer le nouveau mot de passe :'></ConfirmPassword>
+                        {checkConfirmPassword && <p className="text-red-500 text-center mt-2">{checkConfirmPassword}</p>}
                         <button type="submit" className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-colors duration-300">Mise à jour du mot de passe</button>  
                     </form>
                 </div>
-                {success && <p className="text-green-500 text-center mt-2">{success}</p>}
-                {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+                {showSuccessAlert && (<SuccessAlert message={showSuccessAlert} onClose={() => setShowSuccessAlert(false)}/>)}
+                {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
             </div>
         </div> 
     );

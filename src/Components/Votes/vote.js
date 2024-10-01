@@ -9,7 +9,7 @@ function Vote({upvotes, downvotes, userVote, subject, setIsHidden, type}) {
     const [upVotes, setupVotes] = useState(upvotes || 0);
     const [downVotes, setdownVotes] = useState(downvotes || 0);
     const [userVoteType, setUserVoteType] = useState(userVote ? userVote.voteType : null);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
     const { token } = useAuth();
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function Vote({upvotes, downvotes, userVote, subject, setIsHidden, type}) {
             voteForArticle(voteType);
             voteForComment(voteType);
         } catch {
-            setShowErrorAlert(true);
+            setShowErrorAlert("Erreur lors de la création du vote.");
         }
     };
 
@@ -116,7 +116,7 @@ function Vote({upvotes, downvotes, userVote, subject, setIsHidden, type}) {
                 )}
                 <span className="ml-2">{downVotes}</span>
             </button>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la création du vote" onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div> 
     )
 }

@@ -1,11 +1,13 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { createCategories } from '../../API/categories';
 import { useAuth } from '../../AuthContext';
 import { useForm, Controller } from 'react-hook-form';
 import Name from './name';
+import ErrorAlert from '../../Alert/error';
 
 function New({handleCategoryAdded}) {
     const { control, handleSubmit, reset, formState: { errors } } = useForm();
+    const [showErrorAlert, setShowErrorAlert] = useState("");
     const { token } = useAuth();
 
     const onSubmit = async (data) => {
@@ -13,8 +15,8 @@ function New({handleCategoryAdded}) {
             const result = await createCategories(data, token);
             handleCategoryAdded(result.categories);
             reset();
-        } catch (error) {
-            alert(error.message)
+        } catch {
+            setShowErrorAlert("Erreur lors de la création de la catégorie");
         }
     };
 
@@ -26,6 +28,7 @@ function New({handleCategoryAdded}) {
                 Créer la catégorie
             </button>
         </form>
+        {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
     </div>
   );
 };

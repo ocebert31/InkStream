@@ -10,7 +10,7 @@ function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeFo
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm();
     const { token, user } = useAuth();
     const [showGifSelector, setShowGifSelector] = useState(false);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     const onSubmit = async (data) => {
         try {
@@ -20,7 +20,7 @@ function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeFo
             comment.pseudo = user.pseudo;
             onAdded(comment);
         } catch {
-            setShowErrorAlert(true);
+            setShowErrorAlert("Erreur lors de la récupération des commentaires.");
         }
     };
 
@@ -43,7 +43,7 @@ function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeFo
             ) : (
                 <Form register={register} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} setShowGifSelector={setShowGifSelector} setIsReply={setIsReply} comment={comment} typeForm={typeForm}/>
             )}
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération des commentaires." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

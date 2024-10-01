@@ -16,7 +16,7 @@ function Edition({ article, setArticle, cancelEdit }) {
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { title: article.title, content: article.content, tags: article.tags, categoryId: article.categoryId ,image: null } });
     const { token } = useAuth();
     const myRef = useRef(null); 
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     const onSubmit = async (data) => {
         try {
@@ -25,7 +25,7 @@ function Edition({ article, setArticle, cancelEdit }) {
             setArticle(result.article);
             cancelEdit();
         } catch {
-            setShowErrorAlert(true);
+            setShowErrorAlert("Erreur lors de l'édition de l article.");
         }
     };
 
@@ -42,7 +42,7 @@ function Edition({ article, setArticle, cancelEdit }) {
                     <EditActions cancelEdit={cancelEdit}></EditActions>
                 </form>
             </div>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de l'édition de l article." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

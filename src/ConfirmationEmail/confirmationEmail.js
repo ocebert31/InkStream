@@ -9,7 +9,7 @@ function ConfirmationEmail ({ isEmailUpdate = false }) {
     const { token } = useParams();
     const { updateUser } = useAuth();
     const [isConfirmed, setIsConfirmed] = useState(null);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     useEffect(() => {
         const confirmEmail = async () => {
@@ -19,9 +19,9 @@ function ConfirmationEmail ({ isEmailUpdate = false }) {
                     updateUser(user);
                 }
                 setIsConfirmed(true);
-            } catch (error) {
+            } catch {
                 setIsConfirmed(false);
-                setShowErrorAlert(true)
+                setShowErrorAlert("Erreur lors de la confirmation d'email.")
             }
         };
         confirmEmail();
@@ -62,7 +62,7 @@ function ConfirmationEmail ({ isEmailUpdate = false }) {
             <div className={`${isConfirmed === null ? '' : 'bg-white shadow-lg'} p-8 rounded-lg text-center max-w-md style-p`}>
                 {renderContent()}
             </div>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la confirmation d'email" onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 };

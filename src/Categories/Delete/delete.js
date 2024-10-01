@@ -7,14 +7,14 @@ import ErrorAlert from '../../Alert/error';
 
 function Delete({category, handleCategoryDelete}) {
     const { token } = useAuth();
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     const handleDelete = async () => {
         try {
             await deleteCategory(category._id, token);
             handleCategoryDelete(category._id)
         } catch (error) {
-            setShowErrorAlert(true); 
+            setShowErrorAlert("Erreur lors de la suppression de la catégorie."); 
         }
     };
 
@@ -23,7 +23,7 @@ function Delete({category, handleCategoryDelete}) {
             <button onClick={handleDelete} className="text-secondary transition-colors duration-300">
                 <FontAwesomeIcon icon={faTrash} />
             </button>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la suppression de la catégorie." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 };

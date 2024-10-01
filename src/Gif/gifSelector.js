@@ -6,7 +6,7 @@ function Gifs({ onSelect }) {
     const [gifs, setGifs] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     useEffect(() => {
         if (search.length < 2) return;
@@ -16,7 +16,7 @@ function Gifs({ onSelect }) {
                 const fetchedGifs = await getGifs(search);
                 setGifs(fetchedGifs);
             } catch {
-                setShowErrorAlert(true);
+                setShowErrorAlert("Erreur lors de la récupération des gifs");
             } finally {
                 setLoading(false);
             }
@@ -40,7 +40,7 @@ function Gifs({ onSelect }) {
                     !loading && <p className="text-center text-gray-500">Aucun GIF trouvé</p>
                 )}
             </div>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération des gifs" onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

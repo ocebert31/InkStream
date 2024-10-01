@@ -2,21 +2,20 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Email from '../Components/Users/email';
 import { forgotPassword } from '../API/authentification';
-import './resetPassword.css';
+import SuccessAlert from '../Alert/success';
+import ErrorAlert from '../Alert/error';
 
 function ResetPassword() {
-    const [success, setSuccess] = useState(false);
-    const [error, setError] = useState(false);
+    const [showSuccessAlert, setShowSuccessAlert] = useState('');
+    const [showErrorAlert, setShowErrorAlert] = useState('');
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const sendEmail = async (data) => {
         try {
             await forgotPassword(data.email);
-            setSuccess(true);
-            setError('')
-        } catch (error) {
-            setError(true);
-            setSuccess('')
+            setShowSuccessAlert("Un lien vous a été envoyé afin de modifier votre mot de passe !")
+        } catch {
+            setShowErrorAlert("Erreur lors de l'envoie de l'email. Veuillez réessayer.");
         }
     }
 
@@ -30,8 +29,8 @@ function ResetPassword() {
                         <button type="submit" className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-colors duration-300">Récupération mot de passe</button>
                     </form>
                 </div>
-                 {success && <p className="text-green-500 text-center mt-2">Un lien vous a été envoyé afin de modifier votre mot de passe !</p>}
-                {error && <p className="text-red-500 text-center mt-2">Erreur lors de l'envoie de l'email. Veuillez réessayer.</p>}
+                {showSuccessAlert && (<SuccessAlert message={showSuccessAlert} onClose={() => setShowSuccessAlert(false)}/>)}
+                {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
             </div>
            
         </div>

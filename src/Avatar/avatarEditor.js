@@ -4,10 +4,12 @@ import { updateAvatarOptions } from '../API/authentification';
 import { useAuth } from '../AuthContext';
 import Select from './selectAvatar';
 import avatarOptionsData from './avatarOptionsData';
+import ErrorAlert from '../Alert/error';
 
 const AvatarEditor = ({ avatarOptions, onAvatarChange }) => {
     const [localAvatarOptions, setLocalAvatarOptions] = useState(avatarOptions);
     const { token } = useAuth();
+    const [showErrorAlert, setShowErrorAlert] = useState("");
 
     useEffect(() => {
         setLocalAvatarOptions(avatarOptions);
@@ -21,10 +23,15 @@ const AvatarEditor = ({ avatarOptions, onAvatarChange }) => {
     };
 
     const handleSubmit = async () => {
-        const response = await updateAvatarOptions(token, localAvatarOptions);
-        if (response.user) {
-            onAvatarChange(response.user);
+        try {
+            const response = await updateAvatarOptions(token, localAvatarOptions);
+            if (response.user) {
+                onAvatarChange(response.user);
+            }
+        } catch {
+            setShowErrorAlert("Erreur lors de la modification de votre avatar")
         }
+        
     };
 
     return (
@@ -40,6 +47,7 @@ const AvatarEditor = ({ avatarOptions, onAvatarChange }) => {
                     Valider
                 </button>
             </div>
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 };

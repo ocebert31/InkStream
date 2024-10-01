@@ -17,20 +17,23 @@ function Registration() {
     const [isConfirmationRegistration, setIsConfirmationRegistration] = useState(false)
 
     const onSubmit = async (data) => {
+        confirmPasswordMatch()
+        try {
+            await postInscription(data);
+            setShowSuccessAlert("Vous êtes désormais inscrit avec succès !");
+            setIsConfirmationRegistration(true)
+        } catch {
+            setShowErrorAlert("Erreur lors de l'inscription. Veuillez réessayer.");
+        }
+    };
+
+    const confirmPasswordMatch = () => {
         const { password, confirmPassword } = getValues();
         if (password !== confirmPassword) {
             setCheckConfirmPassword('Les mots de passe ne correspondent pas.');
             return;
         }
-
-        try {
-            await postInscription(data);
-            setShowSuccessAlert("Vous êtes désormais inscrit avec succès !");
-            setIsConfirmationRegistration(true)
-        } catch (error) {
-            setShowErrorAlert("Erreur lors de l'inscription. Veuillez réessayer.");
-        }
-    };
+    }
 
     return (
         <div>

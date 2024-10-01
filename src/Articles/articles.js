@@ -17,7 +17,7 @@ function Articles({ type }) {
     const [page, setPage] = useState(1);
     const [limit] = useState(20);
     const [hasMore, setHasMore] = useState(true);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState("");
     
     useEffect(() => {
         const loadArticles = async () => {
@@ -27,7 +27,7 @@ function Articles({ type }) {
                 setArticleLength(fetchedArticles.length);
                 checkHasMoreArticles(fetchedArticles)
             } catch {
-                setShowErrorAlert(true);
+                setShowErrorAlert("Erreur lors de la récupération des articles.");
             }
         };
         loadArticles();
@@ -56,7 +56,7 @@ function Articles({ type }) {
     }
 
     return (
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 min-h-screen">
             <div className="text-center my-16">
                 <h1 className="font-inkstream font-bold text-primary mb-4 relative">
                     <span className="block">Inkstream</span>
@@ -74,7 +74,7 @@ function Articles({ type }) {
                     ))}
                 </ul>
             </InfiniteScrollComponent>
-            {showErrorAlert && (<ErrorAlert message="Erreur lors de la récupération de l article." onClose={() => setShowErrorAlert(false)}/>)}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }

@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { getAllStat } from '../API/stat'; 
 import { useAuth } from "../AuthContext"; 
+import ErrorAlert from '../Alert/error';
 
 function Statistiques() {
     const [stats, setStats] = useState(null);
     const { token } = useAuth();
+    const [showErrorAlert, setShowErrorAlert] = useState('');
 
     useEffect(() => {
         const fetchStats = async () => {
             try {
-            
                 const statsData = await getAllStat(token);
                 setStats(statsData); 
-            } catch (error) {
-                alert(`Erreur lors de la mise à jour des statistiques : ${error.message}`)
+            } catch {
+                setShowErrorAlert("Erreur lors de la mise à jour des statistiques");
             }
         };
-
         fetchStats();
     }, [token]); 
-
 
     return (
         <div className="container mx-auto px-4 py-8 bg-gray-100">
@@ -33,6 +32,7 @@ function Statistiques() {
             ) : (
                 <div>Pas de statistiques.</div>
             )}
+            {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     );
 }
