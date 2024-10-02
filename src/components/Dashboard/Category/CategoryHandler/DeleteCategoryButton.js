@@ -5,7 +5,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../../../context/AuthContext";
 import ErrorAlert from '../../../Notifications/ErrorAlert';
 
-function Delete({category, handleCategoryDelete}) {
+function DeleteCategoryButton({category, handleCategoryDelete}) {
     const { token } = useAuth();
     const [showErrorAlert, setShowErrorAlert] = useState("");
 
@@ -28,4 +28,4 @@ function Delete({category, handleCategoryDelete}) {
     );
 };
 
-export default Delete;
+export default DeleteCategoryButton;

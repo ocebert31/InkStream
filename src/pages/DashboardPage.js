@@ -9,7 +9,7 @@ import ErrorAlert from '../components/Notifications/ErrorAlert';
 import tabs from '../utils/constants/tabs';
 import { checkHasMore } from '../utils/helpers/checkHasMore.js';
 
-function UsersList() {
+function DashboardPage() {
     const [users, setUsers] = useState([]);
     const { token } = useAuth(); 
     const [showErrorAlert, setShowErrorAlert] = useState("");
@@ -29,9 +29,9 @@ function UsersList() {
         if (token && activeTab === 'users') {
             const loadUsers = async () => {
                 try {
-                    const fetchedUsers = await getUsers(searchQuery, page, limit, token);
-                    setUsers(prevUsers => page === 1 ? fetchedUsers.users : [...prevUsers, ...fetchedUsers.users]);
-                    checkHasMore(fetchedUsers, limit, setHasMore);
+                    const result = await getUsers(searchQuery, page, limit, token);
+                    setUsers(prevUsers => page === 1 ? result.users : [...prevUsers, ...result.users]);
+                    checkHasMore(result, limit, setHasMore);
                 } catch {
                     setShowErrorAlert("Erreur lors du chargement des utilisateurs");
                 }
@@ -98,4 +98,4 @@ function UsersList() {
     );
 }
 
-export default UsersList;
+export default DashboardPage;

@@ -5,7 +5,7 @@ import { forgotPassword } from '../services/authenticationService';
 import SuccessAlert from '../components/Notifications/SuccessAlert';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
-function ResetPassword() {
+function ResetPasswordPage() {
     const [showSuccessAlert, setShowSuccessAlert] = useState('');
     const [showErrorAlert, setShowErrorAlert] = useState('');
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -37,4 +37,4 @@ function ResetPassword() {
     )
 }
 
-export default ResetPassword;
+export default ResetPasswordPage;

@@ -2,7 +2,7 @@ import { faVolumeUp, faStop } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useRef, useCallback, useEffect } from 'react';
 
-function Audio({ article }) {
+function ArticleAudio({ article }) {
     const [isPaused] = useState(false);
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [isGlobalSpeaking, setGlobalSpeaking] = useState(false);
@@ -84,4 +84,4 @@ function Audio({ article }) {
     )
 }
 
-export default Audio;
+export default ArticleAudio;

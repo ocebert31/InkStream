@@ -1,7 +1,7 @@
 import React from 'react';
 import './ContentInput.css';
 
-function Content(props) {
+function ContentInput(props) {
     const { value, onChange, errorMessage } = props;
 
     return (
@@ -13,4 +13,4 @@ function Content(props) {
     );
 }
 
-export default Content;
+export default ContentInput;

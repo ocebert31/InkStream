@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import Categories from '../../common/Articles/CategorySelector';
 
-function Filter({ onCategoryChange }) {
+function FilterArticle({ onCategoryChange }) {
     const [showMenu, setShowMenu] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(""); 
 
@@ -39,4 +39,4 @@ function Filter({ onCategoryChange }) {
     );
 }
 
-export default Filter;
+export default FilterArticle;

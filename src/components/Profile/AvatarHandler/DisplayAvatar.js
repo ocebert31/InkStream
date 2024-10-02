@@ -2,7 +2,7 @@ import Avatar from 'avataaars';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function AvatarUser({avatarOptions, toggleAvatarEditor}) {
+function DisplayAvatar({avatarOptions, toggleAvatarEditor}) {
     return(
         <div className="relative inline-block">
             <Avatar {...avatarOptions} />
@@ -13,4 +13,4 @@ function AvatarUser({avatarOptions, toggleAvatarEditor}) {
     )
 }
 
-export default AvatarUser;
+export default DisplayAvatar;

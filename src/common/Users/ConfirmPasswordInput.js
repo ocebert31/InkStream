@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
-function ConfirmPassword({ register, errors, name, label }) {
+function ConfirmPasswordInput({ register, errors, name, label }) {
     const [visible, setVisible] = useState(false);
 
     const toggleVisibility = () => {
@@ -23,5 +23,5 @@ function ConfirmPassword({ register, errors, name, label }) {
     );
 }
 
-export default ConfirmPassword;
+export default ConfirmPasswordInput;
 

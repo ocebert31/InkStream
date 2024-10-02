@@ -1,7 +1,7 @@
 import NewComment from "./NewCommentForm";
 import React, { useState } from 'react';
 
-function NewReply ({comment, typeForm, onReply}) {
+function NewReplyForm ({comment, typeForm, onReply}) {
     const [isReply, setIsReply] = useState(false);
 
     const toggleReply = () => {
@@ -30,4 +30,4 @@ function NewReply ({comment, typeForm, onReply}) {
     )
 }
 
-export default NewReply;
+export default NewReplyForm;

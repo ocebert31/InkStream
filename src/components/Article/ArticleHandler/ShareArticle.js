@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaTwitter } from 'react-icons/fa';
 
-function Share ({ article }) {
+function ShareArticle ({ article }) {
     const url= process.env.REACT_APP_URL
 
     const stripHtml = (html) => {
@@ -36,4 +36,4 @@ function Share ({ article }) {
     );
 };
 
-export default Share;
+export default ShareArticle;

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
-function Menu ({ onClose, onLogout }) {
+function SideBarMenu ({ onClose, onLogout }) {
     const { user } = useAuth();
 
     const links = [
@@ -39,4 +39,4 @@ function Menu ({ onClose, onLogout }) {
     );
 };
 
-export default Menu;
+export default SideBarMenu;

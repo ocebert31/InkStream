@@ -9,7 +9,7 @@ import InfiniteScrollComponent from '../common/UI/InfiniteScroll.js';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 import { checkHasMore } from '../utils/helpers/checkHasMore.js';
 
-function Articles({ type }) {
+function HomePage({ type }) {
     const { token } = useAuth();
     const [articles, setArticles] = useState([]);
     const [articleLength, setArticleLength] = useState(0);
@@ -23,10 +23,10 @@ function Articles({ type }) {
     useEffect(() => {
         const loadArticles = async () => {
             try {
-                const fetchedArticles = await getArticles(searchQuery, page, limit, type, token, selectedCategory);
-                setArticles(prevArticles => page === 1 ? fetchedArticles : [...prevArticles, ...fetchedArticles]);
-                setArticleLength(fetchedArticles.length);
-                checkHasMore(fetchedArticles, limit, setHasMore)
+                const result = await getArticles(searchQuery, page, limit, type, token, selectedCategory);
+                setArticles(prevArticles => page === 1 ? result : [...prevArticles, ...result]);
+                setArticleLength(result.length);
+                checkHasMore(result, limit, setHasMore)
             } catch {
                 setShowErrorAlert("Erreur lors de la récupération des articles.");
             }
@@ -74,4 +74,4 @@ function Articles({ type }) {
     );
 }
 
-export default Articles;
+export default HomePage;

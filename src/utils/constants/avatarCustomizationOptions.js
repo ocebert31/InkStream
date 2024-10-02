@@ -1,4 +1,4 @@
-const avatarOptionsData = [
+const avatarCustomizationOptions = [
     {
         label: "Arrière Plan",
         key: "avatarStyle",
@@ -128,4 +128,4 @@ const avatarOptionsData = [
     },
 ];
 
-export default avatarOptionsData;
+export default avatarCustomizationOptions;

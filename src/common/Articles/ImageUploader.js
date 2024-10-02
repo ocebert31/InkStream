@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ErrorAlert from '../../components/Notifications/ErrorAlert';
 
-function Image(props) {
+function ImageUploader(props) {
     const { onChange } = props;
     const [showErrorAlert, setShowErrorAlert] = useState(false);
 
@@ -25,4 +25,4 @@ function Image(props) {
     );
 }
 
-export default Image;
+export default ImageUploader;

@@ -9,7 +9,7 @@ import ConfirmPassword from '../../../common/Users/ConfirmPasswordInput';
 import SuccessAlert from '../../Notifications/SuccessAlert';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-function ChangePassword() {
+function PasswordForm() {
     const { token } = useAuth();
     const [showSuccessAlert, setShowSuccessAlert] = useState('');
     const [showErrorAlert, setShowErrorAlert] = useState('');
@@ -49,4 +49,4 @@ function ChangePassword() {
     );
 }
 
-export default ChangePassword;
+export default PasswordForm;

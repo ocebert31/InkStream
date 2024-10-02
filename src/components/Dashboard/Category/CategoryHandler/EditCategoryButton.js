@@ -6,7 +6,7 @@ import Content from '../../../../common/Comments/ContentInput';
 import EditActions from '../../../../common/UI/EditActions';
 import ErrorAlert from '../../../Notifications/ErrorAlert';
 
-function Edit({ category, handleCategoryUpdated, editCategory }) {
+function EditCategoryButton({ category, handleCategoryUpdated, editCategory }) {
     const { token } = useAuth(); 
     const [content, setContent] = useState(category.name);
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { content } });
@@ -38,5 +38,5 @@ function Edit({ category, handleCategoryUpdated, editCategory }) {
     );
 }
 
-export default Edit;
+export default EditCategoryButton;
 

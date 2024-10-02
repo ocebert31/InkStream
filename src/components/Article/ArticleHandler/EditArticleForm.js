@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { updateArticle } from '../../../services/articleService';
-import { buildFormData } from '../../../utils/constants/formDataBuilder';
+import { formDataBuilder } from '../../../utils/constants/formDataBuilder';
 import Title from '../../../common/Articles/TitleInput';
 import Content from '../../../common/Articles/ContentEditor';
 import Image from '../../../common/Articles/ImageUploader';
@@ -12,7 +12,7 @@ import Categories from '../../../common/Articles/CategorySelector';
 import EditActions from '../../../common/UI/EditActions';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-function Edition({ article, setArticle, cancelEdit }) {
+function EditArticleForm({ article, setArticle, cancelEdit }) {
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { title: article.title, content: article.content, tags: article.tags, categoryId: article.categoryId ,image: null } });
     const { token } = useAuth();
     const myRef = useRef(null); 
@@ -20,7 +20,7 @@ function Edition({ article, setArticle, cancelEdit }) {
 
     const onSubmit = async (data) => {
         try {
-            const formData = buildFormData(data);
+            const formData = formDataBuilder(data);
             const result = await updateArticle(article._id, formData, token);
             setArticle(result.article);
             cancelEdit();
@@ -47,4 +47,4 @@ function Edition({ article, setArticle, cancelEdit }) {
     );
 }
 
-export default Edition;
+export default EditArticleForm;

@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import './ConfirmationEmailPage.css';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
-function ConfirmationEmail ({ isEmailUpdate = false }) {
+function ConfirmationEmailPage ({ isEmailUpdate = false }) {
     const { token } = useParams();
     const { updateUser } = useAuth();
     const [isConfirmed, setIsConfirmed] = useState(null);
@@ -67,5 +67,5 @@ function ConfirmationEmail ({ isEmailUpdate = false }) {
     );
 };
 
-export default ConfirmationEmail;
+export default ConfirmationEmailPage;
 

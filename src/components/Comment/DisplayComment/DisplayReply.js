@@ -1,6 +1,6 @@
 import Comment from "./DisplayComment";
 
-function Display ({comment, handleCommentDeleted, onReply}) {
+function DisplayReply ({comment, handleCommentDeleted, onReply}) {
     return(
         <div>
             {comment.replies && comment.replies.length > 0 && (
@@ -14,4 +14,4 @@ function Display ({comment, handleCommentDeleted, onReply}) {
     )
 }
 
-export default Display;
+export default DisplayReply;

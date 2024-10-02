@@ -1,4 +1,4 @@
-function CommentOfUser({isHidden, toggleHidden, content}) {
+function ViewCommentContent({isHidden, toggleHidden, content}) {
     const giphyUrl = () => {
         return content.split('#')[1];
     }
@@ -25,4 +25,4 @@ function CommentOfUser({isHidden, toggleHidden, content}) {
     )
 }
 
-export default CommentOfUser;
+export default ViewCommentContent;

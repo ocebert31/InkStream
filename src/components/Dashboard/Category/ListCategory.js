@@ -8,7 +8,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-function CategoryList() {
+function ListCategory() {
     const { token } = useAuth();
     const [categories, setCategories] = useState([]);
     const [isEditing, setIsEditing] = useState(null);
@@ -70,4 +70,4 @@ function CategoryList() {
     )
 }
 
-export default CategoryList;
+export default ListCategory;

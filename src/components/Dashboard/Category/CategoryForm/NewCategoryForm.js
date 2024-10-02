@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import Name from './CategoryNameInput';
 import ErrorAlert from '../../../Notifications/ErrorAlert';
 
-function New({handleCategoryAdded}) {
+function NewCategoryForm({handleCategoryAdded}) {
     const { control, handleSubmit, reset, formState: { errors } } = useForm();
     const [showErrorAlert, setShowErrorAlert] = useState("");
     const { token } = useAuth();
@@ -33,4 +33,4 @@ function New({handleCategoryAdded}) {
   );
 };
 
-export default New;
+export default NewCategoryForm;

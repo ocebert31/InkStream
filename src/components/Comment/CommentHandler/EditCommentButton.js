@@ -8,7 +8,7 @@ import Content from '../../../common/Comments/ContentInput';
 import EditActions from '../../../common/UI/EditActions';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
+function EditCommentButton({ comment, content, setContent, isEditing, setIsEditing }) {
     const { token } = useAuth(); 
     const { control, handleSubmit, formState: { errors } } = useForm({ defaultValues: { content } });
     const [showErrorAlert, setShowErrorAlert] = useState("");
@@ -50,5 +50,5 @@ function Edit({ comment, content, setContent, isEditing, setIsEditing }) {
     );
 }
 
-export default Edit;
+export default EditCommentButton;
 

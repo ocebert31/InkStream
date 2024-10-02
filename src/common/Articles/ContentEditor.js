@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Editor from 'react-simple-wysiwyg';
 
-function Content(props) {
+function ContentEditor(props) {
     const { value, onChange, errorMessage } = props;
     const [html, setHtml] = useState(value);
 
@@ -19,4 +19,4 @@ function Content(props) {
     );
 }
 
-export default Content;
+export default ContentEditor;

@@ -7,7 +7,7 @@ import ConfirmPassword from '../common/Users/ConfirmPasswordInput';
 import SuccessAlert from '../components/Notifications/SuccessAlert';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
-function FormRecoveryPassword() {
+function ResetPasswordForm() {
     const [showSuccessAlert, setShowSuccessAlert] = useState('');
     const [showErrorAlert, setShowErrorAlert] = useState('');
     const [checkConfirmPassword, setCheckConfirmPassword] = useState('');
@@ -51,4 +51,4 @@ function FormRecoveryPassword() {
     );
 }
 
-export default FormRecoveryPassword;
+export default ResetPasswordForm;

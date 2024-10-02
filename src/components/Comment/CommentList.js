@@ -8,7 +8,7 @@ import InfiniteScrollComponent from '../../common/UI/InfiniteScroll';
 import ErrorAlert from '../Notifications/ErrorAlert';
 import { checkHasMore } from '../../utils/helpers/checkHasMore';
 
-function Comments({ articleId }) {
+function CommentList({ articleId }) {
     const [comments, setComments] = useState([]);
     const { token, user } = useAuth();
     const [avatarOptions, setAvatarOptions] = useState(null);
@@ -20,13 +20,13 @@ function Comments({ articleId }) {
     useEffect(() => {
         const loadComments = async () => {
             try {
-                const fetchedComments = await getComments(articleId, token, page, limit);
-                const commentsWithReplies = fetchedComments.map(comment => ({
+                const result = await getComments(articleId, token, page, limit);
+                const commentsWithReplies = result.map(comment => ({
                     ...comment,
                     replies: comment.replies || []
                 }));
                 setComments(prevComments => page === 1 ? commentsWithReplies : [...prevComments, ...commentsWithReplies]);
-                checkHasMore(fetchedComments, limit, setHasMore);
+                checkHasMore(result, limit, setHasMore);
             } catch {
                 setShowErrorAlert("Erreur lors de la récupération des commentaires.");
             }
@@ -129,4 +129,4 @@ function Comments({ articleId }) {
     );
 }
 
-export default Comments;
+export default CommentList;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getCategories } from '../../services/categoryService';
 import ErrorAlert from '../../components/Notifications/ErrorAlert';
 
-function Categories(props) {
+function CategorySelector(props) {
     const { value, onChange } = props;
     const [categories, setCategories] = useState([]);
     const [showErrorAlert, setShowErrorAlert] = useState("");
@@ -10,9 +10,9 @@ function Categories(props) {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const fetchedCategories = await getCategories();
-                setCategories(fetchedCategories);
-            } catch (error) {
+                const result = await getCategories();
+                setCategories(result);
+            } catch {
                 setShowErrorAlert("Erreur lors de la récupération des catégories.")
             }
         };
@@ -35,4 +35,4 @@ function Categories(props) {
     );
 }
 
-export default Categories;
+export default CategorySelector;

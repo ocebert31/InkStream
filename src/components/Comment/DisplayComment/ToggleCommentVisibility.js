@@ -1,7 +1,7 @@
 import React from 'react';
 import CommentOfUser from './ViewCommentContent';
 
-function CommentDisplay({ isHidden, toggleHidden, content, comment }) {
+function ToggleCommentVisibility({ isHidden, toggleHidden, content, comment }) {
     return (
         <div className="p-2">
             {!comment.deletedAt ? (
@@ -14,4 +14,4 @@ function CommentDisplay({ isHidden, toggleHidden, content, comment }) {
     );
 }
 
-export default CommentDisplay;
+export default ToggleCommentVisibility;

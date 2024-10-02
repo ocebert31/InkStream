@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Name(props) {
+function CategoryNameInput(props) {
     const { value, onChange, errorMessage } = props;
 
     return (
@@ -12,4 +12,4 @@ function Name(props) {
     );
 }
 
-export default Name;
+export default CategoryNameInput;

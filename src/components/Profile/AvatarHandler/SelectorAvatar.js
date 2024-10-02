@@ -1,4 +1,4 @@
-function SelectAvatar ({ label, value, options, onChange }) {
+function SelectorAvatar ({ label, value, options, onChange }) {
     return(
         <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -15,4 +15,4 @@ function SelectAvatar ({ label, value, options, onChange }) {
     )
 };
 
-export default SelectAvatar;
+export default SelectorAvatar;

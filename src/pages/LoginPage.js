@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import Success from '../components/Notifications/SuccessAlert';
 import Error from '../components/Notifications/ErrorAlert';
 
-function Login() {
+function LoginPage() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -50,4 +50,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default LoginPage;

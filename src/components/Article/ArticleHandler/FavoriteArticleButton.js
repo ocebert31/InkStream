@@ -6,7 +6,7 @@ import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-function Favorites({ article }) {
+function FavoriteArticleButton({ article }) {
     const { token } = useAuth();
     const [favorite, setFavorite] = useState(article.favorite);
     const [showErrorAlert, setShowErrorAlert] = useState("");
@@ -36,4 +36,4 @@ function Favorites({ article }) {
     );
 }
 
-export default Favorites;
+export default FavoriteArticleButton;

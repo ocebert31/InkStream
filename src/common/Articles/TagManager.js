@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ErrorAlert from '../../components/Notifications/ErrorAlert';
 
-function Tags({ value = [], onChange }) {
+function TagManager({ value = [], onChange }) {
     const [tagInput, setTagInput] = useState('');
     const [tags, setTags] = useState(value || []);
     const [showErrorAlert, setShowErrorAlert] = useState('');
@@ -70,4 +70,4 @@ function Tags({ value = [], onChange }) {
     );
 }
 
-export default Tags;
+export default TagManager;

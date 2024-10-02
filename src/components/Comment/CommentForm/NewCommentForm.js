@@ -7,7 +7,7 @@ import { useAuth } from '../../../context/AuthContext';
 import GifSelector from './GifSelector';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeForm}) {
+function NewCommentForm({ articleId, onAdded, commentId, setIsReply, comment, typeForm}) {
     const { register, handleSubmit, reset, formState: { errors }, setValue } = useForm();
     const { token, user } = useAuth();
     const [showGifSelector, setShowGifSelector] = useState(false);
@@ -66,4 +66,4 @@ function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeFo
     );
 }
 
-export default NewComment;
+export default NewCommentForm;

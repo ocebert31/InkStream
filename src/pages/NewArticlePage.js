@@ -4,7 +4,7 @@ import { createArticles } from '../services/articleService';
 import Title from '../common/Articles/TitleInput';
 import Content from '../common/Articles/ContentEditor';
 import Image from '../common/Articles/ImageUploader';
-import { buildFormData } from '../utils/constants/formDataBuilder';
+import { formDataBuilder } from '../utils/constants/formDataBuilder';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import './NewArticlePage.css';
@@ -12,7 +12,7 @@ import Tags from '../common/Articles/TagManager';
 import Categories from '../common/Articles/CategorySelector';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
-function New() {
+function NewArticlePage() {
     const { control, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const { token } = useAuth();
@@ -20,7 +20,7 @@ function New() {
 
     const onSubmit = async (data) => {
         try {
-            await createArticles(buildFormData(data), token);
+            await createArticles(formDataBuilder(data), token);
             navigate('/');
         } catch {
             setShowErrorAlert("Erreur lors de la création de l'article")
@@ -49,4 +49,4 @@ function New() {
     );
 }   
 
-export default New;
+export default NewArticlePage;

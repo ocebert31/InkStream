@@ -2,7 +2,7 @@ import Avatar from 'avataaars';
 import React, { useEffect, useState } from 'react';
 import defaultAvatarOptions from '../../../utils/constants/defaultAvatarOptions';
 
-function HeaderComment({comment}) {
+function CommentAvatar({comment}) {
     const [avatarOptions, setAvatarOptions] = useState(defaultAvatarOptions);
 
     useEffect(() => {
@@ -29,4 +29,4 @@ function HeaderComment({comment}) {
     )
 }
 
-export default HeaderComment;
+export default CommentAvatar;

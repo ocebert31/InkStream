@@ -6,7 +6,7 @@ import ChangeEmail from '../components/Profile/CredentialHandler/EmailForm';
 import ChangePassword from '../components/Profile/CredentialHandler/PasswordForm';
 import defaultAvatarOptions from '../utils/constants/defaultAvatarOptions';
 
-function Profile() {
+function ProfilePage() {
     const { user, updateUser } = useAuth();
     const [showAvatarEditor, setShowAvatarEditor] = useState(false);
     const [avatarOptions, setAvatarOptions] = useState(null);
@@ -61,4 +61,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default ProfilePage;

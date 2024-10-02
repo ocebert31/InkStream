@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-function Search({ handleSearchQueryChange }) {
+function SearchBar({ handleSearchQueryChange }) {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = async (data) => {
@@ -20,4 +20,4 @@ function Search({ handleSearchQueryChange }) {
     );
 }
 
-export default Search;
+export default SearchBar;

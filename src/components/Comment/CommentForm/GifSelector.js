@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getGifs } from '../../../services/gifService';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-function Gifs({ onSelect }) {
+function GifSelector({ onSelect }) {
     const [gifs, setGifs] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
@@ -45,4 +45,4 @@ function Gifs({ onSelect }) {
     );
 }
 
-export default Gifs;
+export default GifSelector;

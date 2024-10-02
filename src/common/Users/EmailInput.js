@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Email({ register, errors, name, label }) {
+function EmailInput({ register, errors, name, label }) {
     return (
         <div className="mb-4">
             <label htmlFor={name} className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
@@ -10,4 +10,4 @@ function Email({ register, errors, name, label }) {
     );
 }
 
-export default Email;
+export default EmailInput;

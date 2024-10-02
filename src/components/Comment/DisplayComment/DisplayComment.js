@@ -5,7 +5,7 @@ import DisplayReply from './DisplayReply';
 import HeaderComment from '../../Profile/AvatarHandler/CommentAvatar';
 import CommentActions from '../CommentHandler/CommentActions';
 
-function Comment({ comment, handleCommentDeleted, onReply, typeForm='reply comment' }) {
+function DisplayComment({ comment, handleCommentDeleted, onReply, typeForm='reply comment' }) {
     const [commentState, setCommentState] = useState(comment || {});
     const [content, setContent] = useState(comment.content);
     const [isEditing, setIsEditing] = useState(false);
@@ -32,4 +32,4 @@ function Comment({ comment, handleCommentDeleted, onReply, typeForm='reply comme
     );
 }
 
-export default Comment;
+export default DisplayComment;

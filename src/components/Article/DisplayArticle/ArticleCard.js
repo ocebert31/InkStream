@@ -5,7 +5,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './ArticleCard.css';
 import Audio from '../ArticleAudio';
 
-function Card({ article }) {
+function ArticleCard({ article }) {
     const formattedDate = format(new Date(article.createdAt), 'd MMMM yyyy')
 
     return (
@@ -40,5 +40,5 @@ function Card({ article }) {
     );
 }
 
-export default Card;
+export default ArticleCard;
 

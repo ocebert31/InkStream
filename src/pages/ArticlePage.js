@@ -9,7 +9,7 @@ import { useAuth } from "../context/AuthContext";
 import Comments from '../components/Comment/CommentList';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
-function Article() {
+function ArticlePage() {
     const [article, setArticle] = useState(null);
     const { id } = useParams();
     const [isEditing, setIsEditing] = useState(false);
@@ -19,8 +19,8 @@ function Article() {
     useEffect(() => {
         const loadArticle = async () => {
             try {
-                const fetchedArticle = await getOneArticle(id, token);
-                setArticle(fetchedArticle);
+                const result = await getOneArticle(id, token);
+                setArticle(result);
             } catch {
                 setShowErrorAlert("Erreur lors de la récupération de l article.");
             }
@@ -70,4 +70,4 @@ function Article() {
     );
 }
 
-export default Article;
+export default ArticlePage;

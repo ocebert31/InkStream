@@ -9,7 +9,7 @@ import Error from '../components/Notifications/ErrorAlert';
 import React, { useState } from 'react';
 import ConfirmPassword from '../common/Users/ConfirmPasswordInput';
 
-function Registration() {
+function RegisterPage() {
     const { register, handleSubmit, formState: { errors }, getValues } = useForm();
     const [showSuccessAlert, setShowSuccessAlert] = useState('');
     const [showErrorAlert, setShowErrorAlert] = useState('');
@@ -68,4 +68,4 @@ function Registration() {
     );
 }
 
-export default Registration;
+export default RegisterPage;

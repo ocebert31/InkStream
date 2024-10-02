@@ -6,7 +6,7 @@ import Favorites from '../ArticleHandler/FavoriteArticleButton';
 import Share from '../ArticleHandler/ShareArticle';
 import Vote from '../../../common/Votes/Vote';
 
-function Display({ article }) {
+function ArticleContent({ article }) {
     const [articleState, setArticleState] = useState(article || {});
 
     useEffect(() => {
@@ -48,4 +48,4 @@ function Display({ article }) {
     );
 }
 
-export default Display;
+export default ArticleContent;

@@ -2,7 +2,7 @@ import React from 'react';
 import { faXmark, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function Error({ message, onClose }) {
+function ErrorAlert({ message, onClose }) {
     return (
         <div className="fixed top-4 right-4 z-50 max-w-sm w-full bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg shadow-lg flex items-center space-x-4">
                 <FontAwesomeIcon icon={faCircleInfo}/>
@@ -16,4 +16,4 @@ function Error({ message, onClose }) {
     );
 }
 
-export default Error;
+export default ErrorAlert;

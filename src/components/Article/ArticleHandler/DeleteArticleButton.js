@@ -6,7 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../../context/AuthContext";
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-function Delete({ id }) {
+function DeleteArticleButton({ id }) {
     const navigate = useNavigate();
     const { token } = useAuth();
     const [showErrorAlert, setShowErrorAlert] = useState("");
@@ -30,4 +30,4 @@ function Delete({ id }) {
     );
 };
 
-export default Delete;
+export default DeleteArticleButton;

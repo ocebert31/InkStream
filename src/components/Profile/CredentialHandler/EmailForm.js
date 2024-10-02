@@ -9,7 +9,7 @@ import Password from '../../../common/Users/PasswordInput';
 import SuccessAlert from '../../Notifications/SuccessAlert';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-function ChangeEmail() {
+function EmailForm() {
     const [showSuccessAlert, setShowSuccessAlert] = useState('');
     const [showErrorAlert, setShowErrorAlert] = useState('');
     const [isOpen, setIsOpen] = useState(false);
@@ -47,4 +47,4 @@ function ChangeEmail() {
     );
 }
 
-export default ChangeEmail;
+export default EmailForm;

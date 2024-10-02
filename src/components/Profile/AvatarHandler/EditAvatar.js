@@ -6,7 +6,7 @@ import Select from './SelectorAvatar';
 import avatarOptionsData from '../../../utils/constants/avatarCustomizationOptions';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
-const AvatarEditor = ({ avatarOptions, onAvatarChange }) => {
+function EditAvatar ({ avatarOptions, onAvatarChange }) {
     const [localAvatarOptions, setLocalAvatarOptions] = useState(avatarOptions);
     const { token } = useAuth();
     const [showErrorAlert, setShowErrorAlert] = useState("");
@@ -52,4 +52,4 @@ const AvatarEditor = ({ avatarOptions, onAvatarChange }) => {
     );
 };
 
-export default AvatarEditor;
+export default EditAvatar;
