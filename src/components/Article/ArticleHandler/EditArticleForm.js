@@ -3,12 +3,12 @@ import { useForm, Controller } from 'react-hook-form';
 import { updateArticle } from '../../../services/articleService';
 import { buildFormData } from '../../../utils/constants/formDataBuilder';
 import Title from '../../../common/Articles/TitleInput';
-import Content from '../../../common/Articles/EditorContent';
-import Image from '../../../common/Articles/UploaderImage';
+import Content from '../../../common/Articles/ContentEditor';
+import Image from '../../../common/Articles/ImageUploader';
 import { useAuth } from "../../../context/AuthContext";
 import './EditFormArticle.css';
-import Tags from '../../../common/Articles/ManagerTag';
-import Categories from '../../../common/Articles/SelectorCategory';
+import Tags from '../../../common/Articles/TagManager';
+import Categories from '../../../common/Articles/CategorySelector';
 import EditActions from '../../../common/UI/EditActions';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 

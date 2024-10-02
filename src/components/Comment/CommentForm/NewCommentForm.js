@@ -4,7 +4,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
 import { postComment } from '../../../services/commentService'; 
 import { useAuth } from '../../../context/AuthContext';
-import GifSelector from './SelectorGif';
+import GifSelector from './GifSelector';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
 function NewComment({ articleId, onAdded, commentId, setIsReply, comment, typeForm}) {

@@ -2,7 +2,7 @@ import React , {useState} from 'react';
 import { createCategories } from '../../../../services/categoryService';
 import { useAuth } from '../../../../context/AuthContext';
 import { useForm, Controller } from 'react-hook-form';
-import Name from './NameInputCategory';
+import Name from './CategoryNameInput';
 import ErrorAlert from '../../../Notifications/ErrorAlert';
 
 function New({handleCategoryAdded}) {
