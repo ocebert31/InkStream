@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getOneArticle } from '../services/articleService';
 import { useParams } from 'react-router-dom';
-import Delete from '../components/Article/ManagementArticle/DeleteButtonArticle';
-import Edit from '../components/Article/ManagementArticle/EditButtonArticle';
-import ArticleDisplay from '../components/Article/DisplayArticle/ContentArticle';
-import ArticleEdition from '../components/Article/ManagementArticle/EditFormArticle';
+import Delete from '../components/Article/ArticleHandler/DeleteArticleButton';
+import Edit from '../components/Article/ArticleHandler/EditArticleButton';
+import ArticleDisplay from '../components/Article/DisplayArticle/ArticleContent';
+import ArticleEdition from '../components/Article/ArticleHandler/EditArticleForm';
 import { useAuth } from "../context/AuthContext";
-import Comments from '../components/Comment/ListComment';
+import Comments from '../components/Comment/CommentList';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function Article() {

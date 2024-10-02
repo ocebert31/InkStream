@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getArticles } from '../services/articleService';
-import Card from '../components/Article/DisplayArticle/CardArticle.js';
+import Card from '../components/Article/DisplayArticle/ArticleCard.js';
 import Search from '../common/Articles/SearchBar.js';
 import './HomePage.css';
 import { useAuth } from '../context/AuthContext';

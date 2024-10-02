@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getComments } from '../../services/commentService';
 import Comment from './DisplayComment/DisplayComment';
-import New from './FormComment/NewFormComment';
+import New from './CommentForm/NewCommentForm';
 import { useAuth } from '../../context/AuthContext';
 import defaultAvatarData from '../../utils/constants/defaultAvatarOptions';
 import InfiniteScrollComponent from '../../common/UI/InfiniteScroll';

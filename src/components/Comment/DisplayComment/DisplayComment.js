@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Display from './VisibilityToggleComment';
-import NewReply from '../FormComment/NewFormReply';
+import Display from './ToggleCommentVisibility';
+import NewReply from '../CommentForm/NewReplyForm';
 import DisplayReply from './DisplayReply';
-import HeaderComment from '../../Profile/ManagementAvatar/CommentAvatar';
-import CommentActions from '../ManagementComment/ActionsComment';
+import HeaderComment from '../../Profile/AvatarHandler/CommentAvatar';
+import CommentActions from '../CommentHandler/CommentActions';
 
 function Comment({ comment, handleCommentDeleted, onReply, typeForm='reply comment' }) {
     const [commentState, setCommentState] = useState(comment || {});

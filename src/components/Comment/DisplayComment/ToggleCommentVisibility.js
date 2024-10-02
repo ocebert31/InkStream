@@ -1,5 +1,5 @@
 import React from 'react';
-import CommentOfUser from './ViewContentComment';
+import CommentOfUser from './ViewCommentContent';
 
 function CommentDisplay({ isHidden, toggleHidden, content, comment }) {
     return (

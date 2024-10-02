@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {getCategories} from '../../../services/categoryService';
 import { useAuth } from '../../../context/AuthContext'
-import New from './FormCategory/NewFormCategory';
-import Delete from './ManagementCategory/DeleteButtonCategory';
-import Edit from './ManagementCategory/EditButtonCategory';
+import New from './CategoryForm/NewCategoryForm';
+import Delete from './CategoryHandler/DeleteCategoryButton';
+import Edit from './CategoryHandler/EditCategoryButton';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ErrorAlert from '../../Notifications/ErrorAlert';
