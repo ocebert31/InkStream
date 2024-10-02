@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import Filter from '../components/Article/FilterArticle.js';
 import InfiniteScrollComponent from '../common/UI/InfiniteScroll.js';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
+import { checkHasMore } from '../utils/helpers/checkHasMore.js';
 
 function Articles({ type }) {
     const { token } = useAuth();
@@ -25,19 +26,13 @@ function Articles({ type }) {
                 const fetchedArticles = await getArticles(searchQuery, page, limit, type, token, selectedCategory);
                 setArticles(prevArticles => page === 1 ? fetchedArticles : [...prevArticles, ...fetchedArticles]);
                 setArticleLength(fetchedArticles.length);
-                checkHasMoreArticles(fetchedArticles)
+                checkHasMore(fetchedArticles, limit, setHasMore)
             } catch {
                 setShowErrorAlert("Erreur lors de la récupération des articles.");
             }
         };
         loadArticles();
     }, [searchQuery, page, limit, type, token, selectedCategory]);
-
-    const checkHasMoreArticles = (fetchedArticles) => {
-        if (fetchedArticles.length < limit) {
-            setHasMore(false);
-        } else setHasMore(true)
-    }
 
     useEffect(() => {
         setArticles([]);

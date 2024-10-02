@@ -7,6 +7,7 @@ import CategoryList from '../components/Dashboard/Category/ListCategory.js';
 import Stat from '../components/Dashboard/Statistic/Statistic.js';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 import tabs from '../utils/constants/tabs';
+import { checkHasMore } from '../utils/helpers/checkHasMore.js';
 
 function UsersList() {
     const [users, setUsers] = useState([]);
@@ -30,7 +31,7 @@ function UsersList() {
                 try {
                     const fetchedUsers = await getUsers(searchQuery, page, limit, token);
                     setUsers(prevUsers => page === 1 ? fetchedUsers.users : [...prevUsers, ...fetchedUsers.users]);
-                    checkHasMoreUsers(fetchedUsers);
+                    checkHasMore(fetchedUsers, limit, setHasMore);
                 } catch {
                     setShowErrorAlert("Erreur lors du chargement des utilisateurs");
                 }
@@ -38,12 +39,6 @@ function UsersList() {
             loadUsers();
         }
     }, [searchQuery, page, limit, token, activeTab]);
-
-    const checkHasMoreUsers = (fetchedUsers) => {
-        if (fetchedUsers.users.length < limit) {
-            setHasMore(false);
-        } else setHasMore(true);
-    }
 
     const handleRoleChange = async (userId, newRole) => {
         try {

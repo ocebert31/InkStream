@@ -6,6 +6,7 @@ import { useAuth } from '../../context/AuthContext';
 import defaultAvatarData from '../../utils/constants/defaultAvatarOptions';
 import InfiniteScrollComponent from '../../common/UI/InfiniteScroll';
 import ErrorAlert from '../Notifications/ErrorAlert';
+import { checkHasMore } from '../../utils/helpers/checkHasMore';
 
 function Comments({ articleId }) {
     const [comments, setComments] = useState([]);
@@ -25,19 +26,13 @@ function Comments({ articleId }) {
                     replies: comment.replies || []
                 }));
                 setComments(prevComments => page === 1 ? commentsWithReplies : [...prevComments, ...commentsWithReplies]);
-                checkHasMoreComments(fetchedComments);
+                checkHasMore(fetchedComments, limit, setHasMore);
             } catch {
                 setShowErrorAlert("Erreur lors de la récupération des commentaires.");
             }
         };
         loadComments();
     }, [page]);
-
-    const checkHasMoreComments = (fetchedComments) => {
-        if (fetchedComments.length < limit) {
-            setHasMore(false);
-        } else setHasMore(true)
-    }
 
     useEffect(() => {
         if (user) {
