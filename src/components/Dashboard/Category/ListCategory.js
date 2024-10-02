@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {getCategories} from '../services/categoryService';
-import { useAuth } from '../context/AuthContext'
-import New from './New/new';
-import Delete from './Delete/delete';
-import Edit from './Edit/edit';
+import {getCategories} from '../../../services/categoryService';
+import { useAuth } from '../../../context/AuthContext'
+import New from './FormCategory/NewFormCategory';
+import Delete from './ManagementCategory/DeleteButtonCategory';
+import Edit from './ManagementCategory/EditButtonCategory';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ErrorAlert from '../components/Notifications/ErrorAlert';
+import ErrorAlert from '../../Notifications/ErrorAlert';
 
 function CategoryList() {
     const { token } = useAuth();

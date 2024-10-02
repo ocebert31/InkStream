@@ -3,8 +3,8 @@ import { getUsers, updateUserRole } from '../services/adminService';
 import { useAuth } from "../context/AuthContext";
 import InfiniteScrollComponent from '../common/UI/InfiniteScroll.js';
 import Search from '../common/Articles/SearchBar.js';
-import CategoryList from '../Categories/categoryList';
-import Stat from '../Stat/stat';
+import CategoryList from '../components/Dashboard/Category/ListCategory.js';
+import Stat from '../components/Dashboard/Statistic/Statistic.js';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 import tabs from '../utils/constants/tabs';
 

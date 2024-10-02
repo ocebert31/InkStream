@@ -1,9 +1,9 @@
 import React , {useState} from 'react';
-import { createCategories } from '../../services/categoryService';
-import { useAuth } from '../../context/AuthContext';
+import { createCategories } from '../../../../services/categoryService';
+import { useAuth } from '../../../../context/AuthContext';
 import { useForm, Controller } from 'react-hook-form';
-import Name from './name';
-import ErrorAlert from '../../components/Notifications/ErrorAlert';
+import Name from './NameInputCategory';
+import ErrorAlert from '../../../Notifications/ErrorAlert';
 
 function New({handleCategoryAdded}) {
     const { control, handleSubmit, reset, formState: { errors } } = useForm();
