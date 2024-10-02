@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { createArticles } from '../services/articleService';
 import Title from '../common/Articles/TitleInput';
-import Content from '../common/Articles/ContentEditor';
-import Image from '../common/Articles/ImageUploader';
+import Content from '../common/Articles/EditorContent';
+import Image from '../common/Articles/UploaderImage';
 import { buildFormData } from '../utils/constants/formDataBuilder';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import './NewArticlePage.css';
-import Tags from '../common/Articles/TagManager';
-import Categories from '../common/Articles/CategorySelector';
+import Tags from '../common/Articles/ManagerTag';
+import Categories from '../common/Articles/SelectorCategory';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function New() {

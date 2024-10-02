@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import Categories from '../../common/Articles/CategorySelector';
+import Categories from '../../common/Articles/SelectorCategory';
 
 function Filter({ onCategoryChange }) {
     const [showMenu, setShowMenu] = useState(false);

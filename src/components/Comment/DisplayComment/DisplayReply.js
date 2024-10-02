@@ -1,4 +1,4 @@
-import Comment from "../../Comment/comment";
+import Comment from "./DisplayComment";
 
 function Display ({comment, handleCommentDeleted, onReply}) {
     return(

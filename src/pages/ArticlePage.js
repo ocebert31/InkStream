@@ -6,7 +6,7 @@ import Edit from '../components/Article/ManagementArticle/EditButtonArticle';
 import ArticleDisplay from '../components/Article/DisplayArticle/ContentArticle';
 import ArticleEdition from '../components/Article/ManagementArticle/EditFormArticle';
 import { useAuth } from "../context/AuthContext";
-import Comments from '../Comments/comments';
+import Comments from '../components/Comment/ListComment';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 
 function Article() {

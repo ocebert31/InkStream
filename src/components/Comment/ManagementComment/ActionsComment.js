@@ -1,5 +1,5 @@
-import Edit from '../Button/edit';
-import Delete from "../Button/delete";
+import Edit from './EditButtonComment';
+import Delete from "./DeleteButtonComment";
 import CommonVote from '../../../common/Votes/Vote';
 import { useAuth } from "../../../context/AuthContext";
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { getComments } from '../services/commentService';
-import Comment from './Comment/comment';
-import New from './Comment/New/new';
-import { useAuth } from '../context/AuthContext';
-import defaultAvatarData from '../utils/constants/defaultAvatarOptions';
-import InfiniteScrollComponent from '../common/UI/InfiniteScroll';
-import ErrorAlert from '../components/Notifications/ErrorAlert';
+import { getComments } from '../../services/commentService';
+import Comment from './DisplayComment/DisplayComment';
+import New from './FormComment/NewFormComment';
+import { useAuth } from '../../context/AuthContext';
+import defaultAvatarData from '../../utils/constants/defaultAvatarOptions';
+import InfiniteScrollComponent from '../../common/UI/InfiniteScroll';
+import ErrorAlert from '../Notifications/ErrorAlert';
 
 function Comments({ articleId }) {
     const [comments, setComments] = useState([]);

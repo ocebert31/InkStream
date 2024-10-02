@@ -1,4 +1,4 @@
-import NewComment from "../../Comment/New/new";
+import NewComment from "./NewFormComment";
 import React, { useState } from 'react';
 
 function NewReply ({comment, typeForm, onReply}) {
