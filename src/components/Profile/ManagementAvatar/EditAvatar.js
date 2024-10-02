@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Avatar from 'avataaars';
-import { updateAvatarOptions } from '../services/authenticationService';
-import { useAuth } from '../context/AuthContext';
-import Select from './selectAvatar';
-import avatarOptionsData from '../utils/constants/avatarCustomizationOptions';
-import ErrorAlert from '../components/Notifications/ErrorAlert';
+import { updateAvatarOptions } from '../../../services/authenticationService';
+import { useAuth } from '../../../context/AuthContext';
+import Select from './SelectorAvatar';
+import avatarOptionsData from '../../../utils/constants/avatarCustomizationOptions';
+import ErrorAlert from '../../Notifications/ErrorAlert';
 
 const AvatarEditor = ({ avatarOptions, onAvatarChange }) => {
     const [localAvatarOptions, setLocalAvatarOptions] = useState(avatarOptions);

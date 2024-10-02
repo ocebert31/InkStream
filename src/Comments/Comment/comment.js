@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Display from './Display/display';
 import NewReply from '../Reply/New/new';
 import DisplayReply from '../Reply/Display/display';
-import HeaderComment from '../../Avatar/headerComment';
+import HeaderComment from '../../components/Profile/ManagementAvatar/CommentAvatar';
 import CommentActions from './New/commentActions';
 
 function Comment({ comment, handleCommentDeleted, onReply, typeForm='reply comment' }) {

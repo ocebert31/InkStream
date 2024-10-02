@@ -1,9 +1,9 @@
 import { useAuth } from '../context/AuthContext';
-import AvatarEditor from '../Avatar/avatarEditor'; 
-import AvatarUser from '../Avatar/avatarUser';
+import AvatarEditor from '../components/Profile/ManagementAvatar/EditAvatar'; 
+import AvatarUser from '../components/Profile/ManagementAvatar/DisplayAvatar';
 import React, { useState, useEffect } from 'react';
-import ChangeEmail from '../Profile/changeEmail';
-import ChangePassword from '../Profile/changePassword';
+import ChangeEmail from '../components/Profile/EditAccount/EditFormEmail';
+import ChangePassword from '../components/Profile/EditAccount/EditFormPassword';
 import defaultAvatarOptions from '../utils/constants/defaultAvatarOptions';
 
 function Profile() {

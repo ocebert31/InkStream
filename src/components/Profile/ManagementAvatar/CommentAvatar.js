@@ -1,6 +1,6 @@
 import Avatar from 'avataaars';
 import React, { useEffect, useState } from 'react';
-import defaultAvatarOptions from '../utils/constants/defaultAvatarOptions';
+import defaultAvatarOptions from '../../../utils/constants/defaultAvatarOptions';
 
 function HeaderComment({comment}) {
     const [avatarOptions, setAvatarOptions] = useState(defaultAvatarOptions);

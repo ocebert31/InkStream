@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { updateEmail } from '../services/authenticationService';
+import { updateEmail } from '../../../services/authenticationService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
-import Email from '../common/Users/EmailInput';
-import { useAuth } from '../context/AuthContext';
-import Password from '../common/Users/PasswordInput';
-import SuccessAlert from '../components/Notifications/SuccessAlert';
-import ErrorAlert from '../components/Notifications/ErrorAlert';
+import Email from '../../../common/Users/EmailInput';
+import { useAuth } from '../../../context/AuthContext';
+import Password from '../../../common/Users/PasswordInput';
+import SuccessAlert from '../../Notifications/SuccessAlert';
+import ErrorAlert from '../../Notifications/ErrorAlert';
 
 function ChangeEmail() {
     const [showSuccessAlert, setShowSuccessAlert] = useState('');

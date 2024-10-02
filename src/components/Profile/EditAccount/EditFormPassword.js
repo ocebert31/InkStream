@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { updatePassword } from '../services/authenticationService';
+import { useAuth } from '../../../context/AuthContext';
+import { updatePassword } from '../../../services/authenticationService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
-import Password from '../common/Users/PasswordInput';
+import Password from '../../../common/Users/PasswordInput';
 import { useForm } from 'react-hook-form';
-import ConfirmPassword from '../common/Users/ConfirmPasswordInput';
-import SuccessAlert from '../components/Notifications/SuccessAlert';
-import ErrorAlert from '../components/Notifications/ErrorAlert';
+import ConfirmPassword from '../../../common/Users/ConfirmPasswordInput';
+import SuccessAlert from '../../Notifications/SuccessAlert';
+import ErrorAlert from '../../Notifications/ErrorAlert';
 
 function ChangePassword() {
     const { token } = useAuth();
