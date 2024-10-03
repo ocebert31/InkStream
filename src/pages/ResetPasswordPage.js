@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Email from '../common/Users/EmailInput';
+import EmailInput from '../common/Users/EmailInput';
 import { forgotPassword } from '../services/authenticationService';
 import SuccessAlert from '../components/Notifications/SuccessAlert';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
@@ -25,7 +25,7 @@ function ResetPasswordPage() {
                 <h2 className="text-2xl font-bold text-center text-primary mb-6">Récupération du mot de passe</h2>
                 <div className='flex justify-center'>
                     <form onSubmit={handleSubmit(sendEmail)} className="space-y-4 mx-5">
-                        <Email register={register} errors={errors} name='email' label='Email :'/>
+                        <EmailInput register={register} errors={errors} name='email' label='Email :'/>
                         <button type="submit" className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-colors duration-300">Récupération mot de passe</button>
                     </form>
                 </div>

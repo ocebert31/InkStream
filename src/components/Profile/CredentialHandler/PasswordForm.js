@@ -8,16 +8,19 @@ import { useForm } from 'react-hook-form';
 import ConfirmPassword from '../../../common/Users/ConfirmPasswordInput';
 import SuccessAlert from '../../Notifications/SuccessAlert';
 import ErrorAlert from '../../Notifications/ErrorAlert';
+import { confirmPasswordMatch } from '../../../utils/validators/confirmPasswordMatch';
 
 function PasswordForm() {
     const { token } = useAuth();
     const [showSuccessAlert, setShowSuccessAlert] = useState('');
     const [showErrorAlert, setShowErrorAlert] = useState('');
+    const [checkConfirmPassword, setCheckConfirmPassword] = useState('');
     const [isOpen, setIsOpen] = useState(false);
-    const { register, handleSubmit, formState: { errors }, watch } = useForm();
-    const password = watch("newPassword", "");
+    const { register, handleSubmit, formState: { errors }, getValues } = useForm();
+    const { newPassword, confirmNewPassword } = getValues();  
 
     const handlePasswordChange = async (data) => {
+        confirmPasswordMatch(setCheckConfirmPassword, newPassword, confirmNewPassword);
         try {
             await updatePassword(data.currentPassword, data.newPassword, data.confirmNewPassword, token);
             setShowSuccessAlert('Vous avez bien modifié votre mot de passe');
@@ -37,8 +40,9 @@ function PasswordForm() {
                 <div className="mt-4 p-4 border border-gray-300 rounded-lg transition-all duration-300 ease-in-out transform origin-top scale-y-100" style={{ animation: 'slideDown 0.3s ease-in-out' }}>
                     <form onSubmit={handleSubmit(handlePasswordChange)} className="space-y-4">
                         <Password register={register} errors={errors} name='currentPassword' label='Mot de passe actuel:'></Password>
-                        <Password register={register} errors={errors} name='newPassword' label='Nouveau mot de passe:' validate={{ validate: value => value === password || "Les mots de passe ne correspondent pas" }}></Password>
+                        <Password register={register} errors={errors} name='newPassword' label='Nouveau mot de passe:'></Password>
                         <ConfirmPassword register={register} errors={errors} name='confirmNewPassword' label='Confirmer le nouveau mot de passe :'></ConfirmPassword>
+                        {checkConfirmPassword && <p className="text-red-500 text-center mt-2">{checkConfirmPassword}</p>}
                         <button type="submit" className="w-full bg-primary text-white py-2 rounded-lg">Changer le mot de passe</button>
                     </form>
                 </div>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {getCategories} from '../../../services/categoryService';
 import { useAuth } from '../../../context/AuthContext'
-import New from './CategoryForm/NewCategoryForm';
-import Delete from './CategoryHandler/DeleteCategoryButton';
-import Edit from './CategoryHandler/EditCategoryButton';
+import NewCategoryForm from './CategoryForm/NewCategoryForm';
+import DeleteCategoryButton from './CategoryHandler/DeleteCategoryButton';
+import EditCategoryButton from './CategoryHandler/EditCategoryButton';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ErrorAlert from '../../Notifications/ErrorAlert';
@@ -52,10 +52,10 @@ function ListCategory() {
             {categories.map((category) => (
                 <div key={category._id}>
                     {isEditing === category._id ? (
-                        <Edit category={category} handleCategoryUpdated={handleCategoryUpdated} editCategory={editCategory} />
+                        <EditCategoryButton category={category} handleCategoryUpdated={handleCategoryUpdated} editCategory={editCategory} />
                     ) : (
                         <div className='flex items-center'>
-                            <Delete category={category} handleCategoryDelete={handleCategoryDelete}></Delete>
+                            <DeleteCategoryButton category={category} handleCategoryDelete={handleCategoryDelete}/>
                             <p>{category.name}</p>
                             <button onClick={() => editCategory(category._id)} className="p-2 text-blue-500 hover:text-blue-700 transition-colors duration-150" aria-label="Modifier la catégorie">
                                 <FontAwesomeIcon icon={faPen} />
@@ -64,7 +64,7 @@ function ListCategory() {
                     )}
                 </div>
             ))}
-            <New handleCategoryAdded={handleCategoryAdded}></New>
+            <NewCategoryForm handleCategoryAdded={handleCategoryAdded}/>
             {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>
     )

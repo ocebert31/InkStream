@@ -1,13 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { postInscription } from '../services/authenticationService';
 import Email from '../common/Users/EmailInput';
-import Password from '../common/Users/EmailInput';
+import Password from '../common/Users/PasswordInput';
 import './RegisterPage.css';
 import { Link } from 'react-router-dom';
 import Success from '../components/Notifications/SuccessAlert';
 import Error from '../components/Notifications/ErrorAlert';
 import React, { useState } from 'react';
 import ConfirmPassword from '../common/Users/ConfirmPasswordInput';
+import { confirmPasswordMatch } from '../utils/validators/confirmPasswordMatch';
 
 function RegisterPage() {
     const { register, handleSubmit, formState: { errors }, getValues } = useForm();
@@ -15,9 +16,10 @@ function RegisterPage() {
     const [showErrorAlert, setShowErrorAlert] = useState('');
     const [checkConfirmPassword, setCheckConfirmPassword] = useState('');
     const [isConfirmationRegistration, setIsConfirmationRegistration] = useState(false)
+    const { password, confirmPassword } = getValues();
 
     const onSubmit = async (data) => {
-        confirmPasswordMatch()
+        confirmPasswordMatch(setCheckConfirmPassword, password, confirmPassword)
         try {
             await postInscription(data);
             setShowSuccessAlert("Vous êtes désormais inscrit avec succès !");
@@ -26,14 +28,6 @@ function RegisterPage() {
             setShowErrorAlert("Erreur lors de l'inscription. Veuillez réessayer.");
         }
     };
-
-    const confirmPasswordMatch = () => {
-        const { password, confirmPassword } = getValues();
-        if (password !== confirmPassword) {
-            setCheckConfirmPassword('Les mots de passe ne correspondent pas.');
-            return;
-        }
-    }
 
     return (
         <div>
