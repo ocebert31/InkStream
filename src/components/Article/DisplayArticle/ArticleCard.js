@@ -1,13 +1,11 @@
 import React from 'react';
-import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './ArticleCard.css';
 import Audio from '../ArticleAudio';
+import { formatLongDate } from "../../../utils/helpers/date";
 
 function ArticleCard({ article }) {
-    const formattedDate = format(new Date(article.createdAt), 'd MMMM yyyy')
-
     return (
         <div className="flex flex-col md:flex-row bg-white m-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-4 md:p-6">
             <div className="flex-1 p-2 md:p-6">
@@ -15,7 +13,7 @@ function ArticleCard({ article }) {
                 <div className='flex items-center'>
                     <span className='pr-1'>Par</span>
                     <span className="text-primary py-4 pr-1 dark:text-white font-bold">{article.pseudo}</span>
-                    <p className='text-xs md:text-base text-primary'>le {formattedDate}</p>
+                    <p className='text-xs md:text-base text-primary'>le {formatLongDate(article)}</p>
                 </div>
                 <p className="text-base md:text-3xl font-semibold text-gray-700 dark:text-gray-400 text-container" dangerouslySetInnerHTML={{ __html: article.content || '<p>No description available.</p>' }}></p>
                 <div className='flex py-3'>

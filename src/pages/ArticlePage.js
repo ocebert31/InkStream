@@ -8,6 +8,7 @@ import ArticleEdition from '../components/Article/ArticleHandler/EditArticleForm
 import { useAuth } from "../context/AuthContext";
 import Comments from '../components/Comment/CommentList';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
+import { isAuthor } from '../utils/helpers/autorization';
 
 function ArticlePage() {
     const [article, setArticle] = useState(null);
@@ -44,13 +45,11 @@ function ArticlePage() {
                     </div>
                 </div>
     }
-
-    const isAuthor = user && (user._id === article.userId || user.role === 'admin');
  
     return (
         <div className='bg-gray-100 min-h-screen'>
             <div className="container mx-auto px-4 py-8">
-                {isAuthor && (
+                {isAuthor(user, article) && (
                     <div className="flex justify-center space-x-4 mb-4">
                         <Delete id={article._id} />
                         <Edit editArticle={editArticle} isEditing={isEditing}/>

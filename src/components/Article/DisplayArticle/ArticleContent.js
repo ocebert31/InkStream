@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import parse from 'html-react-parser';
-import { format } from 'date-fns';
 import './ArticleContent.css';
 import Favorites from '../ArticleHandler/FavoriteArticleButton';
 import Share from '../ArticleHandler/ShareArticle';
 import Vote from '../../../common/Votes/Vote';
+import { formatLongDate } from '../../../utils/helpers/date';
 
 function ArticleContent({ article }) {
     const [articleState, setArticleState] = useState(article || {});
@@ -18,7 +18,6 @@ function ArticleContent({ article }) {
     };
 
     const sanitizedContent = sanitizeHtml(article.content);
-    const formattedDate = format(new Date(article.createdAt), 'MMM dd, yyyy');
 
     return (
         <div>
@@ -30,7 +29,7 @@ function ArticleContent({ article }) {
                 <span className='pr-1'>Par</span>
                 <span className="pr-1 font-semibold">{article.pseudo}</span>
                 <span className='pr-1'>le</span>
-                <p>{formattedDate}</p> 
+                <p>{formatLongDate(article) }</p> 
             </div> 
             <div className='flex justify-start py-3'>
                 {article.tags && article.tags.map((tag, index) => (
