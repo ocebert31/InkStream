@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { updateComment } from '../../../services/commentService';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../../context/AuthContext';
-import Content from '../../../common/Comments/ContentInput';
+import ContentInput from '../../../common/Comments/ContentInput';
 import EditActions from '../../../common/UI/EditActions';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
@@ -32,8 +32,8 @@ function EditCommentButton({ comment, content, setContent, isEditing, setIsEditi
             {isEditing ? (
                 <div className="p-4 border rounded-lg bg-gray-50 shadow-md">
                     <form onSubmit={handleSubmit(onSubmit)} className="gap-4">
-                        <Controller name="content" control={control} defaultValue="" render={({ field }) => (<Content {...field} errorMessage={errors.content?.message} />)} rules={{ required: "Contenu requis" }}/>
-                        <EditActions cancelEdit={handleEditingEnd}></EditActions>
+                        <Controller name="content" control={control} defaultValue="" render={({ field }) => (<ContentInput {...field} errorMessage={errors.content?.message} />)} rules={{ required: "Contenu requis" }}/>
+                        <EditActions cancelEdit={handleEditingEnd}/>
                     </form> 
                 </div>
             ) : (

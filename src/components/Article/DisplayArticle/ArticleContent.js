@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import parse from 'html-react-parser';
 import './ArticleContent.css';
-import Favorites from '../ArticleHandler/FavoriteArticleButton';
-import Share from '../ArticleHandler/ShareArticle';
+import FavoriteArticleButton from '../ArticleHandler/FavoriteArticleButton';
+import ShareArticle from '../ArticleHandler/ShareArticle';
 import Vote from '../../../common/Votes/Vote';
 import { formatLongDate } from '../../../utils/helpers/date';
 
@@ -38,8 +38,8 @@ function ArticleContent({ article }) {
             </div>
             <div className="p-6 rounded-lg shadow-lg max-w-2xl mx-auto image-article">{article.imageUrl && <img src={article.imageUrl} alt={article.title} className="w-full h-auto"/>}</div>
             <div className='flex justify-center items-center'>
-                <Favorites article={article}></Favorites>
-                <Share article={article}></Share>
+                <FavoriteArticleButton article={article}/>
+                <ShareArticle article={article}/>
                 <Vote upvotes={articleState.upvotes} downvotes={articleState.downvotes} userVote={articleState.userVote} subject={articleState} type='article'/>
             </div> 
             <div className="pt-8 text-center">{parse(sanitizedContent)}</div>

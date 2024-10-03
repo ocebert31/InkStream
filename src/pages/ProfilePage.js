@@ -1,9 +1,9 @@
 import { useAuth } from '../context/AuthContext';
-import AvatarEditor from '../components/Profile/AvatarHandler/EditAvatar'; 
-import AvatarUser from '../components/Profile/AvatarHandler/DisplayAvatar';
+import EditAvatar from '../components/Profile/AvatarHandler/EditAvatar'; 
+import DisplayAvatar from '../components/Profile/AvatarHandler/DisplayAvatar';
 import React, { useState, useEffect } from 'react';
-import ChangeEmail from '../components/Profile/CredentialHandler/EmailForm';
-import ChangePassword from '../components/Profile/CredentialHandler/PasswordForm';
+import EmailForm from '../components/Profile/CredentialHandler/EmailForm';
+import PasswordForm from '../components/Profile/CredentialHandler/PasswordForm';
 import defaultAvatarOptions from '../utils/constants/defaultAvatarOptions';
 
 function ProfilePage() {
@@ -50,13 +50,13 @@ function ProfilePage() {
             {user.email}
             <div className="flex justify-center"> 
                 {showAvatarEditor ? (
-                    <AvatarEditor avatarOptions={avatarOptions} onAvatarChange={handleAvatarChange} />
+                    <EditAvatar avatarOptions={avatarOptions} onAvatarChange={handleAvatarChange} />
                 ) : (
-                    <AvatarUser avatarOptions={avatarOptions} toggleAvatarEditor={toggleAvatarEditor}/>
+                    <DisplayAvatar avatarOptions={avatarOptions} toggleAvatarEditor={toggleAvatarEditor}/>
                 )}
             </div>
-            <ChangeEmail></ChangeEmail>
-            <ChangePassword></ChangePassword>
+            <EmailForm/>
+            <PasswordForm/>
         </div>
     );
 }

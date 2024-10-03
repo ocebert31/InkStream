@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Avatar from 'avataaars';
 import { updateAvatarOptions } from '../../../services/authenticationService';
 import { useAuth } from '../../../context/AuthContext';
-import Select from './SelectorAvatar';
+import SelectorAvatar from './SelectorAvatar';
 import avatarOptionsData from '../../../utils/constants/avatarCustomizationOptions';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
@@ -41,7 +41,7 @@ function EditAvatar ({ avatarOptions, onAvatarChange }) {
             </div>
             <div className="space-y-4">
                 {avatarOptionsData.map(({ label, key, options }) => (
-                    <Select key={key} label={label} value={localAvatarOptions[key]} options={options} onChange={(e) => handleChange(key, e.target.value)}/>
+                    <SelectorAvatar key={key} label={label} value={localAvatarOptions[key]} options={options} onChange={(e) => handleChange(key, e.target.value)}/>
                 ))}
                 <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300" onClick={handleSubmit}>
                     Valider

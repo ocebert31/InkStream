@@ -1,4 +1,4 @@
-import NewComment from "./NewCommentForm";
+import NewCommentForm from "./NewCommentForm";
 import React, { useState } from 'react';
 
 function NewReplyForm ({comment, typeForm, onReply}) {
@@ -16,7 +16,7 @@ function NewReplyForm ({comment, typeForm, onReply}) {
     return(
         <div>
             {isReply ? (
-                <NewComment articleId={comment.articleId} onAdded={handleReplyAdded} commentId={comment._id} setIsReply={setIsReply} comment={comment} typeForm={typeForm}/>
+                <NewCommentForm articleId={comment.articleId} onAdded={handleReplyAdded} commentId={comment._id} setIsReply={setIsReply} comment={comment} typeForm={typeForm}/>
             ) : (
                 <div>
                     {!comment.commentId &&

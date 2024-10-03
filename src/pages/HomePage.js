@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getArticles } from '../services/articleService';
-import Card from '../components/Article/DisplayArticle/ArticleCard.js';
-import Search from '../common/Articles/SearchBar.js';
+import ArticleCard from '../components/Article/DisplayArticle/ArticleCard.js';
+import SearchBar from '../common/Articles/SearchBar.js';
 import './HomePage.css';
 import { useAuth } from '../context/AuthContext';
-import Filter from '../components/Article/FilterArticle.js';
+import FilterArticle from '../components/Article/FilterArticle.js';
 import InfiniteScrollComponent from '../common/UI/InfiniteScroll.js';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 import { checkHasMore } from '../utils/helpers/checkHasMore.js';
@@ -59,13 +59,13 @@ function HomePage({ type }) {
                 </h1>
             </div>
             <div className='flex justify-center items-center'>
-                <Search handleSearchQueryChange={handleSearchQueryChange} />
-                <Filter onCategoryChange={handleCategoryChange}/>
+                <SearchBar handleSearchQueryChange={handleSearchQueryChange}/>
+                <FilterArticle onCategoryChange={handleCategoryChange}/>
             </div>
             <InfiniteScrollComponent loadMore={() => setPage(page + 1)} dataLength={articleLength} hasMore={hasMore}>
                 <ul>
                     {articles.map((article, index) => (
-                        <Card key={index} article={article} />
+                        <ArticleCard key={index} article={article}/>
                     ))}
                 </ul>
             </InfiniteScrollComponent>

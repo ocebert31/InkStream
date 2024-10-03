@@ -3,9 +3,9 @@ import { updateEmail } from '../../../services/authenticationService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
-import Email from '../../../common/Users/EmailInput';
+import EmailInput from '../../../common/Users/EmailInput';
 import { useAuth } from '../../../context/AuthContext';
-import Password from '../../../common/Users/PasswordInput';
+import PasswordInput from '../../../common/Users/PasswordInput';
 import SuccessAlert from '../../Notifications/SuccessAlert';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 
@@ -35,8 +35,8 @@ function EmailForm() {
             {isOpen && (
                 <div className="mt-4 p-4 border border-gray-300 rounded-lg transition-all duration-300 ease-in-out transform origin-top scale-y-100" style={{ animation: 'slideDown 0.3s ease-in-out' }}>
                     <form onSubmit={handleSubmit(handleEmailUpdate)} className="space-y-4">
-                        <Email register={register} errors={errors} name='newEmail' label='Nouvelle adresse mail :'></Email>
-                        <Password register={register} errors={errors} name='currentPassword' label='Mot de passe actuel :'></Password>
+                        <EmailInput register={register} errors={errors} name='newEmail' label='Nouvelle adresse mail :'/>
+                        <PasswordInput register={register} errors={errors} name='currentPassword' label='Mot de passe actuel :'/>
                         <button type="submit" className="w-full bg-primary text-white py-2 rounded-lg">Mettre à jour</button>
                     </form>
                 </div>

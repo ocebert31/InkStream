@@ -5,7 +5,7 @@ import logo from '../../assets/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars} from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
-import Menu from './SideBarMenu';
+import SideBarMenu from './SideBarMenu';
 
 function Header() {
     const { token, logout } = useAuth();
@@ -43,7 +43,7 @@ function Header() {
                     </div>
                 )}
             </nav>
-            {showMenu && <Menu onClose={handleLinkClick} onLogout={closeConnexionAndNav} />}
+            {showMenu && <SideBarMenu onClose={handleLinkClick} onLogout={closeConnexionAndNav} />}
         </header>
     );
 }

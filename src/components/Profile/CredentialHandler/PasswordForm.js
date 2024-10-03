@@ -3,9 +3,9 @@ import { useAuth } from '../../../context/AuthContext';
 import { updatePassword } from '../../../services/authenticationService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
-import Password from '../../../common/Users/PasswordInput';
+import PasswordInput from '../../../common/Users/PasswordInput';
 import { useForm } from 'react-hook-form';
-import ConfirmPassword from '../../../common/Users/ConfirmPasswordInput';
+import ConfirmPasswordInput from '../../../common/Users/ConfirmPasswordInput';
 import SuccessAlert from '../../Notifications/SuccessAlert';
 import ErrorAlert from '../../Notifications/ErrorAlert';
 import { confirmPasswordMatch } from '../../../utils/validators/confirmPasswordMatch';
@@ -39,9 +39,9 @@ function PasswordForm() {
             {isOpen && (
                 <div className="mt-4 p-4 border border-gray-300 rounded-lg transition-all duration-300 ease-in-out transform origin-top scale-y-100" style={{ animation: 'slideDown 0.3s ease-in-out' }}>
                     <form onSubmit={handleSubmit(handlePasswordChange)} className="space-y-4">
-                        <Password register={register} errors={errors} name='currentPassword' label='Mot de passe actuel:'></Password>
-                        <Password register={register} errors={errors} name='newPassword' label='Nouveau mot de passe:'></Password>
-                        <ConfirmPassword register={register} errors={errors} name='confirmNewPassword' label='Confirmer le nouveau mot de passe :'></ConfirmPassword>
+                        <PasswordInput register={register} errors={errors} name='currentPassword' label='Mot de passe actuel:'/>
+                        <PasswordInput register={register} errors={errors} name='newPassword' label='Nouveau mot de passe:'/>
+                        <ConfirmPasswordInput register={register} errors={errors} name='confirmNewPassword' label='Confirmer le nouveau mot de passe :'/>
                         {checkConfirmPassword && <p className="text-red-500 text-center mt-2">{checkConfirmPassword}</p>}
                         <button type="submit" className="w-full bg-primary text-white py-2 rounded-lg">Changer le mot de passe</button>
                     </form>

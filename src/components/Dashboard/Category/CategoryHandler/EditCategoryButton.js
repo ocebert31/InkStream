@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { updateCategory } from '../../../../services/categoryService';
 import { useForm, Controller } from 'react-hook-form';
 import { useAuth } from '../../../../context/AuthContext';
-import Content from '../../../../common/Comments/ContentInput';
+import ContentInput from '../../../../common/Comments/ContentInput';
 import EditActions from '../../../../common/UI/EditActions';
 import ErrorAlert from '../../../Notifications/ErrorAlert';
 
@@ -30,8 +30,8 @@ function EditCategoryButton({ category, handleCategoryUpdated, editCategory }) {
     return (
         <div className="p-4 border rounded-lg bg-gray-50 shadow-md">
             <form onSubmit={handleSubmit(onSubmit)} className="gap-4">
-                <Controller name="content" control={control} defaultValue={content} render={({ field }) => (<Content {...field} errorMessage={errors.content?.message} />)} rules={{ required: "Contenu requis" }}/>
-                <EditActions cancelEdit={handleEditingEnd}></EditActions>
+                <Controller name="content" control={control} defaultValue={content} render={({ field }) => (<ContentInput {...field} errorMessage={errors.content?.message} />)} rules={{ required: "Contenu requis" }}/>
+                <EditActions cancelEdit={handleEditingEnd}/>
             </form> 
             {showErrorAlert && (<ErrorAlert message={showErrorAlert} onClose={() => setShowErrorAlert(false)}/>)}
         </div>

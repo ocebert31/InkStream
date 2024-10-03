@@ -1,12 +1,12 @@
 import React from 'react';
-import CommentOfUser from './ViewCommentContent';
+import ViewCommentContent from './ViewCommentContent';
 
 function ToggleCommentVisibility({ isHidden, toggleHidden, content, comment }) {
     return (
         <div className="p-2">
             {!comment.deletedAt ? (
                 <div>
-                    <CommentOfUser isHidden={isHidden} toggleHidden={toggleHidden} content={content}/>
+                    <ViewCommentContent isHidden={isHidden} toggleHidden={toggleHidden} content={content}/>
                 </div>
             ) : (
             <p>Ce commentaire a été supprimé</p>)}

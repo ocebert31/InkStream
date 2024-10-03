@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getOneArticle } from '../services/articleService';
 import { useParams } from 'react-router-dom';
-import Delete from '../components/Article/ArticleHandler/DeleteArticleButton';
-import Edit from '../components/Article/ArticleHandler/EditArticleButton';
-import ArticleDisplay from '../components/Article/DisplayArticle/ArticleContent';
-import ArticleEdition from '../components/Article/ArticleHandler/EditArticleForm';
+import DeleteArticleButton from '../components/Article/ArticleHandler/DeleteArticleButton';
+import EditArticleButton from '../components/Article/ArticleHandler/EditArticleButton';
+import ArticleContent from '../components/Article/DisplayArticle/ArticleContent';
+import EditArticleForm from '../components/Article/ArticleHandler/EditArticleForm';
 import { useAuth } from "../context/AuthContext";
-import Comments from '../components/Comment/CommentList';
+import CommentList from '../components/Comment/CommentList';
 import ErrorAlert from '../components/Notifications/ErrorAlert';
 import { isAuthor } from '../utils/helpers/autorization';
 
@@ -51,16 +51,16 @@ function ArticlePage() {
             <div className="container mx-auto px-4 py-8">
                 {isAuthor(user, article) && (
                     <div className="flex justify-center space-x-4 mb-4">
-                        <Delete id={article._id} />
-                        <Edit editArticle={editArticle} isEditing={isEditing}/>
+                        <DeleteArticleButton id={article._id} />
+                        <EditArticleButton editArticle={editArticle} isEditing={isEditing}/>
                     </div>
                 )}
                 {isEditing ? (
-                    <ArticleEdition article={article} setArticle={setArticle} cancelEdit={cancelEdit} />
+                    <EditArticleForm article={article} setArticle={setArticle} cancelEdit={cancelEdit}/>
                 ) : (
                     <div>
-                        <ArticleDisplay article={article}/>
-                        <Comments articleId={article._id}/>
+                        <ArticleContent article={article}/>
+                        <CommentList articleId={article._id}/>
                     </div>
                 )}
             </div>

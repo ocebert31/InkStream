@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getComments } from '../../services/commentService';
-import Comment from './DisplayComment/DisplayComment';
-import New from './CommentForm/NewCommentForm';
+import DisplayComment from './DisplayComment/DisplayComment';
+import NewCommentForm from './CommentForm/NewCommentForm';
 import { useAuth } from '../../context/AuthContext';
 import defaultAvatarData from '../../utils/constants/defaultAvatarOptions';
 import InfiniteScrollComponent from '../../common/UI/InfiniteScroll';
@@ -116,11 +116,11 @@ function CommentList({ articleId }) {
     return (
         <div className="p-4 bg-gray-100 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold text-primary mb-4">Commentaires</h3>
-            <New articleId={articleId} onAdded={handleCommentAdded} />
+            <NewCommentForm articleId={articleId} onAdded={handleCommentAdded} />
             <InfiniteScrollComponent loadMore={() => setPage(page + 1)} dataLength={comments.length} hasMore={hasMore}>
                 <ul>
                     {comments.map(comment => (
-                        <Comment key={comment._id} comment={comment} handleCommentDeleted={handleCommentDeleted} onReply={handleCommentAdded} />
+                        <DisplayComment key={comment._id} comment={comment} handleCommentDeleted={handleCommentDeleted} onReply={handleCommentAdded} />
                     ))}
                 </ul>
             </InfiniteScrollComponent>
