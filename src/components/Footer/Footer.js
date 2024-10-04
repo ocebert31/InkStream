@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { socialMediaLinks } from '../../utils/constants/socialMediaLinks';
 
 function Footer() {
     const handleContactClick = () => {
@@ -10,15 +10,11 @@ function Footer() {
     return (
         <footer className='background text-white p-4 text-center'>
             <div className='flex justify-center space-x-4 mb-4'>
-                <a href='https://facebook.com' target='_blank' rel='noopener noreferrer' className='text-white hover:text-secondary transition-colors duration-300'>
-                    <FontAwesomeIcon icon={faFacebookF} />
-                </a>
-                <a href='https://twitter.com' target='_blank' rel='noopener noreferrer' className='text-white hover:text-secondary transition-colors duration-300'>
-                    <FontAwesomeIcon icon={faTwitter} />
-                </a>
-                <a href='https://instagram.com' target='_blank' rel='noopener noreferrer' className='text-white hover:text-secondary transition-colors duration-300'>
-                    <FontAwesomeIcon icon={faInstagram} />
-                </a>
+                {socialMediaLinks().map((link) => 
+                    <a href={link.href} target='_blank' rel='noopener noreferrer' className='text-white hover:text-secondary transition-colors duration-300'>
+                        <FontAwesomeIcon icon={link.icon} />
+                    </a>
+                )}
             </div>
             <p className='text-sm'>
                 &copy; {new Date().getFullYear()} Inkstream. Tous droits réservés.
