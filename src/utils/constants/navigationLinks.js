@@ -9,4 +9,3 @@ export const navigationLinks = (user) => {
         { to: '/favorites', label: 'Favoris', icon: faStar },
     ]
 };
-

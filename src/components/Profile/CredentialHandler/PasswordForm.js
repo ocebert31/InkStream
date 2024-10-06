@@ -24,10 +24,8 @@ function PasswordForm() {
         try {
             await updatePassword(data.currentPassword, data.newPassword, data.confirmNewPassword, token);
             setShowSuccessAlert('Vous avez bien modifié votre mot de passe');
-            setShowErrorAlert('');
         } catch {
             setShowErrorAlert('Erreur lors du changement de mot de passe.');
-            setShowSuccessAlert('');
         }
     };
 
